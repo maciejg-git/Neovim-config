@@ -1,0 +1,5 @@
+{
+	"diagnostic.virtualText": true,
+  "diagnostic.enableMessage": "never",
+  "coc.preferences.extensionUpdateCheck": "never"
+}
