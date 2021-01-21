@@ -1,5 +1,7 @@
 {
-	"diagnostic.virtualText": true,
-  "diagnostic.enableMessage": "never",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.messageDelay": 0,
+  "diagnostic.errorSign": "▶",
+  "diagnostic.infoSign": "▶",
   "coc.preferences.extensionUpdateCheck": "never"
 }

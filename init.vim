@@ -79,6 +79,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 Plug 'leafOfTree/vim-vue-plugin'
+Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'godlygeek/tabular'
 Plug 'itchyny/vim-cursorword'
@@ -239,9 +240,10 @@ autocmd ColorScheme * hi ALEWarningSign guifg=red guibg=none gui=bold
 autocmd ColorScheme * hi ALEInfoSign guifg=red guibg=none gui=bold
 autocmd ColorScheme * hi SignColumn guibg=none
 
-autocmd ColorScheme * hi CocErrorSign guifg=red guibg=none gui=bold
-autocmd ColorScheme * hi CocWarningSign guifg=red guibg=none gui=bold
-autocmd ColorScheme * hi CocInfoSign guifg=red guibg=none gui=bold
+autocmd ColorScheme * hi CocErrorSign guifg=red guibg=none
+autocmd ColorScheme * hi CocWarningSign guifg=yellow guibg=none
+autocmd ColorScheme * hi CocInfoSign guifg=yellow guibg=none
+autocmd ColorScheme * hi CocUnderline gui=undercurl
 
 autocmd ColorScheme deus hi StatusLine gui=none,reverse
 autocmd ColorScheme deus hi StatusLineNC gui=none guibg=#242a32
@@ -353,6 +355,7 @@ nnoremap <silent> <localleader> :WhichKey ','<CR>
 "
 " PLUGIN VUE{{{
 
+let g:vim_vue_plugin_use_typescript = 1
 let g:vim_vue_plugin_use_scss = 1
 let g:vim_vue_plugin_highlight_vue_attr = 1
 
@@ -362,6 +365,7 @@ let g:vim_vue_plugin_highlight_vue_attr = 1
 
 let g:gitgutter_sign_removed = '-'
 let g:gitgutter_preview_win_floating = 0
+" let g:gitgutter_sign_priority = 20
 
 " }}}
 
