@@ -317,12 +317,6 @@ let g:Lf_ExternalCommand = 'fd -t f -E *.jpg -E *.png -E *.svg -E node_modules -
 let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_WindowPosition = 'bottom'
 let g:Lf_JumpToExistingWindow = 0
-hi! link Lf_hl_File_stlCwd StatusLine
-hi! link Lf_hl_File_stlTotal StatusLine
-hi! link Lf_hl_File_stlBlank StatusLine
-hi! link Lf_hl_File_stlLineInfo StatusLine
-hi! link Lf_hl_File_stlSeparator3 StatusLine
-hi! link Lf_hl_selection Search
 
 nmap <leader>l :LeaderfLineAll<cr>
 nmap <leader>h :LeaderfHistoryCmd<cr>
@@ -365,7 +359,6 @@ let g:vim_vue_plugin_highlight_vue_attr = 1
 
 let g:gitgutter_sign_removed = '-'
 let g:gitgutter_preview_win_floating = 0
-" let g:gitgutter_sign_priority = 20
 
 " }}}
 
