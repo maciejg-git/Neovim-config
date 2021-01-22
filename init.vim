@@ -101,6 +101,7 @@ call plug#end()
 " MAPPING{{{
 
 nmap <leader>q :q!<CR>
+nmap <C-q> :q!<CR>
 nmap <CR> o
 nnoremap ; :
 map <c-f> <c-u>
