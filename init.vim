@@ -109,6 +109,8 @@ nmap <silent> <Leader><Leader> V
 vmap <Leader><Leader> <Esc>
 xnoremap < <gv
 xnoremap > >gv|
+nmap <M-c> gcc
+vmap <M-c> gcc
 
 nnoremap <silent> <C-L> :nohlsearch<cr>
 
@@ -360,7 +362,7 @@ let g:vim_vue_plugin_highlight_vue_attr = 1
 " PLUGIN GIT{{{
 
 let g:gitgutter_sign_removed = '-'
-let g:gitgutter_preview_win_floating = 0
+" let g:gitgutter_preview_win_floating = 0
 
 " }}}
 
