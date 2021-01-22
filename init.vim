@@ -73,6 +73,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'whatyouhide/vim-gotham'
 Plug 'ryanoasis/vim-devicons'
 Plug 'morhetz/gruvbox'
+Plug 'romainl/flattened'
 
 Plug 'plasticboy/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
@@ -82,7 +83,7 @@ Plug 'leafOfTree/vim-vue-plugin'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'godlygeek/tabular'
-Plug 'itchyny/vim-cursorword'
+" Plug 'itchyny/vim-cursorword'
 Plug 'liuchengxu/vim-which-key'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
@@ -366,10 +367,31 @@ let g:gitgutter_preview_win_floating = 0
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <M-d> <Plug>(coc-definition)
+nmap <silent> <M-r> <Plug>(coc-references)
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+vmap <M-f>  <Plug>(coc-format-selected)
+nmap <M-f>  <Plug>(coc-format-selected)
+
+nmap <leader>rn <Plug>(coc-rename)
+
+nnoremap <silent><nowait> <M-1>  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <M-3>  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <M-2>  :<C-u>CocList -I --ignore-case symbols<cr>
+
+nnoremap <silent> M :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 "}}}
 
