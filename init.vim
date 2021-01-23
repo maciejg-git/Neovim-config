@@ -73,7 +73,8 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'whatyouhide/vim-gotham'
 Plug 'ryanoasis/vim-devicons'
 Plug 'morhetz/gruvbox'
-Plug 'romainl/flattened'
+Plug 'mhinz/vim-janah'
+Plug 'mhartington/oceanic-next'
 
 Plug 'plasticboy/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
@@ -83,7 +84,6 @@ Plug 'leafOfTree/vim-vue-plugin'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'godlygeek/tabular'
-" Plug 'itchyny/vim-cursorword'
 Plug 'liuchengxu/vim-which-key'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
@@ -91,11 +91,11 @@ Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'voldikss/vim-floaterm'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
-
 "}}}
 
 " MAPPING{{{
@@ -255,6 +255,7 @@ autocmd ColorScheme deus hi StatusLineNC gui=none guibg=#242a32
 autocmd ColorScheme gotham256 hi StatusLine gui=bold
 
 autocmd ColorScheme PaperColor hi VertSplit guifg=#303030 guibg=none
+autocmd ColorScheme OceanicNext hi! link VertSplit Normal
 
 autocmd ColorScheme gruvbox hi link htmlCommentPart Comment
 autocmd ColorScheme gruvbox hi link htmlComment Comment
@@ -262,7 +263,8 @@ autocmd ColorScheme gruvbox hi GruvboxGreenSign guibg=none gui=bold
 autocmd ColorScheme gruvbox hi GruvboxAquaSign guibg=none gui=bold
 autocmd ColorScheme gruvbox hi GruvboxRedSign guibg=none gui=bold
 
-autocmd TermOpen * setlocal winhighlight=Normal:CursorLine,FoldColumn:CursorLine,EndOfBuffer:CursorLine,SignColumn:CursorLine
+autocmd ColorScheme * hi link Floaterm CursorLine
+autocmd ColorScheme * hi link FloatermBorder CursorLine
  
 "}}}
 
@@ -358,6 +360,15 @@ let g:vim_vue_plugin_use_scss = 1
 let g:vim_vue_plugin_highlight_vue_attr = 1
 
 " }}}
+
+" PLUGIN FLOATERM{{{
+
+let g:floaterm_keymap_new    = ''
+let g:floaterm_keymap_prev   = ''
+let g:floaterm_keymap_next   = ''
+let g:floaterm_keymap_toggle = '<F12>'
+
+"}}}
 
 " PLUGIN GIT{{{
 
