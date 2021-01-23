@@ -255,7 +255,11 @@ autocmd ColorScheme deus hi StatusLineNC gui=none guibg=#242a32
 autocmd ColorScheme gotham256 hi StatusLine gui=bold
 
 autocmd ColorScheme PaperColor hi VertSplit guifg=#303030 guibg=none
+
 autocmd ColorScheme OceanicNext hi! link VertSplit Normal
+
+autocmd ColorScheme janah hi! link Pmenu CursorLine
+autocmd ColorScheme janah hi StatusLine gui=bold
 
 autocmd ColorScheme gruvbox hi link htmlCommentPart Comment
 autocmd ColorScheme gruvbox hi link htmlComment Comment
