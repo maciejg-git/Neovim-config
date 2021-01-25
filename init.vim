@@ -57,9 +57,9 @@ set sessionoptions-=folds
 set sessionoptions-=help
 set hidden
 set foldmethod=syntax
-set foldnestmax=4
+set foldnestmax=1
 set foldcolumn=0
-set foldlevel=4
+set foldlevel=99
 set guifont=Hack\ Nerd\ Font\ Mono:h12
 
 "}}}
@@ -110,7 +110,11 @@ vmap <Leader><Leader> <Esc>
 xnoremap < <gv
 xnoremap > >gv|
 nmap <M-c> gcc
-vmap <M-c> gcc
+vmap <M-c> gc
+nmap <PageUp> <left>
+nmap <PageDown> <right>
+vmap <PageUp> <left>
+vmap <PageDown> <right>
 
 nnoremap <silent> <C-L> :nohlsearch<cr>
 
@@ -154,12 +158,11 @@ xnoremap <C-A> <C-C>ggVG
 nmap <F2> :PlugInstall<CR>
 nmap <F3> :PlugClean<CR>
 nmap <F4> :PlugUpdate<CR>
-nmap <F5> :terminal "C:\Program Files\Git\bin\sh.exe"<cr>:startinsert<cr>
+nmap <F5> :LeaderfColorscheme<CR>
 nmap <F7> :tabnew<CR>
 map  <F8> :call system("explorer " . expand('%:p:h'))<cr>
 nmap <F9> :set number!<CR>
 nmap <F11> :<C-u>call <SID>toggle_background()<CR>
-map <F10> :GuiTreeviewToggle<CR>
 
 "}}}
 
@@ -195,9 +198,9 @@ nmap <leader>d :bp\|bd#<cr>
 " MAPPING FOLD{{{
 
 nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? "\<2-LeftMouse>" : 'zo'
-nnoremap ff za
-nnoremap fc zM
-nnoremap fa zR
+nnoremap <expr> <C-CR> &foldlevel == 0 ? 'zR' :'zM'
+nnoremap <expr> <M-CR> &foldlevel == 0 ? 'zRzMzo' :'zMzo'
+nnoremap f za
 
 "}}}
 
@@ -226,9 +229,10 @@ imap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
 " COLORSCHEME{{{
 
 set background=dark
-" colorscheme NeoSolarized
-" colorscheme PaperColor
-colorscheme gruvbox
+" colorscheme gruvbox
+" colorscheme OceanicNext
+" colorscheme janah
+colorscheme PaperColor
 
 let g:deus_bold = 0
 let g:gruvbox_contrast_dark = 'hard'
@@ -259,7 +263,6 @@ autocmd ColorScheme PaperColor hi VertSplit guifg=#303030 guibg=none
 autocmd ColorScheme OceanicNext hi! link VertSplit Normal
 
 autocmd ColorScheme janah hi! link Pmenu CursorLine
-autocmd ColorScheme janah hi StatusLine gui=bold
 
 autocmd ColorScheme gruvbox hi link htmlCommentPart Comment
 autocmd ColorScheme gruvbox hi link htmlComment Comment
@@ -300,7 +303,8 @@ autocmd TermOpen * setlocal nobuflisted
 autocmd BufRead,BufNewFile *.vue setlocal comments= | set commentstring=//\ %s
 autocmd BufRead,BufNewFile *.js setlocal comments= | set commentstring=//\ %s
 autocmd BufRead,BufNewFile *.vue setlocal foldnestmax=4
-autocmd BufRead,BufNewFile *.js setlocal foldnestmax=2
+autocmd BufRead,BufNewFile *.js setlocal foldnestmax=1
+autocmd BufRead,BufNewFile *.ts setlocal foldnestmax=1
 autocmd BufRead,BufNewFile *.vim setlocal foldmethod=marker
 
 autocmd User GitGutterStage call fugitive#ReloadStatus()
@@ -329,7 +333,6 @@ let g:Lf_WindowPosition = 'bottom'
 let g:Lf_JumpToExistingWindow = 0
 
 nmap <leader>l :LeaderfLineAll<cr>
-nmap <leader>h :LeaderfHistoryCmd<cr>
 nmap <leader>; :LeaderfHistoryCmd<cr>
 nmap <leader>c :LeaderfColorscheme<cr>
 nmap <space> :LeaderfBuffer<cr>
@@ -417,8 +420,7 @@ endfunction
 
 function MyFoldText()
 	let line = getline(v:foldstart)
-	let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
-	return v:folddashes . sub
+	return '+ ' . v:folddashes . ' ' . line
 endfunction
 
 function FontSize(size)
