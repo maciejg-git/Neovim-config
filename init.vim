@@ -93,6 +93,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'voldikss/vim-floaterm'
 
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
@@ -308,6 +309,9 @@ autocmd BufRead,BufNewFile *.ts setlocal foldnestmax=1
 autocmd BufRead,BufNewFile *.vim setlocal foldmethod=marker
 
 autocmd User GitGutterStage call fugitive#ReloadStatus()
+
+autocmd BufWinEnter */.git/index nnoremap <esc> :q<cr>
+autocmd BufWinLeave */.git/index unmap <esc>
 
 autocmd VimEnter * cd c:\\Users\\ender\\Desktop\\projects
 

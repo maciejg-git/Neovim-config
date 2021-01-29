@@ -1,5 +1,5 @@
 {
-  "diagnostic.checkCurrentLine": true,
+  "diagnostic.checkCurrentLine": false,
   "diagnostic.messageDelay": 0,
   "diagnostic.errorSign": "▶",
   "diagnostic.infoSign": "▶",
