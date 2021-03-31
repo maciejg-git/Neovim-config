@@ -81,6 +81,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 Plug 'leafOfTree/vim-vue-plugin'
+" Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'godlygeek/tabular'
@@ -346,6 +347,7 @@ nmap <space> :LeaderfBuffer<cr>
 " PLUGIN EMMET{{{
 
 let g:user_emmet_expandabbr_key = '<C-e>'
+let g:user_emmet_update_tag = '<M-e>'
 
 "}}}
 
@@ -366,9 +368,19 @@ nnoremap <silent> <localleader> :WhichKey ','<CR>
 "
 " PLUGIN VUE{{{
 
-let g:vim_vue_plugin_use_typescript = 1
-let g:vim_vue_plugin_use_scss = 1
-let g:vim_vue_plugin_highlight_vue_attr = 1
+let g:vim_vue_plugin_config = { 
+      \'syntax': {
+      \   'script': ['javascript'],
+      \   'template': ['html'],
+      \   'style': ['css'],
+      \},
+      \'full_syntax': [],
+      \'attribute': 0,
+      \'keyword': 0,
+      \'foldexpr': 0,
+      \'init_indent': 0,
+      \'debug': 0,
+      \}
 
 " }}}
 
@@ -390,8 +402,6 @@ let g:gitgutter_sign_removed = '-'
 
 " PLUGIN COC{{{
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <M-d> <Plug>(coc-definition)
 nmap <silent> <M-r> <Plug>(coc-references)
 

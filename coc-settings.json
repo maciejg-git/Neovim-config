@@ -4,5 +4,6 @@
   "diagnostic.errorSign": "▶",
   "diagnostic.infoSign": "▶",
   "diagnostic.hintSign": "▶",
-  "coc.preferences.extensionUpdateCheck": "never"
+  "coc.preferences.extensionUpdateCheck": "never",
+  "vetur.ignoreProjectWarning": true 
 }
