@@ -80,8 +80,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
-Plug 'leafOfTree/vim-vue-plugin'
-" Plug 'posva/vim-vue'
+" Plug 'leafOfTree/vim-vue-plugin'
+Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'godlygeek/tabular'
@@ -113,6 +113,7 @@ xnoremap < <gv
 xnoremap > >gv|
 nmap <M-c> gcc
 vmap <M-c> gc
+nmap <M-S-c> <Leader>_b
 nmap <PageUp> <left>
 nmap <PageDown> <right>
 vmap <PageUp> <left>
