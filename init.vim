@@ -116,6 +116,8 @@ vmap <M-c> gc
 nmap <M-S-c> <Leader>_b
 nmap <PageUp> <left>
 nmap <PageDown> <right>
+imap <PageUp> <left>
+imap <PageDown> <right>
 vmap <PageUp> <left>
 vmap <PageDown> <right>
 
@@ -241,7 +243,9 @@ let g:deus_bold = 0
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
 let g:gruvbox_bold = 0
-
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 autocmd ColorScheme * hi LineNr guibg=NONE
 autocmd ColorScheme * hi FoldColumn guibg=NONE
 autocmd ColorScheme * hi VertSplit gui=none guibg=none
@@ -255,6 +259,7 @@ autocmd ColorScheme * hi CocErrorSign guifg=red guibg=none
 autocmd ColorScheme * hi CocWarningSign guifg=yellow guibg=none
 autocmd ColorScheme * hi CocInfoSign guifg=yellow guibg=none
 autocmd ColorScheme * hi CocUnderline gui=undercurl
+autocmd ColorScheme * hi link CocFadeOut CocUnderline
 
 autocmd ColorScheme deus hi StatusLine gui=none,reverse
 autocmd ColorScheme deus hi StatusLineNC gui=none guibg=#242a32
@@ -309,6 +314,8 @@ autocmd BufRead,BufNewFile *.vue setlocal foldnestmax=4
 autocmd BufRead,BufNewFile *.js setlocal foldnestmax=1
 autocmd BufRead,BufNewFile *.ts setlocal foldnestmax=1
 autocmd BufRead,BufNewFile *.vim setlocal foldmethod=marker
+" autocmd BufRead,BufNewFile *.vue set filetype=html
+let g:vue_pre_processors = []
 
 autocmd User GitGutterStage call fugitive#ReloadStatus()
 
@@ -402,6 +409,8 @@ let g:gitgutter_sign_removed = '-'
 " }}}
 
 " PLUGIN COC{{{
+
+let g:coc_default_semantic_highlight_groups = 0
 
 nmap <silent> <M-d> <Plug>(coc-definition)
 nmap <silent> <M-r> <Plug>(coc-references)
