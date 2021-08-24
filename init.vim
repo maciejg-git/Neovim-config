@@ -98,10 +98,92 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'neovim/nvim-lspconfig'
+
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'bluz71/vim-nightfly-guicolors'
+Plug 'Pocco81/Catppuccino.nvim', { 'branch': 'main' }
+Plug 'ray-x/aurora'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'hrsh7th/nvim-compe'
+Plug 'sbdchd/neoformat'
 
 call plug#end()
 "}}}
+
+set completeopt=menuone,noselect
+
+lua << EOF
+require'lspconfig'.vuels.setup{ cmd = { "vls.cmd" } }
+require'lspconfig'.tsserver.setup{}
+EOF
+
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:true
+let g:compe.debug = v:false
+let g:compe.min_length = 1
+let g:compe.preselect = 'enable'
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.resolve_timeout = 800
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width = 100
+let g:compe.max_kind_width = 100
+let g:compe.max_menu_width = 100
+let g:compe.documentation = v:true
+
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.calc = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
+let g:compe.source.emoji = v:true
+
+map <space> :Telescope buffers theme=get_ivy<cr>
+map <C-p> :Telescope find_files theme=get_ivy<cr>
+map <leader>; :Telescope command_history theme=get_ivy<cr>
+map <leader>c :Telescope colorscheme theme=get_ivy<cr>
+map <leader>m :Telescope keymaps theme=get_ivy<cr>
+map <leader>h :Telescope highlights theme=get_ivy<cr>
+map <leader>f :Telescope current_buffer_fuzzy_find theme=get_ivy<cr>
+map <M-1> :Telescope lsp_workspace_diagnostics theme=get_ivy<cr>
+map <leader>/ :Telescope lsp_document_symbols theme=get_ivy<cr>
+map <leader>g :Telescope git_commits theme=get_ivy<cr>
+
+lua << EOF
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+})
+
+local signs = { Error = "▶ ", Warning = "▶ ", Hint = "▶ ", Information = "▶ " }
+
+for type, icon in pairs(signs) do
+  local hl = "LspDiagnosticsSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+
+-- vim.o.updatetime = 250
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
+EOF
+
+autocmd ColorScheme * highlight LspDiagnosticsVirtualTextHint guifg=yellow
+autocmd ColorScheme * highlight LspDiagnosticsVirtualTextError guifg=red
+autocmd ColorScheme * highlight LspDiagnosticsVirtualTextWarning guifg=yellow
+autocmd ColorScheme * highlight LspDiagnosticsUnderlineError gui=undercurl
+autocmd ColorScheme * highlight LspDiagnosticsUnderlineWarning gui=undercurl
+autocmd ColorScheme * highlight LspDiagnosticsUnderlineInformation gui=undercurl
+autocmd ColorScheme * highlight LspDiagnosticsUnderlineHint gui=undercurl
+
+autocmd ColorScheme * highlight Special gui=bold
 
 " MAPPING{{{
 
@@ -220,7 +302,6 @@ nmap <leader>t :tabnew<CR>
 
 " MAPPING GIT {{{
 
-nmap <leader>g :G<cr>
 map <c-g> :G<cr>
 nmap <leader>s \hs
 nmap <leader>p \hp
@@ -240,7 +321,8 @@ set background=dark
 " colorscheme gruvbox
 " colorscheme OceanicNext
 " colorscheme janah
-colorscheme PaperColor
+" colorscheme PaperColor
+colorscheme hybrid
 
 let g:deus_bold = 0
 let g:gruvbox_contrast_dark = 'hard'
@@ -348,10 +430,10 @@ let g:Lf_StlColorscheme = 'powerline'
 let g:Lf_WindowPosition = 'bottom'
 let g:Lf_JumpToExistingWindow = 0
 
-nmap <leader>l :LeaderfLineAll<cr>
-nmap <leader>; :LeaderfHistoryCmd<cr>
-nmap <leader>c :LeaderfColorscheme<cr>
-nmap <space> :LeaderfBuffer<cr>
+" nmap <leader>l :LeaderfLineAll<cr>
+" nmap <leader>; :LeaderfHistoryCmd<cr>
+" nmap <leader>c :LeaderfColorscheme<cr>
+" nmap <space> :LeaderfBuffer<cr>
 
 "}}}
 
@@ -413,33 +495,33 @@ let g:gitgutter_sign_removed = '-'
 
 " PLUGIN COC{{{
 
-let g:coc_default_semantic_highlight_groups = 0
-
-nmap <silent> <M-d> <Plug>(coc-definition)
-nmap <silent> <M-r> <Plug>(coc-references)
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-vmap <M-f>  <Plug>(coc-format-selected)
-nmap <M-f>  <Plug>(coc-format-selected)
-
-nmap <leader>rn <Plug>(coc-rename)
-
-nnoremap <silent><nowait> <M-1>  :<C-u>CocList diagnostics<cr>
-nnoremap <silent><nowait> <M-3>  :<C-u>CocList outline<cr>
-nnoremap <silent><nowait> <M-2>  :<C-u>CocList -I --ignore-case symbols<cr>
-
-nnoremap <silent> M :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+" let g:coc_default_semantic_highlight_groups = 0
+"
+" nmap <silent> <M-d> <Plug>(coc-definition)
+" nmap <silent> <M-r> <Plug>(coc-references)
+"
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" vmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+" vmap <M-f>  <Plug>(coc-format-selected)
+" nmap <M-f>  <Plug>(coc-format-selected)
+"
+" nmap <leader>rn <Plug>(coc-rename)
+"
+" nnoremap <silent><nowait> <M-1>  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent><nowait> <M-3>  :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <M-2>  :<C-u>CocList -I --ignore-case symbols<cr>
+"
+" nnoremap <silent> M :call <SID>show_documentation()<CR>
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   elseif (coc#rpc#ready())
+"     call CocActionAsync('doHover')
+"   else
+"     execute '!' . &keywordprg . " " . expand('<cword>')
+"   endif
+" endfunction
 
 "}}}
 
