@@ -154,16 +154,16 @@ let g:compe.source.emoji = v:true
 " map <leader>/ :Telescope lsp_document_symbols theme=get_ivy<cr>
 " map <leader>g :Telescope git_commits theme=get_ivy<cr>
 
-map <C-p> :Telescope find_files<cr>
-map <leader>; :Telescope command_history<cr>
-map <leader>c :Telescope colorscheme<cr>
-map <leader>m :Telescope keymaps<cr>
-map <leader>h :Telescope highlights<cr>
-map <leader>f :Telescope current_buffer_fuzzy_find<cr>
-map <M-1> :Telescope lsp_workspace_diagnostics<cr>
-map <leader>/ :Telescope lsp_document_symbols<cr>
-map <leader>g :Telescope git_commits<cr>
-map <space> :lua require('telescope.builtin').buffers({previewer = false})<cr>
+map <leader>; :lua require('telescope.builtin').command_history()<cr>
+map <leader>c :lua require('telescope.builtin').colorscheme()<cr>
+map <leader>m :lua require('telescope.builtin').keymaps()<cr>
+map <leader>h :lua require('telescope.builtin').highlights()<cr>
+map <leader>f :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+map <leader>g :lua require('telescope.builtin').git_commits()<cr>
+map <space> :lua require('telescope.builtin').buffers({previewer=false,layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <M-1> :lua require('telescope.builtin').lsp_workspace_diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <leader>/ :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 
 lua << EOF
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
