@@ -180,6 +180,8 @@ autocmd ColorScheme * highlight LspDiagnosticsUnderlineWarning gui=undercurl
 autocmd ColorScheme * highlight LspDiagnosticsUnderlineInformation gui=undercurl
 autocmd ColorScheme * highlight LspDiagnosticsUnderlineHint gui=undercurl
 
+let g:indent_blankline_filetype = ['vue', 'js', 'ts', 'html']
+
 autocmd ColorScheme * highlight Special gui=bold
 
 " MAPPING{{{
