@@ -95,7 +95,6 @@ Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 Plug 'voldikss/vim-floaterm'
 
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
