@@ -182,7 +182,7 @@ autocmd ColorScheme * highlight LspDiagnosticsUnderlineHint gui=undercurl
 
 let g:indent_blankline_filetype = ['vue', 'js', 'ts', 'html']
 
-autocmd ColorScheme * highlight Special gui=bold
+autocmd ColorScheme * highlight TelescopeMatching guifg=red gui=bold
 
 " MAPPING{{{
 
