@@ -1,6 +1,6 @@
 source $VIMRUNTIME/mswin.vim
 
-let g:python3_host_prog = 'C:\Users\ender\AppData\Local\Programs\Python\Python37\python'
+let g:python3_host_prog = 'C:\Users\ender\AppData\Local\Programs\Python\Python39\python'
 
 cnoreabbrev qw wq
 cnoreabbrev Wq wq
@@ -191,6 +191,9 @@ autocmd ColorScheme * highlight LspDiagnosticsUnderlineError gui=undercurl
 autocmd ColorScheme * highlight LspDiagnosticsUnderlineWarning gui=undercurl
 autocmd ColorScheme * highlight LspDiagnosticsUnderlineInformation gui=undercurl
 autocmd ColorScheme * highlight LspDiagnosticsUnderlineHint gui=undercurl
+autocmd ColorScheme * highlight LspDiagnosticsSignError guifg=red
+autocmd ColorScheme * highlight LspDiagnosticsSignWarning guifg=yellow
+autocmd ColorScheme * highlight LspDiagnosticsSignHint guifg=yellow
 
 let g:indent_blankline_filetype = ['vue', 'javascript', 'typescript', 'html']
 
