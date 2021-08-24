@@ -192,7 +192,7 @@ autocmd ColorScheme * highlight LspDiagnosticsUnderlineWarning gui=undercurl
 autocmd ColorScheme * highlight LspDiagnosticsUnderlineInformation gui=undercurl
 autocmd ColorScheme * highlight LspDiagnosticsUnderlineHint gui=undercurl
 
-let g:indent_blankline_filetype = ['vue', 'js', 'ts', 'html']
+let g:indent_blankline_filetype = ['vue', 'javascript', 'typescript', 'html']
 
 autocmd ColorScheme hybrid highlight TelescopeMatching guifg=#b5bd68 gui=bold
 autocmd ColorScheme PaperColor highlight TelescopeMatching guifg=#b5bd68 gui=bold
