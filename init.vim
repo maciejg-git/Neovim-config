@@ -142,16 +142,27 @@ let g:compe.source.nvim_lsp = v:true
 let g:compe.source.nvim_lua = v:true
 let g:compe.source.emoji = v:true
 
-map <space> :Telescope buffers theme=get_ivy<cr>
-map <C-p> :Telescope find_files theme=get_ivy<cr>
-map <leader>; :Telescope command_history theme=get_ivy<cr>
-map <leader>c :Telescope colorscheme theme=get_ivy<cr>
-map <leader>m :Telescope keymaps theme=get_ivy<cr>
-map <leader>h :Telescope highlights theme=get_ivy<cr>
-map <leader>f :Telescope current_buffer_fuzzy_find theme=get_ivy<cr>
-map <M-1> :Telescope lsp_workspace_diagnostics theme=get_ivy<cr>
-map <leader>/ :Telescope lsp_document_symbols theme=get_ivy<cr>
-map <leader>g :Telescope git_commits theme=get_ivy<cr>
+" map <space> :Telescope buffers theme=get_ivy<cr>
+" map <C-p> :Telescope find_files theme=get_ivy<cr>
+" map <leader>; :Telescope command_history theme=get_ivy<cr>
+" map <leader>c :Telescope colorscheme theme=get_ivy<cr>
+" map <leader>m :Telescope keymaps theme=get_ivy<cr>
+" map <leader>h :Telescope highlights theme=get_ivy<cr>
+" map <leader>f :Telescope current_buffer_fuzzy_find theme=get_ivy<cr>
+" map <M-1> :Telescope lsp_workspace_diagnostics theme=get_ivy<cr>
+" map <leader>/ :Telescope lsp_document_symbols theme=get_ivy<cr>
+" map <leader>g :Telescope git_commits theme=get_ivy<cr>
+
+map <space> :Telescope buffers<cr>
+map <C-p> :Telescope find_files<cr>
+map <leader>; :Telescope command_history<cr>
+map <leader>c :Telescope colorscheme<cr>
+map <leader>m :Telescope keymaps<cr>
+map <leader>h :Telescope highlights<cr>
+map <leader>f :Telescope current_buffer_fuzzy_find<cr>
+map <M-1> :Telescope lsp_workspace_diagnostics<cr>
+map <leader>/ :Telescope lsp_document_symbols<cr>
+map <leader>g :Telescope git_commits<cr>
 
 lua << EOF
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -182,7 +193,8 @@ autocmd ColorScheme * highlight LspDiagnosticsUnderlineHint gui=undercurl
 
 let g:indent_blankline_filetype = ['vue', 'js', 'ts', 'html']
 
-autocmd ColorScheme * highlight TelescopeMatching guifg=red gui=bold
+autocmd ColorScheme hybrid highlight TelescopeMatching guifg=#b5bd68 gui=bold
+autocmd ColorScheme PaperColor highlight TelescopeMatching guifg=#b5bd68 gui=bold
 
 " MAPPING{{{
 
