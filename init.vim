@@ -75,6 +75,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-janah'
 Plug 'mhartington/oceanic-next'
+Plug 'w0ng/vim-hybrid'
 
 Plug 'plasticboy/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
@@ -85,15 +86,17 @@ Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'godlygeek/tabular'
-Plug 'liuchengxu/vim-which-key'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
-Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+
+Plug 'liuchengxu/vim-which-key'
+Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 Plug 'voldikss/vim-floaterm'
 
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
