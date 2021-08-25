@@ -125,6 +125,9 @@ Plug 'folke/todo-comments.nvim'
 
 Plug 'folke/trouble.nvim'
 
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'kristijanhusak/orgmode.nvim'
+
 call plug#end()
 "}}}
 
@@ -134,29 +137,6 @@ lua << EOF
 require'lspconfig'.vuels.setup{ cmd = { "vls.cmd" } }
 require'lspconfig'.tsserver.setup{}
 EOF
-
-let g:compe = {}
-let g:compe.enabled = v:true
-let g:compe.autocomplete = v:true
-let g:compe.debug = v:false
-let g:compe.min_length = 1
-let g:compe.preselect = 'enable'
-let g:compe.throttle_time = 80
-let g:compe.source_timeout = 200
-let g:compe.resolve_timeout = 800
-let g:compe.incomplete_delay = 400
-let g:compe.max_abbr_width = 100
-let g:compe.max_kind_width = 100
-let g:compe.max_menu_width = 100
-let g:compe.documentation = v:true
-
-let g:compe.source = {}
-let g:compe.source.path = v:true
-let g:compe.source.buffer = v:true
-let g:compe.source.calc = v:true
-let g:compe.source.nvim_lsp = v:true
-let g:compe.source.nvim_lua = v:true
-let g:compe.source.emoji = v:true
 
 map <leader>; :lua require('telescope.builtin').command_history()<cr>
 map <leader>c :lua require('telescope.builtin').colorscheme()<cr>
@@ -170,7 +150,7 @@ map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertica
 map <M-1> :lua require('telescope.builtin').lsp_workspace_diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <leader>/ :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <M-3> :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <leader>e :TodoTelescope<cr>
+map <leader>p :TodoTelescope<cr>
 
 lua << EOF
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -186,9 +166,6 @@ for type, icon in pairs(signs) do
   local hl = "LspDiagnosticsSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
-
--- vim.o.updatetime = 250
--- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
 
 require'colorizer'.setup()
 require('numb').setup()
@@ -234,8 +211,7 @@ require("todo-comments").setup {
     -- refer to the configuration section below
   }
 
--- vim.g.tokyonight_style = "day"
--- vim.g.tokyonight_style = "night"
+require "lsp_signature".setup()
 EOF
 
 let g:indent_blankline_filetype = ['vue', 'javascript', 'typescript', 'html']
