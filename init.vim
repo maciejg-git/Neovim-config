@@ -17,7 +17,6 @@ set showcmd
 set smartindent
 set autoindent
 set textwidth=0 wrapmargin=0
-" set statusline=\ \ %{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:t')}\ \ \[\ %{expand('%:p:h:t')}\ \]\ %{FugitiveStatusline()}\ %{GitStatus()}\ %h%m%r\ %=%-10.(%l,%c%V%)\ %P
 set statusline=\ \ %{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:t')}\ \ \[\ %{expand('%:p:h:t')}\ \]\ %{FugitiveStatusline()}\ %h%m%r\ %=%-10.(%l,%c%V%)\ %P
 set foldtext=MyFoldText()
 set ignorecase  
@@ -126,7 +125,6 @@ Plug 'folke/todo-comments.nvim'
 Plug 'folke/trouble.nvim'
 
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'kristijanhusak/orgmode.nvim'
 
 call plug#end()
 "}}}
@@ -342,13 +340,6 @@ nmap <leader>p \hp
 
 "}}}
 
-" MAPPING COMPLETION{{{
-
-" imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" imap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
-
-"}}}
-
 " COLORSCHEME{{{
 
 set background=dark
@@ -433,7 +424,6 @@ autocmd BufRead,BufNewFile *.vue setlocal foldnestmax=4
 autocmd BufRead,BufNewFile *.js setlocal foldnestmax=1
 autocmd BufRead,BufNewFile *.ts setlocal foldnestmax=1
 autocmd BufRead,BufNewFile *.vim setlocal foldmethod=marker
-" autocmd BufRead,BufNewFile *.vue set filetype=html
 let g:vue_pre_processors = []
 
 autocmd User GitGutterStage call fugitive#ReloadStatus()
@@ -451,38 +441,10 @@ let g:vim_markdown_folding_disabled = 1
 
 "}}}
 
-" PLUGIN LEADERF{{{
-
-let g:Lf_ShortcutF = '<C-P>'
-let g:Lf_CursorBlink = 0
-let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-let g:Lf_HideHelp = 1
-let g:Lf_WorkingDirectoryMode = 'ac'
-let g:Lf_CommandMap = {'<C-j>': ['<down>', '<C-j>'], '<C-k>': ['<up>', '<C-k>']}
-let g:Lf_ExternalCommand = 'fd -t f -E *.jpg -E *.png -E *.svg -E node_modules -E sessions -E *.ttf -E *.TTF -E *.otf "%s"'
-let g:Lf_StlColorscheme = 'powerline'
-let g:Lf_WindowPosition = 'bottom'
-let g:Lf_JumpToExistingWindow = 0
-
-" nmap <leader>l :LeaderfLineAll<cr>
-" nmap <leader>; :LeaderfHistoryCmd<cr>
-" nmap <leader>c :LeaderfColorscheme<cr>
-" nmap <space> :LeaderfBuffer<cr>
-
-"}}}
-
 " PLUGIN EMMET{{{
 
 let g:user_emmet_expandabbr_key = '<C-e>'
 let g:user_emmet_update_tag = '<M-e>'
-
-"}}}
-
-" PLUGIN AUTOPAIRS{{{
-
-let g:AutoPairsMapCR = 1 
-let g:AutoPairsCenterLine = 0
-let g:AutoPairsMultilineClose = 0
 
 "}}}
 
@@ -520,45 +482,6 @@ let g:floaterm_keymap_toggle = '<F12>'
 
 "}}}
 
-" PLUGIN GIT{{{
-
-let g:gitgutter_sign_removed = '-'
-" let g:gitgutter_preview_win_floating = 0
-
-" }}}
-
-" PLUGIN COC{{{
-
-" let g:coc_default_semantic_highlight_groups = 0
-"
-" nmap <silent> <M-d> <Plug>(coc-definition)
-" nmap <silent> <M-r> <Plug>(coc-references)
-"
-" command! -nargs=0 Prettier :CocCommand prettier.formatFile
-" vmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-" vmap <M-f>  <Plug>(coc-format-selected)
-" nmap <M-f>  <Plug>(coc-format-selected)
-"
-" nmap <leader>rn <Plug>(coc-rename)
-"
-" nnoremap <silent><nowait> <M-1>  :<C-u>CocList diagnostics<cr>
-" nnoremap <silent><nowait> <M-3>  :<C-u>CocList outline<cr>
-" nnoremap <silent><nowait> <M-2>  :<C-u>CocList -I --ignore-case symbols<cr>
-"
-" nnoremap <silent> M :call <SID>show_documentation()<CR>
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   elseif (coc#rpc#ready())
-"     call CocActionAsync('doHover')
-"   else
-"     execute '!' . &keywordprg . " " . expand('<cword>')
-"   endif
-" endfunction
-
-"}}}
-
 " FUNCTIONS
 
 function MyFoldText()
@@ -584,11 +507,6 @@ function! s:ZoomToggle() abort
     endif
 endfunction
 command! ZoomToggle call s:ZoomToggle()
-
-" function! GitStatus()
-"   let [a,m,r] = GitGutterGetHunkSummary()
-"   return printf('+%d ~%d -%d', a, m, r)
-" endfunction
 
 function! NextClosedFold(dir)
     let cmd = 'norm!z' . a:dir
