@@ -17,7 +17,8 @@ set showcmd
 set smartindent
 set autoindent
 set textwidth=0 wrapmargin=0
-set statusline=\ \ %{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:t')}\ \ \[\ %{expand('%:p:h:t')}\ \]\ %{FugitiveStatusline()}\ %{GitStatus()}\ %h%m%r\ %=%-10.(%l,%c%V%)\ %P
+" set statusline=\ \ %{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:t')}\ \ \[\ %{expand('%:p:h:t')}\ \]\ %{FugitiveStatusline()}\ %{GitStatus()}\ %h%m%r\ %=%-10.(%l,%c%V%)\ %P
+set statusline=\ \ %{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:t')}\ \ \[\ %{expand('%:p:h:t')}\ \]\ %{FugitiveStatusline()}\ %h%m%r\ %=%-10.(%l,%c%V%)\ %P
 set foldtext=MyFoldText()
 set ignorecase  
 set smartcase
@@ -86,7 +87,6 @@ Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'godlygeek/tabular'
-Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 
@@ -95,7 +95,6 @@ Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 Plug 'voldikss/vim-floaterm'
 
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -105,9 +104,26 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'Pocco81/Catppuccino.nvim', { 'branch': 'main' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'hrsh7th/nvim-compe'
+" Plug 'hrsh7th/nvim-compe'
 Plug 'sbdchd/neoformat'
 Plug 'kyazdani42/nvim-web-devicons'
+
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'nacro90/numb.nvim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
+Plug 'folke/lsp-colors.nvim'
+
+Plug 'windwp/nvim-autopairs'
+Plug 'folke/tokyonight.nvim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'hoob3rt/lualine.nvim'
+Plug 'folke/todo-comments.nvim'
+
+Plug 'folke/trouble.nvim'
 
 call plug#end()
 "}}}
@@ -142,27 +158,19 @@ let g:compe.source.nvim_lsp = v:true
 let g:compe.source.nvim_lua = v:true
 let g:compe.source.emoji = v:true
 
-" map <space> :Telescope buffers theme=get_ivy<cr>
-" map <C-p> :Telescope find_files theme=get_ivy<cr>
-" map <leader>; :Telescope command_history theme=get_ivy<cr>
-" map <leader>c :Telescope colorscheme theme=get_ivy<cr>
-" map <leader>m :Telescope keymaps theme=get_ivy<cr>
-" map <leader>h :Telescope highlights theme=get_ivy<cr>
-" map <leader>f :Telescope current_buffer_fuzzy_find theme=get_ivy<cr>
-" map <M-1> :Telescope lsp_workspace_diagnostics theme=get_ivy<cr>
-" map <leader>/ :Telescope lsp_document_symbols theme=get_ivy<cr>
-" map <leader>g :Telescope git_commits theme=get_ivy<cr>
-
 map <leader>; :lua require('telescope.builtin').command_history()<cr>
 map <leader>c :lua require('telescope.builtin').colorscheme()<cr>
 map <leader>m :lua require('telescope.builtin').keymaps()<cr>
 map <leader>h :lua require('telescope.builtin').highlights()<cr>
 map <leader>f :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 map <leader>g :lua require('telescope.builtin').git_commits()<cr>
+map <leader>l :lua require('telescope.builtin').live_grep()<cr>
 map <space> :lua require('telescope.builtin').buffers({previewer=false,layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <M-1> :lua require('telescope.builtin').lsp_workspace_diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <leader>/ :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <M-3> :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <leader>e :TodoTelescope<cr>
 
 lua << EOF
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -181,18 +189,54 @@ end
 
 -- vim.o.updatetime = 250
 -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
-EOF
 
-autocmd ColorScheme * highlight LspDiagnosticsVirtualTextHint guifg=yellow
-autocmd ColorScheme * highlight LspDiagnosticsVirtualTextError guifg=red
-autocmd ColorScheme * highlight LspDiagnosticsVirtualTextWarning guifg=yellow
-autocmd ColorScheme * highlight LspDiagnosticsUnderlineError gui=undercurl
-autocmd ColorScheme * highlight LspDiagnosticsUnderlineWarning gui=undercurl
-autocmd ColorScheme * highlight LspDiagnosticsUnderlineInformation gui=undercurl
-autocmd ColorScheme * highlight LspDiagnosticsUnderlineHint gui=undercurl
-autocmd ColorScheme * highlight LspDiagnosticsSignError guifg=red
-autocmd ColorScheme * highlight LspDiagnosticsSignWarning guifg=yellow
-autocmd ColorScheme * highlight LspDiagnosticsSignHint guifg=yellow
+require'colorizer'.setup()
+require('numb').setup()
+require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+require("lsp-colors").setup()
+require('gitsigns').setup()
+
+local cmp = require('cmp')
+  cmp.setup {
+    mapping = {
+      ['<C-p>'] = cmp.mapping.select_prev_item(),
+      ['<C-n>'] = cmp.mapping.select_next_item(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      }),
+      ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
+    },
+
+    sources = {
+      { name = 'buffer' },
+      { name = 'nvim_lsp' },
+      { name = 'path' },
+    },
+  }
+
+require('nvim-autopairs').setup{}
+require("nvim-autopairs.completion.cmp").setup({
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = true, -- it will auto insert `(` after select function or method item
+})
+
+require('lualine').setup{options = {section_separators='', component_separators='', theme='gruvbox'}}
+
+require("todo-comments").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+
+-- vim.g.tokyonight_style = "day"
+-- vim.g.tokyonight_style = "night"
+EOF
 
 let g:indent_blankline_filetype = ['vue', 'javascript', 'typescript', 'html']
 
@@ -324,8 +368,8 @@ nmap <leader>p \hp
 
 " MAPPING COMPLETION{{{
 
-imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-imap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
+" imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" imap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 "}}}
 
@@ -565,10 +609,10 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 
-function! GitStatus()
-  let [a,m,r] = GitGutterGetHunkSummary()
-  return printf('+%d ~%d -%d', a, m, r)
-endfunction
+" function! GitStatus()
+"   let [a,m,r] = GitGutterGetHunkSummary()
+"   return printf('+%d ~%d -%d', a, m, r)
+" endfunction
 
 function! NextClosedFold(dir)
     let cmd = 'norm!z' . a:dir
