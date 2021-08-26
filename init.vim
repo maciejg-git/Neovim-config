@@ -60,6 +60,7 @@ set foldmethod=syntax
 set foldnestmax=1
 set foldcolumn=0
 set foldlevel=99
+set completeopt=menuone,noselect
 set guifont=Hack\ Nerd\ Font\ Mono:h12
 
 "}}}
@@ -71,11 +72,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'ajmwagar/vim-deus'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'whatyouhide/vim-gotham'
-Plug 'ryanoasis/vim-devicons'
 Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-janah'
 Plug 'mhartington/oceanic-next'
 Plug 'w0ng/vim-hybrid'
+Plug 'Pocco81/Catppuccino.nvim', { 'branch': 'main' }
+Plug 'folke/tokyonight.nvim'
+Plug 'tomasiser/vim-code-dark'
+
+Plug 'nvim-lua/plenary.nvim'
 
 Plug 'plasticboy/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
@@ -84,73 +89,49 @@ Plug 'mattn/emmet-vim'
 " Plug 'leafOfTree/vim-vue-plugin'
 Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'norcalli/nvim-colorizer.lua'
+
+Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'folke/lsp-colors.nvim'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'folke/trouble.nvim'
+
+Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'hoob3rt/lualine.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 Plug 'godlygeek/tabular'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
-
-Plug 'liuchengxu/vim-which-key'
-Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 Plug 'voldikss/vim-floaterm'
-
-Plug 'tpope/vim-fugitive'
-
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'neovim/nvim-lspconfig'
-
-Plug 'Pocco81/Catppuccino.nvim', { 'branch': 'main' }
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-" Plug 'hrsh7th/nvim-compe'
-Plug 'sbdchd/neoformat'
-Plug 'kyazdani42/nvim-web-devicons'
-
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'lewis6991/gitsigns.nvim'
 Plug 'nacro90/numb.nvim'
+Plug 'folke/todo-comments.nvim'
+Plug 'sbdchd/neoformat'
+Plug 'windwp/nvim-autopairs'
+
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
-Plug 'folke/lsp-colors.nvim'
-
-Plug 'windwp/nvim-autopairs'
-Plug 'folke/tokyonight.nvim'
-Plug 'tomasiser/vim-code-dark'
-Plug 'hoob3rt/lualine.nvim'
-Plug 'folke/todo-comments.nvim'
-
-Plug 'folke/trouble.nvim'
-
-Plug 'ray-x/lsp_signature.nvim'
 
 call plug#end()
+
 "}}}
 
-set completeopt=menuone,noselect
-
 lua << EOF
+
+-- LSP
+
 require'lspconfig'.vuels.setup{ cmd = { "vls.cmd" } }
 require'lspconfig'.tsserver.setup{}
-EOF
 
-map <leader>; :lua require('telescope.builtin').command_history()<cr>
-map <leader>c :lua require('telescope.builtin').colorscheme()<cr>
-map <leader>m :lua require('telescope.builtin').keymaps()<cr>
-map <leader>h :lua require('telescope.builtin').highlights()<cr>
-map <leader>f :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-map <leader>g :lua require('telescope.builtin').git_commits()<cr>
-map <leader>l :lua require('telescope.builtin').live_grep()<cr>
-map <space> :lua require('telescope.builtin').buffers({previewer=false,layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <M-1> :lua require('telescope.builtin').lsp_workspace_diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <leader>/ :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <M-3> :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <leader>p :TodoTelescope<cr>
-
-lua << EOF
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
   signs = true,
@@ -165,18 +146,39 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
+require('lsp-colors').setup()
+require 'lsp_signature'.setup()
+
+-- COLORIZER
+
 require'colorizer'.setup()
+
+-- NUMB
+
 require('numb').setup()
-require("trouble").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-require("lsp-colors").setup()
+
+-- TROUBLE
+
+require('trouble').setup {}
+
+-- GITSIGNS
+
 require('gitsigns').setup()
+
+-- CMP
 
 local cmp = require('cmp')
   cmp.setup {
+    formatting = {
+      format = function(entry, vim_item)
+        vim_item.menu = ({
+          buffer = "  [Buffer]",
+          nvim_lsp = "  [LSP]",
+          luasnip = "  [LuaSnip]",
+        })[entry.source.name]
+        return vim_item
+      end,
+    },
     mapping = {
       ['<C-p>'] = cmp.mapping.select_prev_item(),
       ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -187,7 +189,6 @@ local cmp = require('cmp')
       }),
       ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
     },
-
     sources = {
       { name = 'buffer' },
       { name = 'nvim_lsp' },
@@ -195,27 +196,23 @@ local cmp = require('cmp')
     },
   }
 
+-- AUTOPAIRS
+
 require('nvim-autopairs').setup{}
 require("nvim-autopairs.completion.cmp").setup({
-  map_cr = true, --  map <CR> on insert mode
-  map_complete = true, -- it will auto insert `(` after select function or method item
+  map_cr = true,
+  map_complete = true,
 })
 
-require('lualine').setup{options = {section_separators='', component_separators='', theme='gruvbox'}}
+-- LUALINE
 
-require("todo-comments").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
+-- ayu_dark codedark horizon onedark onelight papercolor_dark papercolor_light
+require('lualine').setup{options = {section_separators='', component_separators='', theme='onedark'}}
 
-require "lsp_signature".setup()
+-- TODO-COMMENTS
+
+require("todo-comments").setup {}
 EOF
-
-let g:indent_blankline_filetype = ['vue', 'javascript', 'typescript', 'html']
-
-autocmd ColorScheme hybrid highlight TelescopeMatching guifg=#b5bd68 gui=bold
-autocmd ColorScheme PaperColor highlight TelescopeMatching guifg=#b5bd68 gui=bold
 
 " MAPPING{{{
 
@@ -292,6 +289,9 @@ nmap <F11> :<C-u>call <SID>toggle_background()<CR>
 
 nnoremap <C-PageUp> :call FontSize(1)<CR>
 nnoremap <C-PageDown> :call FontSize(-1)<CR>
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 "}}}
 
@@ -353,9 +353,7 @@ let g:deus_bold = 0
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
 let g:gruvbox_bold = 0
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 autocmd ColorScheme * hi LineNr guibg=NONE
 autocmd ColorScheme * hi FoldColumn guibg=NONE
 autocmd ColorScheme * hi VertSplit gui=none guibg=none
@@ -370,9 +368,6 @@ autocmd ColorScheme * hi CocWarningSign guifg=yellow guibg=none
 autocmd ColorScheme * hi CocInfoSign guifg=yellow guibg=none
 autocmd ColorScheme * hi CocUnderline gui=undercurl
 autocmd ColorScheme * hi link CocFadeOut CocUnderline
-
-autocmd ColorScheme deus hi StatusLine gui=none,reverse
-autocmd ColorScheme deus hi StatusLineNC gui=none guibg=#242a32
 
 autocmd ColorScheme gotham256 hi StatusLine gui=bold
 
@@ -390,6 +385,9 @@ autocmd ColorScheme gruvbox hi GruvboxRedSign guibg=none gui=bold
 
 autocmd ColorScheme * hi link Floaterm CursorLine
 autocmd ColorScheme * hi link FloatermBorder CursorLine
+
+autocmd ColorScheme hybrid highlight TelescopeMatching guifg=#b5bd68 gui=bold
+autocmd ColorScheme PaperColor highlight TelescopeMatching guifg=#b5bd68 gui=bold
  
 "}}}
 
@@ -479,6 +477,30 @@ let g:floaterm_keymap_new    = ''
 let g:floaterm_keymap_prev   = ''
 let g:floaterm_keymap_next   = ''
 let g:floaterm_keymap_toggle = '<F12>'
+
+"}}}
+
+" PLUGIN BLANKLINE{{{
+
+let g:indent_blankline_filetype = ['vue', 'javascript', 'typescript', 'html']
+
+"}}}
+"
+" PLUGIN FLOATERM{{{
+
+map <leader>; :lua require('telescope.builtin').command_history()<cr>
+map <leader>c :lua require('telescope.builtin').colorscheme()<cr>
+map <leader>m :lua require('telescope.builtin').keymaps()<cr>
+map <leader>h :lua require('telescope.builtin').highlights()<cr>
+map <leader>f :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+map <leader>g :lua require('telescope.builtin').git_commits()<cr>
+map <leader>l :lua require('telescope.builtin').live_grep()<cr>
+map <space> :lua require('telescope.builtin').buffers({previewer=false,layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <M-1> :lua require('telescope.builtin').lsp_workspace_diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <leader>/ :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <M-3> :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <leader>p :TodoTelescope<cr>
 
 "}}}
 
