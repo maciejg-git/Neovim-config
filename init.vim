@@ -121,6 +121,9 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
 call plug#end()
 
 "}}}
@@ -169,6 +172,11 @@ require('gitsigns').setup()
 
 local cmp = require('cmp')
   cmp.setup {
+    snippet = {
+      expand = function(args)
+        vim.fn['vsnip#anonymous'](args.body)
+      end
+    },
     formatting = {
       format = function(entry, vim_item)
         vim_item.menu = ({
@@ -212,6 +220,36 @@ require('lualine').setup{options = {section_separators='', component_separators=
 -- TODO-COMMENTS
 
 require("todo-comments").setup {}
+
+require("telescope").setup {
+  defaults = {
+    path_display = {"tail"},
+    mappings = {
+      i = {
+        ["<esc>"] = require('telescope.actions').close,
+      },
+    },
+  },
+  pickers = {
+    buffers = {
+      sort_lastused = true,
+      ignore_current_buffer = true,
+      previewer = false,
+      layout_strategy='vertical',
+      layout_config={ width=0.6 },
+      mappings = {
+        i = {
+          ["<c-d>"] = require("telescope.actions").delete_buffer,
+          -- Right hand side can also be the name of the action as a string
+          ["<c-d>"] = "delete_buffer",
+        },
+        n = {
+          ["<c-d>"] = require("telescope.actions").delete_buffer,
+        }
+      }
+    },
+  },
+}
 EOF
 
 " MAPPING{{{
@@ -495,7 +533,8 @@ map <leader>h :lua require('telescope.builtin').highlights()<cr>
 map <leader>f :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 map <leader>g :lua require('telescope.builtin').git_commits()<cr>
 map <leader>l :lua require('telescope.builtin').live_grep()<cr>
-map <space> :lua require('telescope.builtin').buffers({previewer=false,layout_strategy='vertical',layout_config={width=0.6}})<cr>
+" map <space> :lua require('telescope.builtin').buffers({previewer=false,layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <space> :lua require('telescope.builtin').buffers()<cr>
 map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <M-1> :lua require('telescope.builtin').lsp_workspace_diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <leader>/ :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
