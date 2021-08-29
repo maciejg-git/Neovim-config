@@ -206,7 +206,21 @@ local cmp = require('cmp')
 
 -- AUTOPAIRS
 
-require('nvim-autopairs').setup{}
+local npairs = require('nvim-autopairs')
+npairs.setup({
+    fast_wrap = {},
+})
+npairs.setup({
+    fast_wrap = {
+      map = '<M-e>',
+      chars = { '{', '[', '(', '"', "'" },
+      pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], '%s+', ''),
+      end_key = '$',
+      keys = 'qwertyuiopzxcvbnmasdfghjkl',
+      check_comma = true,
+      hightlight = 'Search'
+    },
+})
 require("nvim-autopairs.completion.cmp").setup({
   map_cr = true,
   map_complete = true,
@@ -223,7 +237,7 @@ require("todo-comments").setup {}
 
 require("telescope").setup {
   defaults = {
-    path_display = {"tail"},
+    -- path_display = {"shorten"},
     mappings = {
       i = {
         ["<esc>"] = require('telescope.actions').close,
@@ -537,7 +551,7 @@ map <leader>l :lua require('telescope.builtin').live_grep()<cr>
 map <space> :lua require('telescope.builtin').buffers()<cr>
 map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <M-1> :lua require('telescope.builtin').lsp_workspace_diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <leader>/ :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <M-2> :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 map <M-3> :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <leader>p :TodoTelescope<cr>
 
