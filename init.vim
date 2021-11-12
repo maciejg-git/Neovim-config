@@ -61,6 +61,9 @@ set foldnestmax=1
 set foldcolumn=0
 set foldlevel=99
 set completeopt=menuone,noselect
+set breakindent
+set breakindentopt=shift:2
+set showbreak=\\\\\
 set guifont=Hack\ Nerd\ Font\ Mono:h12
 
 "}}}
@@ -76,9 +79,10 @@ Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-janah'
 Plug 'mhartington/oceanic-next'
 Plug 'w0ng/vim-hybrid'
-Plug 'Pocco81/Catppuccino.nvim', { 'branch': 'main' }
+Plug 'catppuccin/nvim'
 Plug 'folke/tokyonight.nvim'
 Plug 'tomasiser/vim-code-dark'
+Plug 'projekt0n/github-nvim-theme'
 
 Plug 'nvim-lua/plenary.nvim'
 
@@ -124,6 +128,14 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
+" Plug 'vimwiki/vimwiki'
+
+Plug 'luukvbaal/stabilize.nvim'
+
+Plug 'olimorris/onedarkpro.nvim'
+
+Plug 'olambo/vi-viz'
+
 call plug#end()
 
 "}}}
@@ -150,7 +162,7 @@ for type, icon in pairs(signs) do
 end
 
 require('lsp-colors').setup()
-require 'lsp_signature'.setup()
+-- require 'lsp_signature'.setup()
 
 -- COLORIZER
 
@@ -190,12 +202,13 @@ local cmp = require('cmp')
     mapping = {
       ['<C-p>'] = cmp.mapping.select_prev_item(),
       ['<C-n>'] = cmp.mapping.select_next_item(),
-      ['<C-e>'] = cmp.mapping.close(),
-      ['<CR>'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = true,
-      }),
-      ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
+      -- ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm(),
+      -- ['<CR>'] = cmp.mapping.confirm({
+      --   behavior = cmp.ConfirmBehavior.Insert,
+      --   select = true,
+      -- }),
+      ['<TAB>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
     },
     sources = {
       { name = 'buffer' },
@@ -206,25 +219,9 @@ local cmp = require('cmp')
 
 -- AUTOPAIRS
 
-local npairs = require('nvim-autopairs')
-npairs.setup({
-    fast_wrap = {},
-})
-npairs.setup({
-    fast_wrap = {
-      map = '<M-e>',
-      chars = { '{', '[', '(', '"', "'" },
-      pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], '%s+', ''),
-      end_key = '$',
-      keys = 'qwertyuiopzxcvbnmasdfghjkl',
-      check_comma = true,
-      hightlight = 'Search'
-    },
-})
-require("nvim-autopairs.completion.cmp").setup({
-  map_cr = true,
-  map_complete = true,
-})
+require('nvim-autopairs').setup{}
+-- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+-- cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
 -- LUALINE
 
@@ -264,6 +261,16 @@ require("telescope").setup {
     },
   },
 }
+
+require("stabilize").setup()
+
+local map = vim.api.nvim_set_keymap
+map('n', 's',   "<cmd>lua require('vi-viz').vizInit()<CR>",          {noremap = true})
+map('x', 's',   "<cmd>lua require('vi-viz').vizExpand()<CR>",        {noremap = true})
+map('x', '<M-s>',    "<cmd>lua require('vi-viz').vizContract()<CR>",      {noremap = true})
+map('x', 'r',         "<cmd>lua require('vi-viz').vizPattern()<CR>",       {noremap = true})
+map('x', 'ii',        "<cmd>lua require('vi-viz').vizInsert()<CR>",        {noremap = true})
+map('x', 'aa',        "<cmd>lua require('vi-viz').vizAppend()<CR>",        {noremap = true})
 EOF
 
 " MAPPING{{{
@@ -292,6 +299,18 @@ nnoremap <silent> <C-L> :nohlsearch<cr>
 nnoremap <leader>r *``cgn
 vnoremap <expr> <leader>r "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn"
 
+nnoremap + <C-a>
+nnoremap - <C-x>
+
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+nnoremap <expr> <down> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> <up> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+nnoremap n  nzz
+nnoremap N  Nzz
+
 noremap  <C-up> :m-2<CR>
 noremap  <C-down> :m+<CR>
 vnoremap <C-up> :m-2<CR>gv=gv
@@ -305,11 +324,12 @@ nmap ,g yyp<up>gcc<down>
 
 nnoremap t vatV
 nnoremap <C-t> vit
-imap <leader>c console.log()<left>
-imap <leader>j JSON.stringify()<left>
+imap <leader>c console.log(
+imap <leader>d console.log('debug here'
+imap <leader>j JSON.stringify(
 imap <leader>fa () => {<cr>
-imap <leader>ff function() {<cr>
-imap <leader>i if() {<cr>
+imap <leader>ff function() {
+imap <leader>i if() {
 
 "}}}
 
@@ -386,9 +406,8 @@ nmap <leader>t :tabnew<CR>
 
 " MAPPING GIT {{{
 
-map <c-g> :G<cr>
-nmap <leader>s \hs
-nmap <leader>p \hp
+" map <c-g> :G<cr>
+map <c-g> :vertical G<cr>
 
 "}}}
 
@@ -399,7 +418,8 @@ set background=dark
 " colorscheme OceanicNext
 " colorscheme janah
 " colorscheme PaperColor
-colorscheme hybrid
+" colorscheme hybrid
+colorscheme PaperColor
 
 let g:deus_bold = 0
 let g:gruvbox_contrast_dark = 'hard'
@@ -424,6 +444,8 @@ autocmd ColorScheme * hi link CocFadeOut CocUnderline
 autocmd ColorScheme gotham256 hi StatusLine gui=bold
 
 autocmd ColorScheme PaperColor hi VertSplit guifg=#303030 guibg=none
+
+autocmd ColorScheme Catppuccino hi VertSplit guifg=#28414f guibg=none
 
 autocmd ColorScheme OceanicNext hi! link VertSplit Normal
 
@@ -495,6 +517,8 @@ let g:vim_markdown_folding_disabled = 1
 
 let g:user_emmet_expandabbr_key = '<C-e>'
 let g:user_emmet_update_tag = '<M-e>'
+let g:user_emmet_removetag_key = '<M-d>'
+let g:user_emmet_splitjointag_key = '<M-t>'
 
 "}}}
 
@@ -553,6 +577,8 @@ map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertica
 map <M-1> :lua require('telescope.builtin').lsp_workspace_diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <M-2> :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 map <M-3> :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <leader><cr> :lua require('telescope.builtin').resume()<cr>
+map <leader>] :lua require('telescope.builtin').resume()<cr>
 map <leader>p :TodoTelescope<cr>
 
 "}}}
