@@ -75,14 +75,12 @@ call plug#begin('~/.vim/plugged')
 Plug 'ajmwagar/vim-deus'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'whatyouhide/vim-gotham'
-Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-janah'
 Plug 'mhartington/oceanic-next'
 Plug 'w0ng/vim-hybrid'
 Plug 'catppuccin/nvim'
 Plug 'folke/tokyonight.nvim'
 Plug 'tomasiser/vim-code-dark'
-Plug 'projekt0n/github-nvim-theme'
 
 Plug 'nvim-lua/plenary.nvim'
 
@@ -90,7 +88,6 @@ Plug 'plasticboy/vim-markdown'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
-" Plug 'leafOfTree/vim-vue-plugin'
 Plug 'posva/vim-vue'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'norcalli/nvim-colorizer.lua'
@@ -99,7 +96,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'folke/lsp-colors.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'folke/trouble.nvim'
 
@@ -114,7 +110,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'godlygeek/tabular'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
-Plug 'voldikss/vim-floaterm'
 Plug 'nacro90/numb.nvim'
 Plug 'folke/todo-comments.nvim'
 Plug 'sbdchd/neoformat'
@@ -125,16 +120,15 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-
-" Plug 'vimwiki/vimwiki'
-
-Plug 'luukvbaal/stabilize.nvim'
-
+Plug 'sainnhe/edge'
+Plug 'lifepillar/vim-gruvbox8'
+Plug 'rebelot/kanagawa.nvim'
 Plug 'olimorris/onedarkpro.nvim'
 
-Plug 'olambo/vi-viz'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'luukvbaal/stabilize.nvim'
+Plug 'akinsho/toggleterm.nvim'
 
 call plug#end()
 
@@ -154,14 +148,15 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   update_in_insert = false,
 })
 
-local signs = { Error = "▶ ", Warning = "▶ ", Hint = "▶ ", Information = "▶ " }
+local signs = { Error = "▶", Warn = "▶", Hint = "▶", Info = "▶" }
 
 for type, icon in pairs(signs) do
-  local hl = "LspDiagnosticsSign" .. type
+  local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-require('lsp-colors').setup()
+
+-- require('lsp-colors').setup()
 -- require 'lsp_signature'.setup()
 
 -- COLORIZER
@@ -263,14 +258,7 @@ require("telescope").setup {
 }
 
 require("stabilize").setup()
-
-local map = vim.api.nvim_set_keymap
-map('n', 's',   "<cmd>lua require('vi-viz').vizInit()<CR>",          {noremap = true})
-map('x', 's',   "<cmd>lua require('vi-viz').vizExpand()<CR>",        {noremap = true})
-map('x', '<M-s>',    "<cmd>lua require('vi-viz').vizContract()<CR>",      {noremap = true})
-map('x', 'r',         "<cmd>lua require('vi-viz').vizPattern()<CR>",       {noremap = true})
-map('x', 'ii',        "<cmd>lua require('vi-viz').vizInsert()<CR>",        {noremap = true})
-map('x', 'aa',        "<cmd>lua require('vi-viz').vizAppend()<CR>",        {noremap = true})
+require("toggleterm").setup{}
 EOF
 
 " MAPPING{{{
@@ -413,14 +401,6 @@ map <c-g> :vertical G<cr>
 
 " COLORSCHEME{{{
 
-set background=dark
-" colorscheme gruvbox
-" colorscheme OceanicNext
-" colorscheme janah
-" colorscheme PaperColor
-" colorscheme hybrid
-colorscheme PaperColor
-
 let g:deus_bold = 0
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
@@ -463,6 +443,14 @@ autocmd ColorScheme * hi link FloatermBorder CursorLine
 autocmd ColorScheme hybrid highlight TelescopeMatching guifg=#b5bd68 gui=bold
 autocmd ColorScheme PaperColor highlight TelescopeMatching guifg=#b5bd68 gui=bold
  
+set background=dark
+" colorscheme gruvbox
+" colorscheme OceanicNext
+" colorscheme janah
+" colorscheme PaperColor
+" colorscheme hybrid
+colorscheme PaperColor
+
 "}}}
 
 " SYNTAX{{{
