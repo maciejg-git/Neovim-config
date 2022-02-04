@@ -130,6 +130,11 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'luukvbaal/stabilize.nvim'
 Plug 'akinsho/toggleterm.nvim'
 
+Plug 'max397574/better-escape.nvim'
+
+" Plug 'simrat39/symbols-outline.nvim'
+" Plug 'numToStr/Comment.nvim'
+
 call plug#end()
 
 "}}}
@@ -156,8 +161,7 @@ for type, icon in pairs(signs) do
 end
 
 
--- require('lsp-colors').setup()
--- require 'lsp_signature'.setup()
+require 'lsp_signature'.setup()
 
 -- COLORIZER
 
@@ -215,8 +219,6 @@ local cmp = require('cmp')
 -- AUTOPAIRS
 
 require('nvim-autopairs').setup{}
--- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
--- cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
 -- LUALINE
 
@@ -239,7 +241,6 @@ require("telescope").setup {
   pickers = {
     buffers = {
       sort_lastused = true,
-      ignore_current_buffer = true,
       previewer = false,
       layout_strategy='vertical',
       layout_config={ width=0.6 },
@@ -257,8 +258,25 @@ require("telescope").setup {
   },
 }
 
+-- STABILIZE
+
 require("stabilize").setup()
+
+-- TOGGLE TERM
+
 require("toggleterm").setup{}
+
+-- BETTER ESCAPE
+
+require("better_escape").setup {
+    mapping = {"jk", "jj"}, -- a table with mappings to use
+    timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+    clear_empty_lines = false, -- clear line after escaping if there is only whitespace
+    keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
+}
+
+-- require('Comment').setup()
+-- local ft = require('Comment.ft')
 EOF
 
 " MAPPING{{{
@@ -562,9 +580,10 @@ map <leader>l :lua require('telescope.builtin').live_grep()<cr>
 " map <space> :lua require('telescope.builtin').buffers({previewer=false,layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <space> :lua require('telescope.builtin').buffers()<cr>
 map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <M-1> :lua require('telescope.builtin').lsp_workspace_diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <M-1> :lua require('telescope.builtin').diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <M-2> :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 map <M-3> :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
+map <M-4> :lua require('telescope.builtin').lsp_references({layout_strategy='vertical',layout_config={width=0.6}})<cr>
 map <leader><cr> :lua require('telescope.builtin').resume()<cr>
 map <leader>] :lua require('telescope.builtin').resume()<cr>
 map <leader>p :TodoTelescope<cr>
