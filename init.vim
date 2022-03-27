@@ -127,7 +127,7 @@ Plug 'olimorris/onedarkpro.nvim'
 
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'luukvbaal/stabilize.nvim'
+" Plug 'luukvbaal/stabilize.nvim'
 Plug 'akinsho/toggleterm.nvim'
 
 Plug 'max397574/better-escape.nvim'
@@ -241,6 +241,7 @@ require("telescope").setup {
   pickers = {
     buffers = {
       sort_lastused = true,
+      ignore_current_buffer = true,
       previewer = false,
       layout_strategy='vertical',
       layout_config={ width=0.6 },
@@ -260,7 +261,7 @@ require("telescope").setup {
 
 -- STABILIZE
 
-require("stabilize").setup()
+-- require("stabilize").setup()
 
 -- TOGGLE TERM
 
@@ -467,7 +468,7 @@ set background=dark
 " colorscheme janah
 " colorscheme PaperColor
 " colorscheme hybrid
-colorscheme PaperColor
+colorscheme kanagawa
 
 "}}}
 
