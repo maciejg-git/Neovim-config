@@ -127,7 +127,7 @@ Plug 'olimorris/onedarkpro.nvim'
 
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-" Plug 'luukvbaal/stabilize.nvim'
+Plug 'luukvbaal/stabilize.nvim'
 Plug 'akinsho/toggleterm.nvim'
 
 Plug 'max397574/better-escape.nvim'
@@ -232,6 +232,7 @@ require("todo-comments").setup {}
 require("telescope").setup {
   defaults = {
     -- path_display = {"shorten"},
+    file_ignore_patterns = {"node_modules"},
     mappings = {
       i = {
         ["<esc>"] = require('telescope.actions').close,
@@ -261,7 +262,7 @@ require("telescope").setup {
 
 -- STABILIZE
 
--- require("stabilize").setup()
+require("stabilize").setup()
 
 -- TOGGLE TERM
 
