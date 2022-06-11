@@ -79,7 +79,6 @@ Plug 'mhinz/vim-janah'
 Plug 'mhartington/oceanic-next'
 Plug 'w0ng/vim-hybrid'
 Plug 'catppuccin/nvim'
-Plug 'folke/tokyonight.nvim'
 Plug 'tomasiser/vim-code-dark'
 
 Plug 'nvim-lua/plenary.nvim'
@@ -124,6 +123,8 @@ Plug 'sainnhe/edge'
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'rebelot/kanagawa.nvim'
 Plug 'olimorris/onedarkpro.nvim'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'} 
+Plug 'projekt0n/github-nvim-theme'
 
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
@@ -132,7 +133,6 @@ Plug 'akinsho/toggleterm.nvim'
 
 Plug 'max397574/better-escape.nvim'
 
-" Plug 'simrat39/symbols-outline.nvim'
 " Plug 'numToStr/Comment.nvim'
 
 call plug#end()
@@ -201,12 +201,7 @@ local cmp = require('cmp')
     mapping = {
       ['<C-p>'] = cmp.mapping.select_prev_item(),
       ['<C-n>'] = cmp.mapping.select_next_item(),
-      -- ['<C-e>'] = cmp.mapping.close(),
       ['<CR>'] = cmp.mapping.confirm(),
-      -- ['<CR>'] = cmp.mapping.confirm({
-      --   behavior = cmp.ConfirmBehavior.Insert,
-      --   select = true,
-      -- }),
       ['<TAB>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
     },
     sources = {
@@ -332,12 +327,25 @@ nmap ,g yyp<up>gcc<down>
 
 nnoremap t vatV
 nnoremap <C-t> vit
+
 imap <leader>c console.log(
-imap <leader>d console.log('debug here'
+imap <leader>d console.log('debug'
+imap <leader>dw console.log('watch debug'
+imap <leader>dc console.log('computed debug'
+imap <leader>de console.log('event debug'
+imap <leader>dp console.log('props debug'
+imap <leader>dm console.log('model debug'
+
+imap <leader>= ===
 imap <leader>j JSON.stringify(
 imap <leader>fa () => {<cr>
 imap <leader>ff function() {
-imap <leader>i if() {
+imap <leader>fo () {<cr>
+imap <leader>i if(
+
+imap <leader>tt <template><c-e>
+imap <leader>td <div><c-e>
+imap <leader>tc class="
 
 "}}}
 
@@ -463,13 +471,13 @@ autocmd ColorScheme * hi link FloatermBorder CursorLine
 autocmd ColorScheme hybrid highlight TelescopeMatching guifg=#b5bd68 gui=bold
 autocmd ColorScheme PaperColor highlight TelescopeMatching guifg=#b5bd68 gui=bold
  
+let g:catppuccin_flavour = "macchiato" " latte, frappe, macchiato, mocha
 set background=dark
-" colorscheme gruvbox
-" colorscheme OceanicNext
-" colorscheme janah
-" colorscheme PaperColor
 " colorscheme hybrid
-colorscheme kanagawa
+" colorscheme github_dark
+" colorscheme edge
+colorscheme catppuccin
+" colorscheme kanagawa
 
 "}}}
 
