@@ -434,45 +434,67 @@ map <c-g> :vertical G<cr>
 let g:deus_bold = 0
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_contrast_light = 'hard'
+
 let g:gruvbox_bold = 0
+lua << EOF
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi LineNr guibg=NONE' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi FoldColumn guibg=NONE' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi VertSplit gui=none guibg=none' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi Folded guibg=none gui=bold' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi ALEErrorSign guifg=red guibg=none gui=bold' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi ALEWarningSign guifg=red guibg=none gui=bold' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi ALEInfoSign guifg=red guibg=none gui=bold' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi SignColumn guibg=none' })
 
-autocmd ColorScheme * hi LineNr guibg=NONE
-autocmd ColorScheme * hi FoldColumn guibg=NONE
-autocmd ColorScheme * hi VertSplit gui=none guibg=none
-autocmd ColorScheme * hi Folded guibg=none gui=bold
-autocmd ColorScheme * hi ALEErrorSign guifg=red guibg=none gui=bold
-autocmd ColorScheme * hi ALEWarningSign guifg=red guibg=none gui=bold
-autocmd ColorScheme * hi ALEInfoSign guifg=red guibg=none gui=bold
-autocmd ColorScheme * hi SignColumn guibg=none
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link Floaterm CursorLine' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link FloatermBorder CursorLine' })
 
-autocmd ColorScheme * hi CocErrorSign guifg=red guibg=none
-autocmd ColorScheme * hi CocWarningSign guifg=yellow guibg=none
-autocmd ColorScheme * hi CocInfoSign guifg=yellow guibg=none
-autocmd ColorScheme * hi CocUnderline gui=undercurl
-autocmd ColorScheme * hi link CocFadeOut CocUnderline
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gotham256', command = 'hi StatusLine gui=bold' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'PaperColor', command = 'hi VertSplit guifg=#303030 guibg=none' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'OceanicNext', command = 'hi! link VertSplit Normal' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'janah', command = 'hi! link Pmenu CursorLine' })
 
-autocmd ColorScheme gotham256 hi StatusLine gui=bold
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'hybrid', command = 'highlight TelescopeMatching guifg=#b5bd68 gui=bold' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'PaperColor', command = 'highlight TelescopeMatching guifg=#b5bd68 gui=bold' })
 
-autocmd ColorScheme PaperColor hi VertSplit guifg=#303030 guibg=none
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi link htmlCommentPart Comment' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi link htmlComment Comment' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxGreenSign guibg=none gui=bold' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxAquaSign guibg=none gui=bold' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxRedSign guibg=none gui=bold' })
 
-autocmd ColorScheme Catppuccino hi VertSplit guifg=#28414f guibg=none
+vim.api.nvim_create_autocmd('BufEnter', { pattern = '*', command = 'syntax sync fromstart' })
 
-autocmd ColorScheme OceanicNext hi! link VertSplit Normal
+vim.api.nvim_create_autocmd('BufRead', { pattern = '*.vue', command = 'setlocal foldnestmax=4' })
+vim.api.nvim_create_autocmd('BufRead', { pattern = '*.js', command = 'setlocal foldnestmax=1' })
+vim.api.nvim_create_autocmd('BufRead', { pattern = '*.ts', command = 'setlocal foldnestmax=1' })
+vim.api.nvim_create_autocmd('BufRead', { pattern = '*.vim', command = 'setlocal foldmethod=marker' })
 
-autocmd ColorScheme janah hi! link Pmenu CursorLine
+vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.vue', command = 'setlocal foldnestmax=4' })
+vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.js', command = 'setlocal foldnestmax=1' })
+vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.ts', command = 'setlocal foldnestmax=1' })
+vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.vim', command = 'setlocal foldmethod=marker' })
 
-autocmd ColorScheme gruvbox hi link htmlCommentPart Comment
-autocmd ColorScheme gruvbox hi link htmlComment Comment
-autocmd ColorScheme gruvbox hi GruvboxGreenSign guibg=none gui=bold
-autocmd ColorScheme gruvbox hi GruvboxAquaSign guibg=none gui=bold
-autocmd ColorScheme gruvbox hi GruvboxRedSign guibg=none gui=bold
+vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nobuflisted' })
 
-autocmd ColorScheme * hi link Floaterm CursorLine
-autocmd ColorScheme * hi link FloatermBorder CursorLine
+vim.api.nvim_create_autocmd('VimEnter', { pattern = '*', command = 'cd c:\\Users\\ender\\Desktop\\projects' })
 
-autocmd ColorScheme hybrid highlight TelescopeMatching guifg=#b5bd68 gui=bold
-autocmd ColorScheme PaperColor highlight TelescopeMatching guifg=#b5bd68 gui=bold
- 
+vim.api.nvim_create_autocmd('BufWinEnter', { pattern = '*/.git/index', command = 'nnoremap <esc> :q<cr>' })
+vim.api.nvim_create_autocmd('BufWinLeave', { pattern = '*/.git/index', command = 'unmap <esc>' })
+
+local AutoSaveFolds = vim.api.nvim_create_augroup('AutoSaveFolds', {clear = true})
+vim.api.nvim_create_autocmd('BufWinLeave', { pattern = '?*', group = AutoSaveFolds, command = 'silent! mkview!' })
+vim.api.nvim_create_autocmd('BufLeave', { pattern = '?*', group = AutoSaveFolds, command = 'silent! mkview!' })
+vim.api.nvim_create_autocmd('BufWritePost', { pattern = '?*', group = AutoSaveFolds, command = 'silent! mkview!' })
+vim.api.nvim_create_autocmd('BufWinEnter', { pattern = '?*', group = AutoSaveFolds, command = 'silent! loadview' })
+
+local CursorLine = vim.api.nvim_create_augroup('CursorLine', {clear = true})
+vim.api.nvim_create_autocmd('InsertLeave', { pattern = '*', group = CursorLine, command = 'set cursorline' })
+vim.api.nvim_create_autocmd('WinEnter', { pattern = '*', group = CursorLine, command = 'set cursorline' })
+vim.api.nvim_create_autocmd('InsertEnter', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
+vim.api.nvim_create_autocmd('WinLeave', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
+EOF
+
 let g:catppuccin_flavour = "macchiato" " latte, frappe, macchiato, mocha
 set background=dark
 " colorscheme hybrid
@@ -492,36 +514,9 @@ filetype plugin indent on
 
 " AUTOCMD{{{
 
-autocmd BufEnter * :syntax sync fromstart
-
-augroup AutoSaveFolds
-	autocmd!
-  autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview!
-  autocmd BufWinEnter ?* silent! loadview
-augroup END
-
-augroup CursorLine
-	autocmd!
-	autocmd InsertLeave,WinEnter * set cursorline
-	autocmd InsertEnter,WinLeave * set nocursorline
-augroup END
-
-autocmd TermOpen * setlocal nobuflisted
-
-autocmd BufRead,BufNewFile *.vue setlocal comments= | set commentstring=//\ %s
-autocmd BufRead,BufNewFile *.js setlocal comments= | set commentstring=//\ %s
-autocmd BufRead,BufNewFile *.vue setlocal foldnestmax=4
-autocmd BufRead,BufNewFile *.js setlocal foldnestmax=1
-autocmd BufRead,BufNewFile *.ts setlocal foldnestmax=1
-autocmd BufRead,BufNewFile *.vim setlocal foldmethod=marker
 let g:vue_pre_processors = []
 
 autocmd User GitGutterStage call fugitive#ReloadStatus()
-
-autocmd BufWinEnter */.git/index nnoremap <esc> :q<cr>
-autocmd BufWinLeave */.git/index unmap <esc>
-
-autocmd VimEnter * cd c:\\Users\\ender\\Desktop\\projects
 
 "}}}
 
