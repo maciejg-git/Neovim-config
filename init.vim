@@ -133,6 +133,8 @@ Plug 'akinsho/toggleterm.nvim'
 
 Plug 'max397574/better-escape.nvim'
 
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+
 " Plug 'numToStr/Comment.nvim'
 
 call plug#end()
@@ -274,61 +276,84 @@ require("better_escape").setup {
     keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 }
 
+-- BUFFERLINE
+
+require('bufferline').setup {
+  options = {
+    mode = "tabs",
+    numbers = "none",
+    indicator_icon = '▎',
+    buffer_close_icon = '',
+    modified_icon = '●',
+    close_icon = '',
+    left_trunc_marker = '',
+    right_trunc_marker = '',
+    max_name_length = 18,
+    max_prefix_length = 15,
+    tab_size = 18,
+    color_icons = true,
+    show_buffer_icons = true,
+    show_buffer_close_icons = true,
+    show_buffer_default_icon = true,
+    show_close_icon = true,
+    show_tab_indicators = true,
+    separator_style = "slant",
+    always_show_bufferline = false,
+    sort_by = 'tabs',
+  }
+}
+
 -- require('Comment').setup()
 -- local ft = require('Comment.ft')
 EOF
 
 " MAPPING{{{
 
-nmap <leader>q :q!<CR>
-nmap <C-q> :q!<CR>
-nmap <CR> o
-nnoremap ; :
-map <c-f> <c-u>
-nmap <silent> <Leader><Leader> V
-vmap <Leader><Leader> <Esc>
-xnoremap < <gv
-xnoremap > >gv|
-nmap <M-c> gcc
-vmap <M-c> gc
-nmap <M-S-c> <Leader>_b
-nmap <PageUp> <left>
-nmap <PageDown> <right>
-imap <PageUp> <left>
-imap <PageDown> <right>
-vmap <PageUp> <left>
-vmap <PageDown> <right>
+lua << EOF
+vim.keymap.set('n', '<Leader>q', ':q!<CR>')
+vim.keymap.set('n', '<CR>', 'o')
+vim.keymap.set('n', ';', ':', {remap = false})
+vim.keymap.set('n', '<c-f>', '<c-u>')
+vim.keymap.set('n', '<Leader><Leader>', 'V')
+vim.keymap.set('v', '<Leader><Leader>', '<Esc>')
+vim.keymap.set('x', '<', '<gv', {remap = false})
+vim.keymap.set('x', '>', '>gv|', {remap = false})
+vim.keymap.set('n', '<M-c>', 'gcc')
+vim.keymap.set('v', '<M-c>', 'gc')
+vim.keymap.set('n', '<M-S-c>', '<Leader>_b')
+vim.keymap.set({'n', 'i', 'v'}, '<PageUp>', '<left>')
+vim.keymap.set({'n', 'i', 'v'}, '<PageDown>', '<right>')
 
-nnoremap <silent> <C-L> :nohlsearch<cr>
+vim.keymap.set('n', '<C-L>', ':nohlsearch<cr>', {remap = false})
+
+vim.keymap.set('n', '+', '<C-a>', {remap = false})
+vim.keymap.set('n', '-', '<C-x>', {remap = false})
+
+vim.keymap.set('n', 'n', 'nzz', {remap = false})
+vim.keymap.set('n', 'N', 'Nzz', {remap = false})
+
+vim.keymap.set('n', '<C-up>', ':m-2<CR>', {remap = false})
+vim.keymap.set('n', '<C-down>', ':m+<CR>', {remap = false})
+vim.keymap.set('v', '<C-up>', ':m-2<CR>gv=gv', {remap = false})
+vim.keymap.set('v', '<C-down>', ":m'>+<CR>gv=gv", {remap = false})
+vim.keymap.set('n', '<C-k>', ':m-2<CR>', {remap = false})
+vim.keymap.set('n', '<C-j>', ':m+<CR>', {remap = false})
+vim.keymap.set('v', '<C-k>', ':m-2<CR>gv=gv', {remap = false})
+vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv", {remap = false})
+
+vim.keymap.set('n', ',g', 'yyp<up>gcc<down>')
+vim.keymap.set('n', 't', 'vatV', {remap = false})
+vim.keymap.set('n', '<C-t>', 'vit', {remap = false})
+EOF
 
 nnoremap <leader>r *``cgn
 vnoremap <expr> <leader>r "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn"
-
-nnoremap + <C-a>
-nnoremap - <C-x>
 
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 nnoremap <expr> <down> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> <up> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-nnoremap n  nzz
-nnoremap N  Nzz
-
-noremap  <C-up> :m-2<CR>
-noremap  <C-down> :m+<CR>
-vnoremap <C-up> :m-2<CR>gv=gv
-vnoremap <C-down> :m'>+<CR>gv=gv
-noremap  <C-k> :m-2<CR>
-noremap  <C-j> :m+<CR>
-vnoremap <C-k> :m-2<CR>gv=gv
-vnoremap <C-j> :m'>+<CR>gv=gv
-
-nmap ,g yyp<up>gcc<down>
-
-nnoremap t vatV
-nnoremap <C-t> vit
 
 imap <leader>c console.log(
 imap <leader>d console.log('debug'
@@ -493,22 +518,31 @@ vim.api.nvim_create_autocmd('InsertLeave', { pattern = '*', group = CursorLine, 
 vim.api.nvim_create_autocmd('WinEnter', { pattern = '*', group = CursorLine, command = 'set cursorline' })
 vim.api.nvim_create_autocmd('InsertEnter', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
 vim.api.nvim_create_autocmd('WinLeave', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
-EOF
 
-let g:catppuccin_flavour = "macchiato" " latte, frappe, macchiato, mocha
-set background=dark
-" colorscheme hybrid
-" colorscheme github_dark
-" colorscheme edge
-colorscheme catppuccin
-" colorscheme kanagawa
+-- colorscheme hybrid
+-- colorscheme github_dark
+-- colorscheme edge
+-- colorscheme kanagawa
+vim.cmd [[
+  colorscheme catppuccin
+]]
+
+-- latte, frappe, macchiato, mocha
+vim.g.catppuccin_flavour = "macchiato"
+
+vim.opt.background = 'dark'
+EOF
 
 "}}}
 
 " SYNTAX{{{
 
-syntax on
-filetype plugin indent on
+lua << EOF
+vim.cmd [[
+  syntax on
+  filetype plugin indent on
+]]
+EOF
 
 "}}}
 
