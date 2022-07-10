@@ -344,6 +344,23 @@ vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv", {remap = false})
 vim.keymap.set('n', ',g', 'yyp<up>gcc<down>')
 vim.keymap.set('n', 't', 'vatV', {remap = false})
 vim.keymap.set('n', '<C-t>', 'vit', {remap = false})
+
+vim.keymap.set('i', '<leader>c', "console.log(")
+vim.keymap.set('i', '<leader>d', "console.log('debug'")
+vim.keymap.set('i', '<leader>dw', "console.log('watch debug'")
+vim.keymap.set('i', '<leader>dc', "console.log('computed debug'")
+vim.keymap.set('i', '<leader>de', "console.log('event debug'")
+vim.keymap.set('i', '<leader>dp', "console.log('props debug'")
+vim.keymap.set('i', '<leader>dm', "console.log('model debug'")
+
+vim.keymap.set('i', '<leader>j', "JSON.stringify(")
+vim.keymap.set('i', '<leader>fa', "() => {<cr>")
+vim.keymap.set('i', '<leader>ff', "function() {")
+vim.keymap.set('i', '<leader>i', "if(")
+
+vim.keymap.set('i', '<leader>tt', "<template><c-e>")
+vim.keymap.set('i', '<leader>td', "<div><c-e>")
+vim.keymap.set('i', '<leader>tc', 'class="')
 EOF
 
 nnoremap <leader>r *``cgn
@@ -355,47 +372,33 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 nnoremap <expr> <down> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> <up> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
-imap <leader>c console.log(
-imap <leader>d console.log('debug'
-imap <leader>dw console.log('watch debug'
-imap <leader>dc console.log('computed debug'
-imap <leader>de console.log('event debug'
-imap <leader>dp console.log('props debug'
-imap <leader>dm console.log('model debug'
-
-imap <leader>= ===
-imap <leader>j JSON.stringify(
-imap <leader>fa () => {<cr>
-imap <leader>ff function() {
-imap <leader>fo () {<cr>
-imap <leader>i if(
-
-imap <leader>tt <template><c-e>
-imap <leader>td <div><c-e>
-imap <leader>tc class="
-
 "}}}
 
 " MAPPING MSWIN{{{
 
-noremap <C-A> ggVG
-inoremap <C-A> <C-O>gg<C-O>VG
-cnoremap <C-A> <C-C>ggV<C-O>G
-onoremap <C-A> <C-C>ggV<C-O>G
-snoremap <C-A> <C-C>ggV<C-O>G
-xnoremap <C-A> <C-C>ggVG
+lua << EOF
+vim.keymap.set('n', '<C-A>', "ggVG", {remap = false})
+vim.keymap.set('i', '<C-A>', "<C-O>gg<C-O>VG", {remap = false})
+vim.keymap.set('c', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
+vim.keymap.set('o', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
+vim.keymap.set('s', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
+vim.keymap.set('x', '<C-A>', "<C-C>ggVG", {remap = false})
+EOF
 
 "}}}
 
 " MAPPING F{{{
 
-nmap <F2> :PlugInstall<CR>
-nmap <F3> :PlugClean<CR>
-nmap <F4> :PlugUpdate<CR>
-nmap <F5> :LeaderfColorscheme<CR>
-nmap <F7> :tabnew<CR>
-map  <F8> :call system("explorer " . expand('%:p:h'))<cr>
-nmap <F9> :set number!<CR>
+lua << EOF
+vim.keymap.set('n', '<F2>', ":PlugInstall<CR>")
+vim.keymap.set('n', '<F3>', ":PlugClean<CR>")
+vim.keymap.set('n', '<F4>', ":PlugUpdate<CR>")
+vim.keymap.set('n', '<F7>', ":tabnew<CR>")
+vim.keymap.set('n', '<F8>', ":call system('explorer ' . expand('%:p:h'))<cr>")
+vim.keymap.set('n', '<F9>', ":set number!<CR>")
+vim.keymap.set('n', '<F11>', "ggVG")
+EOF
+
 nmap <F11> :<C-u>call <SID>toggle_background()<CR>
 
 "}}}
@@ -456,11 +459,6 @@ map <c-g> :vertical G<cr>
 
 " COLORSCHEME{{{
 
-let g:deus_bold = 0
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_contrast_light = 'hard'
-
-let g:gruvbox_bold = 0
 lua << EOF
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi LineNr guibg=NONE' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi FoldColumn guibg=NONE' })
@@ -556,23 +554,29 @@ autocmd User GitGutterStage call fugitive#ReloadStatus()
 
 " PLUGIN MARKDOWN{{{
 
-let g:vim_markdown_folding_disabled = 1
+lua << EOF
+vim.g.vim_markdown_folding_disabled = 1
+EOF
 
 "}}}
 
 " PLUGIN EMMET{{{
 
-let g:user_emmet_expandabbr_key = '<C-e>'
-let g:user_emmet_update_tag = '<M-e>'
-let g:user_emmet_removetag_key = '<M-d>'
-let g:user_emmet_splitjointag_key = '<M-t>'
+lua << EOF
+vim.g.user_emmet_expandabbr_key = "'<C-e>"
+vim.g.user_emmet_update_tag = "<M-e>"
+vim.g.user_emmet_removetag_key = "<M-d>"
+vim.g.user_emmet_splitjointag_key = "<M-t>"
+EOF
 
 "}}}
 
 " PLUGIN WHICHKEY{{{
 
-nnoremap <silent> <leader> :WhichKey '\'<CR>
-nnoremap <silent> <localleader> :WhichKey ','<CR>
+lua << EOF
+vim.keymap.set('n', '<leader>', ":WhichKey '\'<CR>", {remap = false})
+vim.keymap.set('n', '<localleader>', ":WhichKey '\'<CR>", {remap = false})
+EOF
 
 "}}}
 "
@@ -608,8 +612,8 @@ let g:floaterm_keymap_toggle = '<F12>'
 let g:indent_blankline_filetype = ['vue', 'javascript', 'typescript', 'html']
 
 "}}}
-"
-" PLUGIN FLOATERM{{{
+
+" PLUGIN TELESCOPE{{{
 
 map <leader>; :lua require('telescope.builtin').command_history()<cr>
 map <leader>c :lua require('telescope.builtin').colorscheme()<cr>
