@@ -309,8 +309,23 @@ EOF
 
 " MAPPING{{{
 
+nnoremap <leader>r *``cgn
+vnoremap <expr> <leader>r "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn"
+
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+nnoremap <expr> <down> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> <up> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+nmap <M-c> gcc
+vmap <M-c> gc
+nmap <M-S-c> <Leader>_b
+vmap <M-S-c> <Leader>_b
+
 lua << EOF
 vim.keymap.set('n', '<Leader>q', ':q!<CR>')
+vim.keymap.set('n', '<C-q>', ':q!<CR>')
 vim.keymap.set('n', '<CR>', 'o')
 vim.keymap.set('n', ';', ':', {remap = false})
 vim.keymap.set('n', '<c-f>', '<c-u>')
@@ -318,9 +333,6 @@ vim.keymap.set('n', '<Leader><Leader>', 'V')
 vim.keymap.set('v', '<Leader><Leader>', '<Esc>')
 vim.keymap.set('x', '<', '<gv', {remap = false})
 vim.keymap.set('x', '>', '>gv|', {remap = false})
-vim.keymap.set('n', '<M-c>', 'gcc')
-vim.keymap.set('v', '<M-c>', 'gc')
-vim.keymap.set('n', '<M-S-c>', '<Leader>_b')
 vim.keymap.set({'n', 'i', 'v'}, '<PageUp>', '<left>')
 vim.keymap.set({'n', 'i', 'v'}, '<PageDown>', '<right>')
 
@@ -361,99 +373,64 @@ vim.keymap.set('i', '<leader>i', "if(")
 vim.keymap.set('i', '<leader>tt', "<template><c-e>")
 vim.keymap.set('i', '<leader>td', "<div><c-e>")
 vim.keymap.set('i', '<leader>tc', 'class="')
-EOF
 
-nnoremap <leader>r *``cgn
-vnoremap <expr> <leader>r "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn"
+-- MAPPING WINDOWS
 
-nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-nnoremap <expr> <down> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> <up> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-"}}}
-
-" MAPPING MSWIN{{{
-
-lua << EOF
 vim.keymap.set('n', '<C-A>', "ggVG", {remap = false})
 vim.keymap.set('i', '<C-A>', "<C-O>gg<C-O>VG", {remap = false})
 vim.keymap.set('c', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
 vim.keymap.set('o', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
 vim.keymap.set('s', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
 vim.keymap.set('x', '<C-A>', "<C-C>ggVG", {remap = false})
-EOF
 
-"}}}
+-- MAPPING F
 
-" MAPPING F{{{
-
-lua << EOF
 vim.keymap.set('n', '<F2>', ":PlugInstall<CR>")
 vim.keymap.set('n', '<F3>', ":PlugClean<CR>")
 vim.keymap.set('n', '<F4>', ":PlugUpdate<CR>")
 vim.keymap.set('n', '<F7>', ":tabnew<CR>")
 vim.keymap.set('n', '<F8>', ":call system('explorer ' . expand('%:p:h'))<cr>")
 vim.keymap.set('n', '<F9>', ":set number!<CR>")
-vim.keymap.set('n', '<F11>', "ggVG")
+vim.keymap.set('n', '<F11>', ":ToggleBackground<CR>")
+
+-- MAPPING FONT
+
+vim.keymap.set('n', '<C-PageUp>', ":call FontSize(1)<CR>", {remap = false})
+vim.keymap.set('n', '<C-PageDown>', ":call FontSize(-1)<CR>", {remap = false})
+
+-- MAPPING WINDOWS
+
+vim.keymap.set('n', '<A-right>', ":set splitright<CR>:vnew<CR>")
+vim.keymap.set('n', '<A-left>', ":set nosplitright<CR>:vnew<CR>")
+vim.keymap.set('n', '<A-up>', ":set nosplitbelow<CR>:new<CR>")
+vim.keymap.set('n', '<A-down>', ":set splitbelow<CR>:new<CR>")
+vim.keymap.set('v', '<A-right>', "<esc>:set splitright<CR>:vnew<CR>", {remap = false})
+vim.keymap.set('v', '<A-left>', "<esc>:set nosplitright<CR>:vnew<CR>", {remap = false})
+vim.keymap.set('v', '<A-up>', "<esc>:set nosplitbelow<CR>:new<CR>", {remap = false})
+vim.keymap.set('v', '<A-down>', "<esc>:set splitbelow<CR>:new<CR>", {remap = false})
+vim.keymap.set('n', ',,', ":ZoomToggle<CR>", {remap = false})
+vim.keymap.set('n', '<leader>=', "<C-w>=", {remap = false})
+vim.keymap.set('n', '<Tab>', "<C-w><C-w>")
+
+-- MAPPING BUFFERS
+
+vim.keymap.set('n', '<leader>d', ':bp\\|bd#<cr>')
+
+-- MAPPING FOLDS
+
+vim.keymap.set('n', '<2-LeftMouse>', "foldclosed(line('.')) == -1 ? '\\<2-LeftMouse>' : 'zo'", {remap = false, expr = true})
+vim.keymap.set('n', '<C-CR>', "&foldlevel == 0 ? 'zR' :'zM'", {remap = false, expr = true})
+vim.keymap.set('n', '<M-CR>', "&foldlevel == 0 ? 'zRzMzo' :'zMzo'", {remap = false, expr = true})
+vim.keymap.set('n', 'f', "za")
+
+-- MAPPING TABS
+
+vim.keymap.set('n', '<leader>t', ":tabnew<CR>")
+
+-- MAPPING GIT
+
+vim.keymap.set('', '<c-g>', ":vertical G<cr>")
 EOF
-
-nmap <F11> :<C-u>call <SID>toggle_background()<CR>
-
-"}}}
-
-" MAPPING GUI{{{
-
-nnoremap <C-PageUp> :call FontSize(1)<CR>
-nnoremap <C-PageDown> :call FontSize(-1)<CR>
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-"}}}
-
-" MAPPING WINDOWS{{{
-
-nmap <A-right> :set splitright<CR>:vnew<CR>
-nmap <A-left> :set nosplitright<CR>:vnew<CR>
-nmap <A-up> :set nosplitbelow<CR>:new<CR>
-nmap <A-down> :set splitbelow<CR>:new<CR>
-vnoremap <A-right> <esc>:set splitright<CR>:vnew<CR>
-vnoremap <A-left> <esc>:set nosplitright<CR>:vnew<CR>
-vnoremap <A-up> <esc>:set nosplitbelow<CR>:new<CR>
-vnoremap <A-down> <esc>:set splitbelow<CR>:new<CR>
-nnoremap <silent>,, :ZoomToggle<CR>
-nnoremap <silent><leader>= <C-w>=
-nmap <Tab> <C-w><C-w>
-
-"}}}
-
-" MAPPING BUFFERS{{{
-
-nmap <leader>d :bp\|bd#<cr>
-
-"}}}
-
-" MAPPING FOLD{{{
-
-nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? "\<2-LeftMouse>" : 'zo'
-nnoremap <expr> <C-CR> &foldlevel == 0 ? 'zR' :'zM'
-nnoremap <expr> <M-CR> &foldlevel == 0 ? 'zRzMzo' :'zMzo'
-nnoremap f za
-
-"}}}
-
-" MAPPING TABS{{{
-
-nmap <leader>t :tabnew<CR>
-
-"}}}
-
-" MAPPING GIT {{{
-
-" map <c-g> :G<cr>
-map <c-g> :vertical G<cr>
 
 "}}}
 
@@ -529,13 +506,9 @@ vim.cmd [[
 vim.g.catppuccin_flavour = "macchiato"
 
 vim.opt.background = 'dark'
-EOF
 
-"}}}
+-- SYNTAX
 
-" SYNTAX{{{
-
-lua << EOF
 vim.cmd [[
   syntax on
   filetype plugin indent on
@@ -689,7 +662,7 @@ function! NextOpenedFold(dir)
     endif
 endfunction
 
-function! s:toggle_background()
+function! s:ToggleBackground()
 	if ! exists('g:colors_name')
 		echomsg 'No colorscheme set'
 		return
@@ -712,5 +685,6 @@ function! s:toggle_background()
 		endif
 	endif
 endfunction
+command! ToggleBackground call s:ToggleBackground()
 
 
