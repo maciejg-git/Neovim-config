@@ -318,11 +318,6 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 nnoremap <expr> <down> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> <up> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
-nmap <M-c> gcc
-vmap <M-c> gc
-nmap <M-S-c> <Leader>_b
-vmap <M-S-c> <Leader>_b
-
 lua << EOF
 vim.keymap.set('n', '<Leader>q', ':q!<CR>')
 vim.keymap.set('n', '<C-q>', ':q!<CR>')
@@ -335,6 +330,11 @@ vim.keymap.set('x', '<', '<gv', {remap = false})
 vim.keymap.set('x', '>', '>gv|', {remap = false})
 vim.keymap.set({'n', 'i', 'v'}, '<PageUp>', '<left>')
 vim.keymap.set({'n', 'i', 'v'}, '<PageDown>', '<right>')
+
+vim.keymap.set('n', '<M-c>', 'gcc', {remap = true})
+vim.keymap.set('v', '<M-c>', 'gc', {remap = true})
+vim.keymap.set('n', '<M-S-c>', '<Leader>_b', {remap = true})
+vim.keymap.set('v', '<M-S-c>', '<Leader>_b', {remap = true})
 
 vim.keymap.set('n', '<C-L>', ':nohlsearch<cr>', {remap = false})
 
@@ -357,13 +357,13 @@ vim.keymap.set('n', ',g', 'yyp<up>gcc<down>')
 vim.keymap.set('n', 't', 'vatV', {remap = false})
 vim.keymap.set('n', '<C-t>', 'vit', {remap = false})
 
-vim.keymap.set('i', '<leader>c', "console.log(")
-vim.keymap.set('i', '<leader>d', "console.log('debug'")
-vim.keymap.set('i', '<leader>dw', "console.log('watch debug'")
-vim.keymap.set('i', '<leader>dc', "console.log('computed debug'")
-vim.keymap.set('i', '<leader>de', "console.log('event debug'")
-vim.keymap.set('i', '<leader>dp', "console.log('props debug'")
-vim.keymap.set('i', '<leader>dm', "console.log('model debug'")
+vim.keymap.set('i', '<leader>c', "console.log(", { remap = true })
+vim.keymap.set('i', '<leader>d', "console.log('debug'", { remap = true })
+vim.keymap.set('i', '<leader>dw', "console.log('watch debug'", { remap = true })
+vim.keymap.set('i', '<leader>dc', "console.log('computed debug'", { remap = true })
+vim.keymap.set('i', '<leader>de', "console.log('event debug'", { remap = true })
+vim.keymap.set('i', '<leader>dp', "console.log('props debug'", { remap = true })
+vim.keymap.set('i', '<leader>dm', "console.log('model debug'", { remap = true })
 
 vim.keymap.set('i', '<leader>j', "JSON.stringify(")
 vim.keymap.set('i', '<leader>fa', "() => {<cr>")
@@ -418,7 +418,7 @@ vim.keymap.set('n', '<leader>d', ':bp\\|bd#<cr>')
 
 -- MAPPING FOLDS
 
-vim.keymap.set('n', '<2-LeftMouse>', "foldclosed(line('.')) == -1 ? '\\<2-LeftMouse>' : 'zo'", {remap = false, expr = true})
+vim.keymap.set('n', '<2-LeftMouse>', "foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : 'zo'", {remap = false, expr = true})
 vim.keymap.set('n', '<C-CR>', "&foldlevel == 0 ? 'zR' :'zM'", {remap = false, expr = true})
 vim.keymap.set('n', '<M-CR>', "&foldlevel == 0 ? 'zRzMzo' :'zMzo'", {remap = false, expr = true})
 vim.keymap.set('n', 'f', "za")
@@ -588,23 +588,24 @@ let g:indent_blankline_filetype = ['vue', 'javascript', 'typescript', 'html']
 
 " PLUGIN TELESCOPE{{{
 
-map <leader>; :lua require('telescope.builtin').command_history()<cr>
-map <leader>c :lua require('telescope.builtin').colorscheme()<cr>
-map <leader>m :lua require('telescope.builtin').keymaps()<cr>
-map <leader>h :lua require('telescope.builtin').highlights()<cr>
-map <leader>f :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-map <leader>g :lua require('telescope.builtin').git_commits()<cr>
-map <leader>l :lua require('telescope.builtin').live_grep()<cr>
-" map <space> :lua require('telescope.builtin').buffers({previewer=false,layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <space> :lua require('telescope.builtin').buffers()<cr>
-map <C-p> :lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <M-1> :lua require('telescope.builtin').diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <M-2> :lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-map <M-3> :lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <M-4> :lua require('telescope.builtin').lsp_references({layout_strategy='vertical',layout_config={width=0.6}})<cr>
-map <leader><cr> :lua require('telescope.builtin').resume()<cr>
-map <leader>] :lua require('telescope.builtin').resume()<cr>
-map <leader>p :TodoTelescope<cr>
+lua << EOF
+vim.keymap.set('', '<leader>;', ":lua require('telescope.builtin').command_history()<cr>", {remap = true})
+vim.keymap.set('', '<leader>c', ":lua require('telescope.builtin').colorscheme()<cr>", {remap = true})
+vim.keymap.set('', '<leader>m', ":lua require('telescope.builtin').keymaps()<cr>", {remap = true})
+vim.keymap.set('', '<leader>h', ":lua require('telescope.builtin').highlights()<cr>", {remap = true})
+vim.keymap.set('', '<leader>f', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", {remap = true})
+vim.keymap.set('', '<leader>g', ":lua require('telescope.builtin').git_commits()<cr>", {remap = true})
+vim.keymap.set('', '<leader>l', ":lua require('telescope.builtin').live_grep()<cr>", {remap = true})
+vim.keymap.set('', '<space>', ":lua require('telescope.builtin').buffers()<cr>", {remap = true})
+vim.keymap.set('', '<C-p>', ":lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
+vim.keymap.set('', '<M-1>', ":lua require('telescope.builtin').diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
+vim.keymap.set('', '<M-2>', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", {remap = true})
+vim.keymap.set('', '<M-3>', ":lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
+vim.keymap.set('', '<M-4>', ":lua require('telescope.builtin').lsp_references({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
+vim.keymap.set('', '<leader><cr>', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
+vim.keymap.set('', '<leader>]', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
+vim.keymap.set('', '<leader>p', ":TodoTelescope<cr>", {remap = true})
+EOF
 
 "}}}
 
