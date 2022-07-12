@@ -9,8 +9,6 @@ cnoreabbrev WQ wq
 let maplocalleader = ','
 let g:font_size = 11
 
-" SET{{{
-
 set undofile
 set ruler
 set showcmd
@@ -65,10 +63,6 @@ set breakindent
 set breakindentopt=shift:2
 set showbreak=\\\\\
 set guifont=Hack\ Nerd\ Font\ Mono:h12
-
-"}}}
-
-" PLUG{{{
 
 call plug#begin('~/.vim/plugged')
 
@@ -135,15 +129,13 @@ Plug 'max397574/better-escape.nvim'
 
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 
-" Plug 'numToStr/Comment.nvim'
-
 call plug#end()
-
-"}}}
 
 lua << EOF
 
--- LSP
+-- PLUGINS
+
+-- LSP CONFIG
 
 require'lspconfig'.vuels.setup{ cmd = { "vls.cmd" } }
 require'lspconfig'.tsserver.setup{}
@@ -162,6 +154,7 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
+-- LSP SIGNATURE
 
 require 'lsp_signature'.setup()
 
@@ -228,6 +221,8 @@ require('lualine').setup{options = {section_separators='', component_separators=
 
 require("todo-comments").setup {}
 
+-- TELESCOPE
+
 require("telescope").setup {
   defaults = {
     -- path_display = {"shorten"},
@@ -258,6 +253,23 @@ require("telescope").setup {
     },
   },
 }
+
+vim.keymap.set('', '<leader>;', ":lua require('telescope.builtin').command_history()<cr>", {remap = true})
+vim.keymap.set('', '<leader>c', ":lua require('telescope.builtin').colorscheme()<cr>", {remap = true})
+vim.keymap.set('', '<leader>m', ":lua require('telescope.builtin').keymaps()<cr>", {remap = true})
+vim.keymap.set('', '<leader>h', ":lua require('telescope.builtin').highlights()<cr>", {remap = true})
+vim.keymap.set('', '<leader>f', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", {remap = true})
+vim.keymap.set('', '<leader>g', ":lua require('telescope.builtin').git_commits()<cr>", {remap = true})
+vim.keymap.set('', '<leader>l', ":lua require('telescope.builtin').live_grep()<cr>", {remap = true})
+vim.keymap.set('', '<space>', ":lua require('telescope.builtin').buffers()<cr>", {remap = true})
+vim.keymap.set('', '<C-p>', ":lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
+vim.keymap.set('', '<M-1>', ":lua require('telescope.builtin').diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
+vim.keymap.set('', '<M-2>', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", {remap = true})
+vim.keymap.set('', '<M-3>', ":lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
+vim.keymap.set('', '<M-4>', ":lua require('telescope.builtin').lsp_references({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
+vim.keymap.set('', '<leader><cr>', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
+vim.keymap.set('', '<leader>]', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
+vim.keymap.set('', '<leader>p', ":TodoTelescope<cr>", {remap = true})
 
 -- STABILIZE
 
@@ -303,11 +315,35 @@ require('bufferline').setup {
   }
 }
 
--- require('Comment').setup()
--- local ft = require('Comment.ft')
-EOF
+-- GIT
 
-" MAPPING{{{
+vim.g.vue_pre_processors = {}
+vim.api.nvim_create_autocmd('User', { pattern = 'GitGutterStage', command = 'call fugitive#ReloadStatus()' })
+
+-- MARKDOWN
+
+vim.g.vim_markdown_folding_disabled = 1
+
+-- EMMET
+
+vim.g.user_emmet_expandabbr_key = "<C-e>"
+vim.g.user_emmet_update_tag = "<M-e>"
+vim.g.user_emmet_removetag_key = "<M-d>"
+vim.g.user_emmet_splitjointag_key = "<M-t>"
+vim.keymap.set('n', '<leader>', ":WhichKey '\'<CR>", {remap = false})
+vim.keymap.set('n', '<localleader>', ":WhichKey '\'<CR>", {remap = false})
+
+-- FLOATERM
+
+vim.g.floaterm_keymap_new = ""
+vim.g.floaterm_keymap_prev = ""
+vim.g.floaterm_keymap_next = ""
+vim.g.floaterm_keymap_toggle = "<F12>"
+
+-- INDENT BLANKLINE
+
+vim.g.indent_blankline_filetype = {'vue', 'javascript', 'typescript', 'html'}
+EOF
 
 nnoremap <leader>r *``cgn
 vnoremap <expr> <leader>r "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn"
@@ -319,6 +355,9 @@ nnoremap <expr> <down> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj
 nnoremap <expr> <up> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 lua << EOF
+
+-- MAPPING
+
 vim.keymap.set('n', '<Leader>q', ':q!<CR>')
 vim.keymap.set('n', '<C-q>', ':q!<CR>')
 vim.keymap.set('n', '<CR>', 'o')
@@ -430,13 +469,9 @@ vim.keymap.set('n', '<leader>t', ":tabnew<CR>")
 -- MAPPING GIT
 
 vim.keymap.set('', '<c-g>', ":vertical G<cr>")
-EOF
 
-"}}}
+-- AUTOCOMMAND
 
-" COLORSCHEME{{{
-
-lua << EOF
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi LineNr guibg=NONE' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi FoldColumn guibg=NONE' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi VertSplit gui=none guibg=none' })
@@ -494,18 +529,17 @@ vim.api.nvim_create_autocmd('WinEnter', { pattern = '*', group = CursorLine, com
 vim.api.nvim_create_autocmd('InsertEnter', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
 vim.api.nvim_create_autocmd('WinLeave', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
 
--- colorscheme hybrid
--- colorscheme github_dark
--- colorscheme edge
--- colorscheme kanagawa
+-- COLORSCHEME
+
+vim.opt.background = 'dark'
+
+-- latte frappe macchiato mocha
+vim.g.catppuccin_flavour = "macchiato"
+
+--  hybrid github_dark edge kanagawa
 vim.cmd [[
   colorscheme catppuccin
 ]]
-
--- latte, frappe, macchiato, mocha
-vim.g.catppuccin_flavour = "macchiato"
-
-vim.opt.background = 'dark'
 
 -- SYNTAX
 
@@ -514,46 +548,6 @@ vim.cmd [[
   filetype plugin indent on
 ]]
 EOF
-
-"}}}
-
-" AUTOCMD{{{
-
-let g:vue_pre_processors = []
-
-autocmd User GitGutterStage call fugitive#ReloadStatus()
-
-"}}}
-
-" PLUGIN MARKDOWN{{{
-
-lua << EOF
-vim.g.vim_markdown_folding_disabled = 1
-EOF
-
-"}}}
-
-" PLUGIN EMMET{{{
-
-lua << EOF
-vim.g.user_emmet_expandabbr_key = "'<C-e>"
-vim.g.user_emmet_update_tag = "<M-e>"
-vim.g.user_emmet_removetag_key = "<M-d>"
-vim.g.user_emmet_splitjointag_key = "<M-t>"
-EOF
-
-"}}}
-
-" PLUGIN WHICHKEY{{{
-
-lua << EOF
-vim.keymap.set('n', '<leader>', ":WhichKey '\'<CR>", {remap = false})
-vim.keymap.set('n', '<localleader>', ":WhichKey '\'<CR>", {remap = false})
-EOF
-
-"}}}
-"
-" PLUGIN VUE{{{
 
 let g:vim_vue_plugin_config = { 
       \'syntax': {
@@ -568,46 +562,6 @@ let g:vim_vue_plugin_config = {
       \'init_indent': 0,
       \'debug': 0,
       \}
-
-" }}}
-
-" PLUGIN FLOATERM{{{
-
-let g:floaterm_keymap_new    = ''
-let g:floaterm_keymap_prev   = ''
-let g:floaterm_keymap_next   = ''
-let g:floaterm_keymap_toggle = '<F12>'
-
-"}}}
-
-" PLUGIN BLANKLINE{{{
-
-let g:indent_blankline_filetype = ['vue', 'javascript', 'typescript', 'html']
-
-"}}}
-
-" PLUGIN TELESCOPE{{{
-
-lua << EOF
-vim.keymap.set('', '<leader>;', ":lua require('telescope.builtin').command_history()<cr>", {remap = true})
-vim.keymap.set('', '<leader>c', ":lua require('telescope.builtin').colorscheme()<cr>", {remap = true})
-vim.keymap.set('', '<leader>m', ":lua require('telescope.builtin').keymaps()<cr>", {remap = true})
-vim.keymap.set('', '<leader>h', ":lua require('telescope.builtin').highlights()<cr>", {remap = true})
-vim.keymap.set('', '<leader>f', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", {remap = true})
-vim.keymap.set('', '<leader>g', ":lua require('telescope.builtin').git_commits()<cr>", {remap = true})
-vim.keymap.set('', '<leader>l', ":lua require('telescope.builtin').live_grep()<cr>", {remap = true})
-vim.keymap.set('', '<space>', ":lua require('telescope.builtin').buffers()<cr>", {remap = true})
-vim.keymap.set('', '<C-p>', ":lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
-vim.keymap.set('', '<M-1>', ":lua require('telescope.builtin').diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
-vim.keymap.set('', '<M-2>', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", {remap = true})
-vim.keymap.set('', '<M-3>', ":lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
-vim.keymap.set('', '<M-4>', ":lua require('telescope.builtin').lsp_references({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
-vim.keymap.set('', '<leader><cr>', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
-vim.keymap.set('', '<leader>]', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
-vim.keymap.set('', '<leader>p', ":TodoTelescope<cr>", {remap = true})
-EOF
-
-"}}}
 
 " FUNCTIONS
 
