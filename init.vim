@@ -69,69 +69,69 @@ vim.opt.guifont='Hack Nerd Font Mono:h12'
 -- PACKER
 
 require('packer').startup(function()
-use 'wbthomason/packer.nvim'
+  use 'wbthomason/packer.nvim'
 
-use 'ajmwagar/vim-deus'
-use 'NLKNguyen/papercolor-theme'
-use 'whatyouhide/vim-gotham'
-use 'mhinz/vim-janah'
-use 'mhartington/oceanic-next'
-use 'w0ng/vim-hybrid'
-use 'tomasiser/vim-code-dark'
+  use 'ajmwagar/vim-deus'
+  use 'NLKNguyen/papercolor-theme'
+  use 'whatyouhide/vim-gotham'
+  use 'mhinz/vim-janah'
+  use 'mhartington/oceanic-next'
+  use 'w0ng/vim-hybrid'
+  use 'tomasiser/vim-code-dark'
 
-use 'nvim-lua/plenary.nvim'
+  use 'nvim-lua/plenary.nvim'
 
-use 'plasticboy/vim-markdown'
-use 'mustache/vim-mustache-handlebars'
-use 'pangloss/vim-javascript'
-use 'mattn/emmet-vim'
-use 'posva/vim-vue'
-use 'HerringtonDarkholme/yats.vim'
-use 'norcalli/nvim-colorizer.lua'
+  use 'plasticboy/vim-markdown'
+  use 'mustache/vim-mustache-handlebars'
+  use 'pangloss/vim-javascript'
+  use 'mattn/emmet-vim'
+  use 'posva/vim-vue'
+  use 'HerringtonDarkholme/yats.vim'
+  use 'norcalli/nvim-colorizer.lua'
 
-use 'tpope/vim-fugitive'
-use 'lewis6991/gitsigns.nvim'
+  use 'tpope/vim-fugitive'
+  use 'lewis6991/gitsigns.nvim'
 
-use 'neovim/nvim-lspconfig'
-use 'ray-x/lsp_signature.nvim'
-use 'folke/trouble.nvim'
+  use 'neovim/nvim-lspconfig'
+  use 'ray-x/lsp_signature.nvim'
+  use 'folke/trouble.nvim'
 
-use 'nvim-telescope/telescope.nvim'
+  use 'nvim-telescope/telescope.nvim'
 
-use 'hoob3rt/lualine.nvim'
-use 'lukas-reineke/indent-blankline.nvim'
-use 'liuchengxu/vim-which-key'
-use 'kyazdani42/nvim-web-devicons'
-use 'ryanoasis/vim-devicons'
+  use 'hoob3rt/lualine.nvim'
+  use 'lukas-reineke/indent-blankline.nvim'
+  use 'liuchengxu/vim-which-key'
+  use 'kyazdani42/nvim-web-devicons'
+  use 'ryanoasis/vim-devicons'
 
-use 'godlygeek/tabular'
-use 'tomtom/tcomment_vim'
-use 'tpope/vim-surround'
-use 'nacro90/numb.nvim'
-use 'folke/todo-comments.nvim'
-use 'sbdchd/neoformat'
-use 'windwp/nvim-autopairs'
+  use 'godlygeek/tabular'
+  use 'tomtom/tcomment_vim'
+  use 'tpope/vim-surround'
+  use 'nacro90/numb.nvim'
+  use 'folke/todo-comments.nvim'
+  use 'sbdchd/neoformat'
+  use 'windwp/nvim-autopairs'
 
-use 'hrsh7th/nvim-cmp'
-use 'hrsh7th/cmp-buffer'
-use 'hrsh7th/cmp-nvim-lsp'
-use 'hrsh7th/cmp-path'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-path'
 
-use 'sainnhe/edge'
-use 'lifepillar/vim-gruvbox8'
-use 'rebelot/kanagawa.nvim'
-use 'olimorris/onedarkpro.nvim'
-use {'catppuccin/nvim', as = 'catppuccin'} 
-use 'projekt0n/github-nvim-theme'
+  use 'sainnhe/edge'
+  use 'lifepillar/vim-gruvbox8'
+  use 'rebelot/kanagawa.nvim'
+  use 'olimorris/onedarkpro.nvim'
+  use {'catppuccin/nvim', as = 'catppuccin'} 
+  use 'projekt0n/github-nvim-theme'
 
-use 'hrsh7th/vim-vsnip'
-use 'hrsh7th/vim-vsnip-integ'
-use 'luukvbaal/stabilize.nvim'
-use 'akinsho/toggleterm.nvim'
+  use 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/vim-vsnip-integ'
+  use 'luukvbaal/stabilize.nvim'
+  use 'akinsho/toggleterm.nvim'
 
-use 'max397574/better-escape.nvim'
+  use 'max397574/better-escape.nvim'
 
-use {'akinsho/bufferline.nvim', tag = 'v2.*' }
+  use {'akinsho/bufferline.nvim', tag = 'v2.*' }
 end)
 
 -- PLUGINS
@@ -425,9 +425,9 @@ vim.keymap.set('x', '<C-A>', "<C-C>ggVG", {remap = false})
 
 -- MAPPING F
 
-vim.keymap.set('n', '<F2>', ":PlugInstall<CR>")
-vim.keymap.set('n', '<F3>', ":PlugClean<CR>")
-vim.keymap.set('n', '<F4>', ":PlugUpdate<CR>")
+vim.keymap.set('n', '<F2>', ":PackerInstall<CR>")
+vim.keymap.set('n', '<F3>', ":PackerClean<CR>")
+vim.keymap.set('n', '<F4>', ":PackerUpdate<CR>")
 vim.keymap.set('n', '<F7>', ":tabnew<CR>")
 vim.keymap.set('n', '<F8>', ":call system('explorer ' . expand('%:p:h'))<cr>")
 vim.keymap.set('n', '<F9>', ":set number!<CR>")
