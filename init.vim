@@ -1,7 +1,5 @@
 source $VIMRUNTIME/mswin.vim
 
-let g:python3_host_prog = 'C:\Users\ender\AppData\Local\Programs\Python\Python39\python'
-
 cnoreabbrev qw wq
 cnoreabbrev Wq wq
 cnoreabbrev WQ wq
@@ -9,129 +7,132 @@ cnoreabbrev WQ wq
 let maplocalleader = ','
 let g:font_size = 11
 
-set undofile
-set ruler
-set showcmd
-set smartindent
-set autoindent
-set textwidth=0 wrapmargin=0
-set statusline=\ \ %{WebDevIconsGetFileTypeSymbol()}\ %{expand('%:t')}\ \ \[\ %{expand('%:p:h:t')}\ \]\ %{FugitiveStatusline()}\ %h%m%r\ %=%-10.(%l,%c%V%)\ %P
 set foldtext=MyFoldText()
-set ignorecase  
-set smartcase
-set scrolloff=1
-set lines=40 columns=164
-set autoindent
-set copyindent
-set nobackup
-set nowritebackup
-set mouse=a
-set keymodel-=stopsel
-set wrap
-set linebreak
-set nolist
-set formatoptions=l
-set noswapfile
-set encoding=utf8
-set tabstop=2
-set expandtab
-set splitbelow
-set shiftwidth=2
-set hlsearch
-set selectmode=key
-set selection=inclusive
-set updatetime=300
-set cursorline
-set fillchars=eob:\ 
-set wildignorecase
-set breakindent
-set nostartofline
-set title
-set noequalalways
-set signcolumn=yes:2
-set shada+=",!"
-set viewoptions=cursor,folds
-set sessionoptions-=folds
-set sessionoptions-=help
-set hidden
-set foldmethod=syntax
-set foldnestmax=1
-set foldcolumn=0
-set foldlevel=99
-set completeopt=menuone,noselect
-set breakindent
-set breakindentopt=shift:2
-set showbreak=\\\\\
-set guifont=Hack\ Nerd\ Font\ Mono:h12
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'ajmwagar/vim-deus'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'whatyouhide/vim-gotham'
-Plug 'mhinz/vim-janah'
-Plug 'mhartington/oceanic-next'
-Plug 'w0ng/vim-hybrid'
-Plug 'catppuccin/nvim'
-Plug 'tomasiser/vim-code-dark'
-
-Plug 'nvim-lua/plenary.nvim'
-
-Plug 'plasticboy/vim-markdown'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'pangloss/vim-javascript'
-Plug 'mattn/emmet-vim'
-Plug 'posva/vim-vue'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'norcalli/nvim-colorizer.lua'
-
-Plug 'tpope/vim-fugitive'
-Plug 'lewis6991/gitsigns.nvim'
-
-Plug 'neovim/nvim-lspconfig'
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'folke/trouble.nvim'
-
-Plug 'nvim-telescope/telescope.nvim'
-
-Plug 'hoob3rt/lualine.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'liuchengxu/vim-which-key'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'ryanoasis/vim-devicons'
-
-Plug 'godlygeek/tabular'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-surround'
-Plug 'nacro90/numb.nvim'
-Plug 'folke/todo-comments.nvim'
-Plug 'sbdchd/neoformat'
-Plug 'windwp/nvim-autopairs'
-
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-path'
-
-Plug 'sainnhe/edge'
-Plug 'lifepillar/vim-gruvbox8'
-Plug 'rebelot/kanagawa.nvim'
-Plug 'olimorris/onedarkpro.nvim'
-Plug 'catppuccin/nvim', {'as': 'catppuccin'} 
-Plug 'projekt0n/github-nvim-theme'
-
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'luukvbaal/stabilize.nvim'
-Plug 'akinsho/toggleterm.nvim'
-
-Plug 'max397574/better-escape.nvim'
-
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-
-call plug#end()
 
 lua << EOF
+
+-- OPTIONS
+
+vim.opt.undofile = true
+vim.opt.ruler = true
+vim.opt.showcmd = true
+vim.opt.smartindent = true
+vim.opt.autoindent = true
+vim.opt.textwidth=0 
+vim.opt.wrapmargin=0
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.scrolloff=1
+vim.opt.lines=40 
+vim.opt.columns=164
+vim.opt.autoindent = true
+vim.opt.copyindent = true
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.mouse='a'
+vim.opt.keymodel:remove('stopsel')
+vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.list = false
+vim.opt.formatoptions=l
+vim.opt.swapfile = false
+vim.opt.tabstop=2
+vim.opt.expandtab = true
+vim.opt.splitbelow = true
+vim.opt.shiftwidth=2
+vim.opt.hlsearch = true
+vim.opt.selectmode='key'
+vim.opt.selection='inclusive'
+vim.opt.updatetime=300
+vim.opt.cursorline = true
+vim.opt.fillchars={eob = ' '} 
+vim.opt.wildignorecase = true
+vim.opt.breakindent = true
+vim.opt.startofline = false
+vim.opt.title = true
+vim.opt.equalalways = false
+vim.opt.signcolumn='yes:2'
+vim.opt.shada:append(",!")
+vim.opt.viewoptions={'cursor', 'folds'}
+vim.opt.sessionoptions:remove('folds')
+vim.opt.sessionoptions:remove('help')
+vim.opt.hidden = true
+vim.opt.foldmethod='syntax'
+vim.opt.foldnestmax=1
+vim.opt.foldcolumn='0'
+vim.opt.foldlevel=99
+vim.opt.completeopt={'menuone', 'noselect'}
+vim.opt.breakindent = true
+vim.opt.breakindentopt={shift = 2}
+vim.opt.guifont='Hack Nerd Font Mono:h12'
+
+-- PACKER
+
+require('packer').startup(function()
+use 'wbthomason/packer.nvim'
+
+use 'ajmwagar/vim-deus'
+use 'NLKNguyen/papercolor-theme'
+use 'whatyouhide/vim-gotham'
+use 'mhinz/vim-janah'
+use 'mhartington/oceanic-next'
+use 'w0ng/vim-hybrid'
+use 'tomasiser/vim-code-dark'
+
+use 'nvim-lua/plenary.nvim'
+
+use 'plasticboy/vim-markdown'
+use 'mustache/vim-mustache-handlebars'
+use 'pangloss/vim-javascript'
+use 'mattn/emmet-vim'
+use 'posva/vim-vue'
+use 'HerringtonDarkholme/yats.vim'
+use 'norcalli/nvim-colorizer.lua'
+
+use 'tpope/vim-fugitive'
+use 'lewis6991/gitsigns.nvim'
+
+use 'neovim/nvim-lspconfig'
+use 'ray-x/lsp_signature.nvim'
+use 'folke/trouble.nvim'
+
+use 'nvim-telescope/telescope.nvim'
+
+use 'hoob3rt/lualine.nvim'
+use 'lukas-reineke/indent-blankline.nvim'
+use 'liuchengxu/vim-which-key'
+use 'kyazdani42/nvim-web-devicons'
+use 'ryanoasis/vim-devicons'
+
+use 'godlygeek/tabular'
+use 'tomtom/tcomment_vim'
+use 'tpope/vim-surround'
+use 'nacro90/numb.nvim'
+use 'folke/todo-comments.nvim'
+use 'sbdchd/neoformat'
+use 'windwp/nvim-autopairs'
+
+use 'hrsh7th/nvim-cmp'
+use 'hrsh7th/cmp-buffer'
+use 'hrsh7th/cmp-nvim-lsp'
+use 'hrsh7th/cmp-path'
+
+use 'sainnhe/edge'
+use 'lifepillar/vim-gruvbox8'
+use 'rebelot/kanagawa.nvim'
+use 'olimorris/onedarkpro.nvim'
+use {'catppuccin/nvim', as = 'catppuccin'} 
+use 'projekt0n/github-nvim-theme'
+
+use 'hrsh7th/vim-vsnip'
+use 'hrsh7th/vim-vsnip-integ'
+use 'luukvbaal/stabilize.nvim'
+use 'akinsho/toggleterm.nvim'
+
+use 'max397574/better-escape.nvim'
+
+use {'akinsho/bufferline.nvim', tag = 'v2.*' }
+end)
 
 -- PLUGINS
 
