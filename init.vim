@@ -1,19 +1,21 @@
-source $VIMRUNTIME/mswin.vim
-
-cnoreabbrev qw wq
-cnoreabbrev Wq wq
-cnoreabbrev WQ wq
-
-let maplocalleader = ','
-let g:font_size = 11
-
-set foldtext=MyFoldText()
-
 lua << EOF
+
+vim.cmd [[
+  source $VIMRUNTIME/mswin.vim
+
+  syntax on
+
+  filetype plugin indent on
+
+  cnoreabbrev qw wq
+  cnoreabbrev Wq wq
+  cnoreabbrev WQ wq
+]]
 
 -- OPTIONS
 
 vim.opt.undofile = true
+vim.opt.foldtext = 'MyFoldText()'
 vim.opt.ruler = true
 vim.opt.showcmd = true
 vim.opt.smartindent = true
@@ -106,7 +108,6 @@ require('packer').startup(function()
 
   use 'godlygeek/tabular'
   use 'tomtom/tcomment_vim'
-  use 'tpope/vim-surround'
   use 'nacro90/numb.nvim'
   use 'folke/todo-comments.nvim'
   use 'sbdchd/neoformat'
@@ -132,6 +133,8 @@ require('packer').startup(function()
   use 'max397574/better-escape.nvim'
 
   use {'akinsho/bufferline.nvim', tag = 'v2.*' }
+
+  use 'kylechui/nvim-surround'
 end)
 
 -- PLUGINS
@@ -316,6 +319,10 @@ require('bufferline').setup {
   }
 }
 
+-- SURROUND
+
+require("nvim-surround").setup()
+
 -- GIT
 
 vim.g.vue_pre_processors = {}
@@ -344,20 +351,11 @@ vim.g.floaterm_keymap_toggle = "<F12>"
 -- INDENT BLANKLINE
 
 vim.g.indent_blankline_filetype = {'vue', 'javascript', 'typescript', 'html'}
-EOF
-
-nnoremap <leader>r *``cgn
-vnoremap <expr> <leader>r "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn"
-
-nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-nnoremap <expr> <down> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> <up> v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-lua << EOF
 
 -- MAPPING
+
+vim.keymap.set('n', '<leader>r', '*``cgn', {remap = false})
+vim.keymap.set('v', '<leader>r', [[ "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn" ]], {remap = false, expr = true})
 
 vim.keymap.set('n', '<Leader>q', ':q!<CR>')
 vim.keymap.set('n', '<C-q>', ':q!<CR>')
@@ -542,27 +540,7 @@ vim.cmd [[
   colorscheme catppuccin
 ]]
 
--- SYNTAX
-
-vim.cmd [[
-  syntax on
-  filetype plugin indent on
-]]
 EOF
-
-let g:vim_vue_plugin_config = { 
-      \'syntax': {
-      \   'script': ['javascript'],
-      \   'template': ['html'],
-      \   'style': ['css'],
-      \},
-      \'full_syntax': [],
-      \'attribute': 0,
-      \'keyword': 0,
-      \'foldexpr': 0,
-      \'init_indent': 0,
-      \'debug': 0,
-      \}
 
 " FUNCTIONS
 
@@ -570,6 +548,8 @@ function MyFoldText()
 	let line = getline(v:foldstart)
 	return '+ ' . v:folddashes . ' ' . line
 endfunction
+
+let g:font_size = 11
 
 function FontSize(size)
 	let g:font_size+=a:size
