@@ -73,6 +73,10 @@ vim.opt.guifont='Hack Nerd Font Mono:h12'
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
+  use 'nvim-lua/plenary.nvim'
+  use 'kyazdani42/nvim-web-devicons'
+  use 'ryanoasis/vim-devicons'
+
   use 'ajmwagar/vim-deus'
   use 'NLKNguyen/papercolor-theme'
   use 'whatyouhide/vim-gotham'
@@ -80,8 +84,12 @@ require('packer').startup(function()
   use 'mhartington/oceanic-next'
   use 'w0ng/vim-hybrid'
   use 'tomasiser/vim-code-dark'
-
-  use 'nvim-lua/plenary.nvim'
+  use 'sainnhe/edge'
+  use 'lifepillar/vim-gruvbox8'
+  use 'rebelot/kanagawa.nvim'
+  use 'olimorris/onedarkpro.nvim'
+  use {'catppuccin/nvim', as = 'catppuccin'} 
+  use 'projekt0n/github-nvim-theme'
 
   use 'plasticboy/vim-markdown'
   use 'mustache/vim-mustache-handlebars'
@@ -90,51 +98,39 @@ require('packer').startup(function()
   use 'posva/vim-vue'
   use 'HerringtonDarkholme/yats.vim'
   use 'norcalli/nvim-colorizer.lua'
+  use 'sbdchd/neoformat'
 
   use 'tpope/vim-fugitive'
   use 'lewis6991/gitsigns.nvim'
 
   use 'neovim/nvim-lspconfig'
   use 'ray-x/lsp_signature.nvim'
-  use 'folke/trouble.nvim'
 
   use 'nvim-telescope/telescope.nvim'
+  use 'folke/trouble.nvim'
 
   use 'hoob3rt/lualine.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'liuchengxu/vim-which-key'
-  use 'kyazdani42/nvim-web-devicons'
-  use 'ryanoasis/vim-devicons'
+  use 'luukvbaal/stabilize.nvim'
+  use 'akinsho/toggleterm.nvim'
 
   use 'godlygeek/tabular'
   use 'tomtom/tcomment_vim'
   use 'nacro90/numb.nvim'
   use 'folke/todo-comments.nvim'
-  use 'sbdchd/neoformat'
   use 'windwp/nvim-autopairs'
+  use 'max397574/better-escape.nvim'
+  use 'kylechui/nvim-surround'
 
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-path'
-
-  use 'sainnhe/edge'
-  use 'lifepillar/vim-gruvbox8'
-  use 'rebelot/kanagawa.nvim'
-  use 'olimorris/onedarkpro.nvim'
-  use {'catppuccin/nvim', as = 'catppuccin'} 
-  use 'projekt0n/github-nvim-theme'
-
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/vim-vsnip-integ'
-  use 'luukvbaal/stabilize.nvim'
-  use 'akinsho/toggleterm.nvim'
-
-  use 'max397574/better-escape.nvim'
 
   use {'akinsho/bufferline.nvim', tag = 'v2.*' }
-
-  use 'kylechui/nvim-surround'
 end)
 
 -- PLUGINS
@@ -403,14 +399,14 @@ vim.keymap.set('i', '<leader>de', "console.log('event debug'", { remap = true })
 vim.keymap.set('i', '<leader>dp', "console.log('props debug'", { remap = true })
 vim.keymap.set('i', '<leader>dm', "console.log('model debug'", { remap = true })
 
-vim.keymap.set('i', '<leader>j', "JSON.stringify(")
-vim.keymap.set('i', '<leader>fa', "() => {<cr>")
-vim.keymap.set('i', '<leader>ff', "function() {")
-vim.keymap.set('i', '<leader>i', "if(")
+vim.keymap.set('i', '<leader>j', "JSON.stringify(", { remap = true })
+vim.keymap.set('i', '<leader>fa', "() => {<cr>", { remap = true })
+vim.keymap.set('i', '<leader>ff', "function() {", { remap = true })
+vim.keymap.set('i', '<leader>i', "if(", { remap = true })
 
-vim.keymap.set('i', '<leader>tt', "<template><c-e>")
-vim.keymap.set('i', '<leader>td', "<div><c-e>")
-vim.keymap.set('i', '<leader>tc', 'class="')
+vim.keymap.set('i', '<leader>tt', "<template><c-e>", { remap = true })
+vim.keymap.set('i', '<leader>td', "<div><c-e>", { remap = true })
+vim.keymap.set('i', '<leader>tc', 'class="', { remap = true })
 
 -- MAPPING WINDOWS
 
