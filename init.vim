@@ -15,7 +15,7 @@ vim.cmd [[
 -- OPTIONS
 
 vim.opt.undofile = true
-vim.opt.foldtext = 'MyFoldText()'
+-- vim.opt.foldtext = 'MyFoldText()'
 vim.opt.ruler = true
 vim.opt.showcmd = true
 vim.opt.smartindent = true
@@ -110,7 +110,7 @@ require('packer').startup(function()
   use 'folke/trouble.nvim'
 
   use 'hoob3rt/lualine.nvim'
-  use 'lukas-reineke/indent-blankline.nvim'
+  -- use 'lukas-reineke/indent-blankline.nvim'
   use 'liuchengxu/vim-which-key'
   use 'luukvbaal/stabilize.nvim'
   use 'akinsho/toggleterm.nvim'
@@ -131,6 +131,11 @@ require('packer').startup(function()
   use 'hrsh7th/vim-vsnip-integ'
 
   use {'akinsho/bufferline.nvim', tag = 'v2.*' }
+
+  use 'sainnhe/everforest'
+  use 'EdenEast/nightfox.nvim'
+
+  use 'anuvyklack/pretty-fold.nvim'
 end)
 
 -- PLUGINS
@@ -319,6 +324,12 @@ require('bufferline').setup {
 
 require("nvim-surround").setup()
 
+-- PRETTY FOLD
+
+require('pretty-fold').setup{
+   fill_char = '━',
+}
+
 -- GIT
 
 vim.g.vue_pre_processors = {}
@@ -395,11 +406,6 @@ vim.keymap.set('n', 'N', ':Neoformat<CR>')
 
 vim.keymap.set('i', '<leader>c', "console.log(", { remap = true })
 vim.keymap.set('i', '<leader>d', "console.log('debug'", { remap = true })
-vim.keymap.set('i', '<leader>dw', "console.log('watch debug'", { remap = true })
-vim.keymap.set('i', '<leader>dc', "console.log('computed debug'", { remap = true })
-vim.keymap.set('i', '<leader>de', "console.log('event debug'", { remap = true })
-vim.keymap.set('i', '<leader>dp', "console.log('props debug'", { remap = true })
-vim.keymap.set('i', '<leader>dm', "console.log('model debug'", { remap = true })
 
 vim.keymap.set('i', '<leader>j', "JSON.stringify(", { remap = true })
 vim.keymap.set('i', '<leader>fa', "() => {<cr>", { remap = true })
@@ -407,8 +413,6 @@ vim.keymap.set('i', '<leader>ff', "function() {", { remap = true })
 vim.keymap.set('i', '<leader>i', "if(", { remap = true })
 
 vim.keymap.set('i', '<leader>tt', "<template><c-e>", { remap = true })
-vim.keymap.set('i', '<leader>td', "<div><c-e>", { remap = true })
-vim.keymap.set('i', '<leader>tc', 'class="', { remap = true })
 
 -- MAPPING WINDOWS
 
