@@ -327,7 +327,7 @@ require("nvim-surround").setup()
 -- PRETTY FOLD
 
 require('pretty-fold').setup{
-   fill_char = '━',
+   fill_char = '-',
 }
 
 -- GIT
