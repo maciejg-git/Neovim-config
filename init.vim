@@ -136,6 +136,8 @@ require('packer').startup(function()
   use 'EdenEast/nightfox.nvim'
 
   use 'anuvyklack/pretty-fold.nvim'
+  use 'karb94/neoscroll.nvim'
+  -- use "Pocco81/auto-save.nvim"
 end)
 
 -- PLUGINS
@@ -330,6 +332,14 @@ require('pretty-fold').setup{
    fill_char = '-',
 }
 
+require('neoscroll').setup({
+    mappings = {'<C-u>', '<C-d>', 'zt', 'zz', 'zb'},
+})
+
+-- AUTO SAVE
+
+-- require("auto-save").setup {}
+
 -- GIT
 
 vim.g.vue_pre_processors = {}
@@ -368,7 +378,7 @@ vim.keymap.set('n', '<Leader>q', ':q!<CR>')
 vim.keymap.set('n', '<C-q>', ':q!<CR>')
 vim.keymap.set('n', '<CR>', 'o')
 vim.keymap.set('n', ';', ':', {remap = false})
-vim.keymap.set('n', '<c-f>', '<c-u>')
+vim.keymap.set('n', '<c-f>', '<c-u>', { remap = true })
 vim.keymap.set('n', '<Leader><Leader>', 'V')
 vim.keymap.set('v', '<Leader><Leader>', '<Esc>')
 vim.keymap.set('x', '<', '<gv', {remap = false})
