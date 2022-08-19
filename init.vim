@@ -412,7 +412,7 @@ vim.keymap.set('n', ',g', 'yyp<up>gcc<down>')
 vim.keymap.set('n', 't', 'vatV', {remap = false})
 vim.keymap.set('n', '<C-t>', 'vit', {remap = false})
 
-vim.keymap.set('n', 'N', ':Neoformat<CR>')
+vim.keymap.set('n', '<c-n>', ':Neoformat<CR>')
 
 vim.keymap.set('i', '<leader>c', "console.log(", { remap = true })
 vim.keymap.set('i', '<leader>d', "console.log('debug'", { remap = true })
