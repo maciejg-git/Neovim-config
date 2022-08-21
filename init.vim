@@ -138,6 +138,7 @@ require('packer').startup(function()
   use 'anuvyklack/pretty-fold.nvim'
   use 'karb94/neoscroll.nvim'
   -- use "Pocco81/auto-save.nvim"
+  use 'RRethy/vim-illuminate'
 end)
 
 -- PLUGINS
@@ -385,6 +386,8 @@ vim.keymap.set('x', '<', '<gv', {remap = false})
 vim.keymap.set('x', '>', '>gv|', {remap = false})
 vim.keymap.set({'n', 'i', 'v'}, '<PageUp>', '<left>')
 vim.keymap.set({'n', 'i', 'v'}, '<PageDown>', '<right>')
+vim.keymap.set('n', '<Backspace>', 'ciw')
+vim.keymap.set('n', 'o', 'ciw')
 
 vim.keymap.set('n', '<M-c>', 'gcc', {remap = true})
 vim.keymap.set('v', '<M-c>', 'gc', {remap = true})
