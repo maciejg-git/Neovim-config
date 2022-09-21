@@ -138,15 +138,25 @@ require('packer').startup(function()
   use 'anuvyklack/pretty-fold.nvim'
   use 'karb94/neoscroll.nvim'
   -- use "Pocco81/auto-save.nvim"
-  use 'RRethy/vim-illuminate'
+
+  use 'phaazon/mind.nvim'
 end)
 
 -- PLUGINS
 
 -- LSP CONFIG
 
-require'lspconfig'.vuels.setup{ cmd = { "vls.cmd" } }
-require'lspconfig'.tsserver.setup{}
+-- require'lspconfig'.vuels.setup{ cmd = { "vls.cmd" } }
+-- require'lspconfig'.tsserver.setup{}
+
+require'lspconfig'.volar.setup{
+  init_options = {
+    typescript = {
+      serverPath = 'C:/Users/ender/AppData/Roaming/npm/node_modules/typescript/lib/tsserverlibrary.js'
+    }
+  },
+  filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
+}
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
@@ -234,7 +244,7 @@ require("todo-comments").setup {}
 require("telescope").setup {
   defaults = {
     -- path_display = {"shorten"},
-    file_ignore_patterns = {"node_modules"},
+    file_ignore_patterns = {"node_modules", "dist"},
     mappings = {
       i = {
         ["<esc>"] = require('telescope.actions').close,
@@ -302,7 +312,7 @@ require('bufferline').setup {
   options = {
     mode = "tabs",
     numbers = "none",
-    indicator_icon = '▎',
+    icon = '▎',
     buffer_close_icon = '',
     modified_icon = '●',
     close_icon = '',
@@ -340,6 +350,8 @@ require('neoscroll').setup({
 -- AUTO SAVE
 
 -- require("auto-save").setup {}
+
+require'mind'.setup()
 
 -- GIT
 
