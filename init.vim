@@ -63,6 +63,7 @@ vim.opt.foldmethod='syntax'
 vim.opt.foldnestmax=1
 vim.opt.foldcolumn='0'
 vim.opt.foldlevel=99
+vim.opt.conceallevel = 2
 vim.opt.completeopt={'menuone', 'noselect'}
 vim.opt.breakindent = true
 vim.opt.breakindentopt={shift = 2}
@@ -90,6 +91,9 @@ require('packer').startup(function()
   use 'olimorris/onedarkpro.nvim'
   use {'catppuccin/nvim', as = 'catppuccin'} 
   use 'projekt0n/github-nvim-theme'
+  use 'pineapplegiant/spaceduck'
+  use 'sainnhe/everforest'
+  use 'EdenEast/nightfox.nvim'
 
   use 'plasticboy/vim-markdown'
   use 'mustache/vim-mustache-handlebars'
@@ -97,8 +101,6 @@ require('packer').startup(function()
   use 'mattn/emmet-vim'
   use 'posva/vim-vue'
   use 'HerringtonDarkholme/yats.vim'
-  use 'norcalli/nvim-colorizer.lua'
-  use 'sbdchd/neoformat'
 
   use 'tpope/vim-fugitive'
   use 'lewis6991/gitsigns.nvim'
@@ -108,20 +110,25 @@ require('packer').startup(function()
 
   use 'nvim-telescope/telescope.nvim'
   use 'folke/trouble.nvim'
-
   use 'hoob3rt/lualine.nvim'
-  -- use 'lukas-reineke/indent-blankline.nvim'
   use 'liuchengxu/vim-which-key'
-  use 'luukvbaal/stabilize.nvim'
   use 'akinsho/toggleterm.nvim'
+  use 'karb94/neoscroll.nvim'
+  use "petertriho/nvim-scrollbar" 
+  use {'akinsho/bufferline.nvim', tag = 'v2.*' }
+  use 'rcarriga/nvim-notify'
 
+  use "kevinhwang91/nvim-hlslens"
+  use 'anuvyklack/pretty-fold.nvim'
+  use 'folke/todo-comments.nvim'
+  use 'norcalli/nvim-colorizer.lua'
   use 'godlygeek/tabular'
   use 'tomtom/tcomment_vim'
   use 'nacro90/numb.nvim'
-  use 'folke/todo-comments.nvim'
   use 'windwp/nvim-autopairs'
   use 'max397574/better-escape.nvim'
   use 'kylechui/nvim-surround'
+  use 'sbdchd/neoformat'
 
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
@@ -130,16 +137,23 @@ require('packer').startup(function()
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/vim-vsnip-integ'
 
-  use {'akinsho/bufferline.nvim', tag = 'v2.*' }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
 
-  use 'sainnhe/everforest'
-  use 'EdenEast/nightfox.nvim'
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2',
+    config = function()
+      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  }
 
-  use 'anuvyklack/pretty-fold.nvim'
-  use 'karb94/neoscroll.nvim'
-  -- use "Pocco81/auto-save.nvim"
-
-  use 'phaazon/mind.nvim'
+  use {
+    "nvim-neorg/neorg",
+    run = ":Neorg sync-parsers", -- This is the important bit!
+  }
 end)
 
 -- PLUGINS
@@ -297,6 +311,16 @@ require("stabilize").setup()
 
 require("toggleterm").setup{}
 
+-- TREE SITTER
+
+require 'nvim-treesitter.install'.compilers = { "clang" }
+
+require('nvim-treesitter.configs').setup{
+	highlight = {
+		enable = true,
+	}
+}
+
 -- BETTER ESCAPE
 
 require("better_escape").setup {
@@ -347,11 +371,34 @@ require('neoscroll').setup({
     mappings = {'<C-u>', '<C-d>', 'zt', 'zz', 'zb'},
 })
 
--- AUTO SAVE
-
--- require("auto-save").setup {}
+-- MIND
 
 require'mind'.setup()
+
+-- HOP
+
+require'hop'.setup()
+
+-- NORG
+
+require('neorg').setup {
+    load = {
+        ["core.defaults"] = {},
+        ["core.norg.concealer"] = {}
+    }
+}
+
+-- SCROLLBAR
+
+require("scrollbar").setup()
+require("scrollbar.handlers.search").setup({
+    override_lens = function() end,
+})
+require("scrollbar.handlers.gitsigns").setup()
+
+-- NOTIFY
+
+vim.notify = require("notify")
 
 -- GIT
 
@@ -562,7 +609,7 @@ vim.opt.background = 'dark'
 -- latte frappe macchiato mocha
 vim.g.catppuccin_flavour = "macchiato"
 
---  hybrid github_dark edge kanagawa
+--  catppuccin hybrid github_dark edge kanagawa nightfox spaceduck
 vim.cmd [[
   colorscheme catppuccin
 ]]
