@@ -153,6 +153,8 @@ require('packer').startup(function()
     "nvim-neorg/neorg",
     run = ":Neorg sync-parsers",
   }
+
+  use 'voldikss/vim-floaterm'
 end)
 
 -- PLUGINS
@@ -299,7 +301,6 @@ vim.keymap.set('', '<M-2>', ":lua require('telescope.builtin').current_buffer_fu
 vim.keymap.set('', '<M-3>', ":lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
 vim.keymap.set('', '<M-4>', ":lua require('telescope.builtin').lsp_references({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
 vim.keymap.set('', '<leader><cr>', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
-vim.keymap.set('', '<leader>]', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
 vim.keymap.set('', '<leader>p', ":TodoTelescope<cr>", {remap = true})
 
 -- TOGGLE TERM
@@ -422,6 +423,8 @@ vim.g.floaterm_keymap_new = ""
 vim.g.floaterm_keymap_prev = ""
 vim.g.floaterm_keymap_next = ""
 vim.g.floaterm_keymap_toggle = "<F12>"
+vim.g.floaterm_width = 0.9
+vim.g.floaterm_height = 0.9
 
 -- INDENT BLANKLINE
 
@@ -550,9 +553,6 @@ vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi Folded
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi SignColumn guibg=none' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link TelescopeBorder Normal' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link TelescopeSelection Visual' })
-
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link Floaterm CursorLine' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link FloatermBorder CursorLine' })
 
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gotham256', command = 'hi StatusLine gui=bold' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'PaperColor', command = 'hi VertSplit guifg=#303030 guibg=none' })
