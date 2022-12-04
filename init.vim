@@ -87,7 +87,6 @@ require('packer').startup(function()
   use 'tomasiser/vim-code-dark'
   use 'sainnhe/edge'
   use 'lifepillar/vim-gruvbox8'
-  use 'rebelot/kanagawa.nvim'
   use 'olimorris/onedarkpro.nvim'
   use {'catppuccin/nvim', as = 'catppuccin'} 
   use 'projekt0n/github-nvim-theme'
@@ -152,7 +151,7 @@ require('packer').startup(function()
 
   use {
     "nvim-neorg/neorg",
-    run = ":Neorg sync-parsers", -- This is the important bit!
+    run = ":Neorg sync-parsers",
   }
 end)
 
@@ -303,10 +302,6 @@ vim.keymap.set('', '<leader><cr>', ":lua require('telescope.builtin').resume()<c
 vim.keymap.set('', '<leader>]', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
 vim.keymap.set('', '<leader>p', ":TodoTelescope<cr>", {remap = true})
 
--- STABILIZE
-
-require("stabilize").setup()
-
 -- TOGGLE TERM
 
 require("toggleterm").setup{}
@@ -371,10 +366,6 @@ require('neoscroll').setup({
     mappings = {'<C-u>', '<C-d>', 'zt', 'zz', 'zb'},
 })
 
--- MIND
-
-require'mind'.setup()
-
 -- HOP
 
 require'hop'.setup()
@@ -382,10 +373,17 @@ require'hop'.setup()
 -- NORG
 
 require('neorg').setup {
-    load = {
-        ["core.defaults"] = {},
-        ["core.norg.concealer"] = {}
-    }
+  load = {
+    ["core.defaults"] = {},
+    ["core.norg.concealer"] = {},
+    ["core.keybinds"] = {
+      config = {
+        hook = function(keybinds)
+          keybinds.unmap("norg", "n", "<CR>")
+        end,
+      }
+    } 
+  }
 }
 
 -- SCROLLBAR
@@ -549,10 +547,9 @@ vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi LineNr
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi FoldColumn guibg=NONE' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi VertSplit gui=none guibg=none' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi Folded guibg=none gui=bold' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi ALEErrorSign guifg=red guibg=none gui=bold' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi ALEWarningSign guifg=red guibg=none gui=bold' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi ALEInfoSign guifg=red guibg=none gui=bold' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi SignColumn guibg=none' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link TelescopeBorder Normal' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link TelescopeSelection Visual' })
 
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link Floaterm CursorLine' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link FloatermBorder CursorLine' })
@@ -571,7 +568,7 @@ vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi 
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxAquaSign guibg=none gui=bold' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxRedSign guibg=none gui=bold' })
 
-vim.api.nvim_create_autocmd('BufEnter', { pattern = '*', command = 'syntax sync fromstart' })
+-- vim.api.nvim_create_autocmd('BufEnter', { pattern = '*', command = 'syntax sync fromstart' })
 
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.vue', command = 'setlocal foldnestmax=4' })
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.js', command = 'setlocal foldnestmax=1' })
@@ -606,10 +603,9 @@ vim.api.nvim_create_autocmd('WinLeave', { pattern = '*', group = CursorLine, com
 
 vim.opt.background = 'dark'
 
--- latte frappe macchiato mocha
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin hybrid github_dark edge kanagawa nightfox spaceduck
+--  catppuccin hybrid github_dark edge nightfox spaceduck papercolor
 vim.cmd [[
   colorscheme catppuccin
 ]]
