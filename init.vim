@@ -110,7 +110,6 @@ require('packer').startup(function()
   use 'nvim-telescope/telescope.nvim'
   use 'folke/trouble.nvim'
   use 'hoob3rt/lualine.nvim'
-  use 'liuchengxu/vim-which-key'
   use 'akinsho/toggleterm.nvim'
   use 'karb94/neoscroll.nvim'
   use "petertriho/nvim-scrollbar" 
@@ -155,6 +154,11 @@ require('packer').startup(function()
   }
 
   use 'voldikss/vim-floaterm'
+  use {'nyoom-engineering/oxocarbon.nvim'}
+
+  use 'mbbill/undotree'
+
+  use "folke/which-key.nvim"
 end)
 
 -- PLUGINS
@@ -248,7 +252,7 @@ require('nvim-autopairs').setup{
 -- LUALINE
 
 -- ayu_dark codedark horizon onedark onelight papercolor_dark papercolor_light
-require('lualine').setup{options = {section_separators='', component_separators='', theme='onedark'}}
+require('lualine').setup{options = {section_separators='', component_separators='', theme='auto'}}
 
 -- TODO-COMMENTS
 
@@ -399,6 +403,10 @@ require("scrollbar.handlers.gitsigns").setup()
 
 vim.notify = require("notify")
 
+-- WHICH-KEY
+
+require("which-key").setup()
+
 -- GIT
 
 vim.g.vue_pre_processors = {}
@@ -414,8 +422,6 @@ vim.g.user_emmet_expandabbr_key = "<C-e>"
 vim.g.user_emmet_update_tag = "<M-e>"
 vim.g.user_emmet_removetag_key = "<M-d>"
 vim.g.user_emmet_splitjointag_key = "<M-t>"
-vim.keymap.set('n', '<leader>', ":WhichKey '\'<CR>", {remap = false})
-vim.keymap.set('n', '<localleader>', ":WhichKey '\'<CR>", {remap = false})
 
 -- FLOATERM
 
@@ -605,7 +611,7 @@ vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin hybrid github_dark edge nightfox spaceduck papercolor
+--  catppuccin hybrid github_dark edge nightfox spaceduck papercolor oxocarbon
 vim.cmd [[
   colorscheme catppuccin
 ]]
