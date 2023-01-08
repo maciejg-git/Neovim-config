@@ -121,7 +121,6 @@ require('packer').startup(function()
   use 'folke/todo-comments.nvim'
   use 'norcalli/nvim-colorizer.lua'
   use 'godlygeek/tabular'
-  use 'tomtom/tcomment_vim'
   use 'nacro90/numb.nvim'
   use 'windwp/nvim-autopairs'
   use 'max397574/better-escape.nvim'
@@ -159,6 +158,8 @@ require('packer').startup(function()
   use 'mbbill/undotree'
 
   use "folke/which-key.nvim"
+
+  use 'numToStr/Comment.nvim'
 end)
 
 -- PLUGINS
@@ -171,7 +172,7 @@ end)
 require'lspconfig'.volar.setup{
   init_options = {
     typescript = {
-      serverPath = 'C:/Users/ender/AppData/Roaming/npm/node_modules/typescript/lib/tsserverlibrary.js'
+      tsdk = 'C:/Users/ender/AppData/Roaming/npm/node_modules/typescript/lib'
     }
   },
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
@@ -397,7 +398,6 @@ require("scrollbar").setup()
 require("scrollbar.handlers.search").setup({
     override_lens = function() end,
 })
-require("scrollbar.handlers.gitsigns").setup()
 
 -- NOTIFY
 
@@ -406,6 +406,10 @@ vim.notify = require("notify")
 -- WHICH-KEY
 
 require("which-key").setup()
+
+-- COMMENT
+
+require('Comment').setup()
 
 -- GIT
 
