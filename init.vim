@@ -78,21 +78,15 @@ require('packer').startup(function()
   use 'kyazdani42/nvim-web-devicons'
   use 'ryanoasis/vim-devicons'
 
-  use 'ajmwagar/vim-deus'
   use 'NLKNguyen/papercolor-theme'
-  use 'whatyouhide/vim-gotham'
-  use 'mhinz/vim-janah'
-  use 'mhartington/oceanic-next'
-  use 'w0ng/vim-hybrid'
-  use 'tomasiser/vim-code-dark'
   use 'sainnhe/edge'
-  use 'lifepillar/vim-gruvbox8'
-  use 'olimorris/onedarkpro.nvim'
   use {'catppuccin/nvim', as = 'catppuccin'} 
   use 'projekt0n/github-nvim-theme'
   use 'pineapplegiant/spaceduck'
   use 'sainnhe/everforest'
   use 'EdenEast/nightfox.nvim'
+  use 'nyoom-engineering/oxocarbon.nvim'
+  use 'AlexvZyl/nordic.nvim'
 
   use 'plasticboy/vim-markdown'
   use 'mustache/vim-mustache-handlebars'
@@ -131,6 +125,7 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/vim-vsnip-integ'
 
@@ -153,13 +148,14 @@ require('packer').startup(function()
   }
 
   use 'voldikss/vim-floaterm'
-  use {'nyoom-engineering/oxocarbon.nvim'}
 
   use 'mbbill/undotree'
 
   use "folke/which-key.nvim"
 
   use 'numToStr/Comment.nvim'
+
+  use "rafamadriz/friendly-snippets"
 end)
 
 -- PLUGINS
@@ -241,6 +237,7 @@ local cmp = require('cmp')
       { name = 'buffer' },
       { name = 'nvim_lsp' },
       { name = 'path' },
+      { name = 'vsnip' },
     },
   }
 
@@ -319,7 +316,15 @@ require 'nvim-treesitter.install'.compilers = { "clang" }
 require('nvim-treesitter.configs').setup{
 	highlight = {
 		enable = true,
-	}
+	},
+	incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = ",",
+      node_incremental = ",",
+      node_decremental = "<C-,>",
+    },
+  },
 }
 
 -- BETTER ESCAPE
@@ -481,7 +486,6 @@ vim.keymap.set('n', '<C-j>', ':m+<CR>', {remap = false})
 vim.keymap.set('v', '<C-k>', ':m-2<CR>gv=gv', {remap = false})
 vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv", {remap = false})
 
-vim.keymap.set('n', ',g', 'yyp<up>gcc<down>')
 vim.keymap.set('n', 't', 'vatV', {remap = false})
 vim.keymap.set('n', '<C-t>', 'vit', {remap = false})
 
@@ -531,7 +535,8 @@ vim.keymap.set('v', '<A-right>', "<esc>:set splitright<CR>:vnew<CR>", {remap = f
 vim.keymap.set('v', '<A-left>', "<esc>:set nosplitright<CR>:vnew<CR>", {remap = false})
 vim.keymap.set('v', '<A-up>', "<esc>:set nosplitbelow<CR>:new<CR>", {remap = false})
 vim.keymap.set('v', '<A-down>', "<esc>:set splitbelow<CR>:new<CR>", {remap = false})
-vim.keymap.set('n', ',,', ":ZoomToggle<CR>", {remap = false})
+-- vim.keymap.set('n', ',,', ":ZoomToggle<CR>", {remap = false})
+vim.keymap.set('n', '<leader>z', ":ZoomToggle<CR>", {remap = false})
 vim.keymap.set('n', '<leader>=', "<C-w>=", {remap = false})
 vim.keymap.set('n', '<Tab>', "<C-w><C-w>")
 
@@ -615,7 +620,7 @@ vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin hybrid github_dark edge nightfox spaceduck papercolor oxocarbon
+--  catppuccin github_dark edge nightfox spaceduck papercolor oxocarbon nordic everforest
 vim.cmd [[
   colorscheme catppuccin
 ]]
