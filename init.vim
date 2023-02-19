@@ -156,6 +156,11 @@ require('packer').startup(function()
   use 'numToStr/Comment.nvim'
 
   use "rafamadriz/friendly-snippets"
+
+  use({
+    'Wansmer/treesj',
+    requires = { 'nvim-treesitter' },
+  })
 end)
 
 -- PLUGINS
@@ -416,6 +421,12 @@ require("which-key").setup()
 
 require('Comment').setup()
 
+-- TREESJ
+
+require('treesj').setup({
+  use_default_keymaps = false,
+})
+
 -- GIT
 
 vim.g.vue_pre_processors = {}
@@ -498,6 +509,11 @@ vim.keymap.set('i', '<leader>j', "JSON.stringify(", { remap = true })
 vim.keymap.set('i', '<leader>fa', "() => {<cr>", { remap = true })
 vim.keymap.set('i', '<leader>ff', "function() {", { remap = true })
 vim.keymap.set('i', '<leader>i', "if(", { remap = true })
+
+vim.keymap.set('n', '<leader>j', ":TSJJoin<cr>", { remap = true })
+vim.keymap.set('n', '<leader>s', ":TSJSplit<cr>", { remap = true })
+vim.keymap.set('n', '<M-j>', ":TSJJoin<cr>", { remap = true })
+vim.keymap.set('n', '<M-s>', ":TSJSplit<cr>", { remap = true })
 
 vim.keymap.set('i', '<leader>tt', "<template><c-e>", { remap = true })
 
