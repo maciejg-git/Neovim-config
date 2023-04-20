@@ -53,13 +53,13 @@ vim.opt.breakindent = true
 vim.opt.startofline = false
 vim.opt.title = true
 vim.opt.equalalways = false
-vim.opt.signcolumn='yes:2'
+vim.opt.signcolumn='yes:1'
 vim.opt.shada:append(",!")
 vim.opt.viewoptions={'cursor', 'folds'}
 vim.opt.sessionoptions:remove('folds')
 vim.opt.sessionoptions:remove('help')
 vim.opt.hidden = true
-vim.opt.foldmethod='syntax'
+vim.opt.foldmethod='indent'
 vim.opt.foldnestmax=1
 vim.opt.foldcolumn='0'
 vim.opt.foldlevel=99
@@ -252,6 +252,15 @@ require('nvim-autopairs').setup{
   fast_wrap = {},
 }
 
+local Rule = require('nvim-autopairs.rule')
+local ts_conds = require 'nvim-autopairs.ts-conds'
+
+require('nvim-autopairs').add_rules {
+  Rule('{{', '  }', 'vue')
+    :set_end_pair_length(2)
+    :with_pair(ts_conds.is_ts_node 'text'),
+}
+
 -- LUALINE
 
 -- ayu_dark codedark horizon onedark onelight papercolor_dark papercolor_light
@@ -391,7 +400,7 @@ require'hop'.setup()
 require('neorg').setup {
   load = {
     ["core.defaults"] = {},
-    ["core.norg.concealer"] = {},
+    ["core.concealer"] = {},
     ["core.keybinds"] = {
       config = {
         hook = function(keybinds)
@@ -415,7 +424,7 @@ vim.notify = require("notify")
 
 -- WHICH-KEY
 
-require("which-key").setup()
+-- require("which-key").setup()
 
 -- COMMENT
 
@@ -582,8 +591,7 @@ vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi FoldCo
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi VertSplit gui=none guibg=none' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi Folded guibg=none gui=bold' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi SignColumn guibg=none' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link TelescopeBorder Normal' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi link TelescopeSelection Visual' })
+vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi! link TelescopeSelection Visual' })
 
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gotham256', command = 'hi StatusLine gui=bold' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'PaperColor', command = 'hi VertSplit guifg=#303030 guibg=none' })
@@ -631,6 +639,21 @@ vim.api.nvim_create_autocmd('InsertEnter', { pattern = '*', group = CursorLine, 
 vim.api.nvim_create_autocmd('WinLeave', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
 
 -- COLORSCHEME
+
+local colors = require("catppuccin.palettes").get_palette()
+require("catppuccin.lib.highlighter").syntax({
+  TelescopePromptNormal = { bg = colors.surface0 },
+  TelescopePromptBorder = { fg = colors.surface0, bg = colors.surface0 },
+  TelescopePromptTitle = { bg = colors.surface0 },
+
+  TelescopeResultsNormal = { bg = colors.surface0 },
+  TelescopeResultsBorder = { fg = colors.surface0, bg = colors.surface0 },
+  TelescopeResultsTitle = { bg = colors.surface0 },
+
+  TelescopePreviewNormal = { bg = colors.surface0 },
+  TelescopePreviewBorder = { fg = colors.surface0, bg = colors.surface0 },
+  TelescopePreviewTitle = { bg = colors.surface0 },
+})
 
 vim.opt.background = 'dark'
 
