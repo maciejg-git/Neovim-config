@@ -85,8 +85,8 @@ require('packer').startup(function()
   use 'pineapplegiant/spaceduck'
   use 'sainnhe/everforest'
   use 'EdenEast/nightfox.nvim'
-  use 'nyoom-engineering/oxocarbon.nvim'
   use 'AlexvZyl/nordic.nvim'
+  use { 'Everblush/nvim', as = 'everblush' }
 
   use 'plasticboy/vim-markdown'
   use 'mustache/vim-mustache-handlebars'
@@ -94,6 +94,11 @@ require('packer').startup(function()
   use 'mattn/emmet-vim'
   use 'posva/vim-vue'
   use 'HerringtonDarkholme/yats.vim'
+  use "rafamadriz/friendly-snippets"
+  use({
+    'Wansmer/treesj',
+    requires = { 'nvim-treesitter' },
+  })
 
   use 'tpope/vim-fugitive'
   use 'lewis6991/gitsigns.nvim'
@@ -109,6 +114,9 @@ require('packer').startup(function()
   use "petertriho/nvim-scrollbar" 
   use {'akinsho/bufferline.nvim', tag = 'v2.*' }
   use 'rcarriga/nvim-notify'
+  use 'mbbill/undotree'
+  use "folke/which-key.nvim"
+  use 'voldikss/vim-floaterm'
 
   use "kevinhwang91/nvim-hlslens"
   use 'anuvyklack/pretty-fold.nvim'
@@ -120,6 +128,7 @@ require('packer').startup(function()
   use 'max397574/better-escape.nvim'
   use 'kylechui/nvim-surround'
   use 'sbdchd/neoformat'
+  use 'numToStr/Comment.nvim'
 
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
@@ -146,21 +155,7 @@ require('packer').startup(function()
     "nvim-neorg/neorg",
     run = ":Neorg sync-parsers",
   }
-
-  use 'voldikss/vim-floaterm'
-
-  use 'mbbill/undotree'
-
-  use "folke/which-key.nvim"
-
-  use 'numToStr/Comment.nvim'
-
-  use "rafamadriz/friendly-snippets"
-
-  use({
-    'Wansmer/treesj',
-    requires = { 'nvim-treesitter' },
-  })
+  use 'stevearc/oil.nvim'
 end)
 
 -- PLUGINS
@@ -424,7 +419,7 @@ vim.notify = require("notify")
 
 -- WHICH-KEY
 
--- require("which-key").setup()
+require("which-key").setup()
 
 -- COMMENT
 
@@ -435,6 +430,22 @@ require('Comment').setup()
 require('treesj').setup({
   use_default_keymaps = false,
 })
+
+-- OIL
+
+require("oil").setup({
+ float = {
+    padding = 4,
+    max_width = 0,
+    max_height = 0,
+    border = "rounded",
+    win_options = {
+      winblend = 0,
+    },
+  },
+})
+
+vim.keymap.set("n", "-", require("oil").open_float, { desc = "Open parent directory" })
 
 -- GIT
 
@@ -491,8 +502,8 @@ vim.keymap.set('v', '<M-S-c>', '<Leader>_b', {remap = true})
 
 vim.keymap.set('n', '<C-L>', ':nohlsearch<cr>', {remap = false})
 
-vim.keymap.set('n', '+', '<C-a>', {remap = false})
-vim.keymap.set('n', '-', '<C-x>', {remap = false})
+-- vim.keymap.set('n', '+', '<C-a>', {remap = false})
+-- vim.keymap.set('n', '-', '<C-x>', {remap = false})
 
 vim.keymap.set('n', 'n', 'nzz', {remap = false})
 vim.keymap.set('n', 'N', 'Nzz', {remap = false})
@@ -659,7 +670,7 @@ vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin github_dark edge nightfox spaceduck papercolor oxocarbon nordic everforest
+--  catppuccin edge nightfox spaceduck papercolor nordic everforest everblush
 vim.cmd [[
   colorscheme catppuccin
 ]]
