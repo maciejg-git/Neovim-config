@@ -112,7 +112,7 @@ require('packer').startup(function()
   use 'akinsho/toggleterm.nvim'
   use 'karb94/neoscroll.nvim'
   use "petertriho/nvim-scrollbar" 
-  use {'akinsho/bufferline.nvim', tag = 'v2.*' }
+  use {'akinsho/bufferline.nvim', tag = '*' }
   use 'rcarriga/nvim-notify'
   use 'mbbill/undotree'
   use "folke/which-key.nvim"
@@ -156,6 +156,7 @@ require('packer').startup(function()
     run = ":Neorg sync-parsers",
   }
   use 'stevearc/oil.nvim'
+  use({ 'rose-pine/neovim', as = 'rose-pine' })
 end)
 
 -- PLUGINS
@@ -206,7 +207,15 @@ require('trouble').setup {}
 
 -- GITSIGNS
 
-require('gitsigns').setup()
+require('gitsigns').setup({
+  signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+    },
+})
 
 -- CMP
 
@@ -240,6 +249,12 @@ local cmp = require('cmp')
       { name = 'vsnip' },
     },
   }
+
+cmp.setup.filetype('norg', {
+  sources = cmp.config.sources({
+    { name = 'buffer' },
+  })
+})
 
 -- AUTOPAIRS
 
@@ -351,7 +366,11 @@ require('bufferline').setup {
   options = {
     mode = "tabs",
     numbers = "none",
-    icon = '▎',
+    themable = false,
+    indicator = {
+      icon = '▎',
+      style = 'icon',
+    },
     buffer_close_icon = '',
     modified_icon = '●',
     close_icon = '',
@@ -363,11 +382,10 @@ require('bufferline').setup {
     color_icons = true,
     show_buffer_icons = true,
     show_buffer_close_icons = true,
-    show_buffer_default_icon = true,
     show_close_icon = true,
     show_tab_indicators = true,
-    separator_style = "slant",
     always_show_bufferline = false,
+    separator_style = "slant",
     sort_by = 'tabs',
   }
 }
@@ -469,8 +487,8 @@ vim.g.floaterm_keymap_new = ""
 vim.g.floaterm_keymap_prev = ""
 vim.g.floaterm_keymap_next = ""
 vim.g.floaterm_keymap_toggle = "<F12>"
-vim.g.floaterm_width = 0.9
-vim.g.floaterm_height = 0.9
+vim.g.floaterm_width = 0.95
+vim.g.floaterm_height = 0.95
 
 -- INDENT BLANKLINE
 
@@ -670,7 +688,7 @@ vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin edge nightfox spaceduck papercolor nordic everforest everblush
+--  catppuccin edge nightfox spaceduck papercolor nordic everforest everblush rose
 vim.cmd [[
   colorscheme catppuccin
 ]]
