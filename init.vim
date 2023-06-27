@@ -157,6 +157,7 @@ require('packer').startup(function()
   }
   use 'stevearc/oil.nvim'
   use({ 'rose-pine/neovim', as = 'rose-pine' })
+  use "folke/flash.nvim"
 end)
 
 -- PLUGINS
@@ -465,6 +466,43 @@ require("oil").setup({
 
 vim.keymap.set("n", "-", require("oil").open_float, { desc = "Open parent directory" })
 
+-- FLASH
+
+require("flash").setup({
+opts = {
+  modes = {
+    char = {
+      enabled = false
+      }
+    }
+  }
+})
+
+local Config = require("flash.config")
+local Char = require("flash.plugins.char")
+for _, motion in ipairs({ "f", "t", "F", "T" }) do
+  vim.keymap.set({ "n", "x", "o" }, motion, function()
+    require("flash").jump(Config.get({
+      mode = "char",
+      search = {
+        mode = Char.mode(motion),
+        max_length = 1,
+      },
+    }, Char.motions[motion]))
+  end)
+end
+
+vim.keymap.set('n', 's', 
+  function()
+    require("flash").jump()
+  end
+)
+vim.keymap.set('n', 'S', 
+  function()
+    require("flash").treesitter()
+  end
+)
+
 -- GIT
 
 vim.g.vue_pre_processors = {}
@@ -535,8 +573,8 @@ vim.keymap.set('n', '<C-j>', ':m+<CR>', {remap = false})
 vim.keymap.set('v', '<C-k>', ':m-2<CR>gv=gv', {remap = false})
 vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv", {remap = false})
 
-vim.keymap.set('n', 't', 'vatV', {remap = false})
-vim.keymap.set('n', '<C-t>', 'vit', {remap = false})
+-- vim.keymap.set('n', 't', 'vatV', {remap = false})
+-- vim.keymap.set('n', '<C-t>', 'vit', {remap = false})
 
 vim.keymap.set('n', '<c-n>', ':Neoformat<CR>')
 
@@ -603,7 +641,7 @@ vim.keymap.set('n', '<leader>d', ':bp\\|bd#<cr>')
 vim.keymap.set('n', '<2-LeftMouse>', "foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : 'zo'", {remap = false, expr = true})
 vim.keymap.set('n', '<C-CR>', "&foldlevel == 0 ? 'zR' :'zM'", {remap = false, expr = true})
 vim.keymap.set('n', '<M-CR>', "&foldlevel == 0 ? 'zRzMzo' :'zMzo'", {remap = false, expr = true})
-vim.keymap.set('n', 'f', "za")
+-- vim.keymap.set('n', 'f', "za")
 
 -- MAPPING TABS
 
