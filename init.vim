@@ -92,7 +92,6 @@ require('packer').startup(function()
   use 'mustache/vim-mustache-handlebars'
   use 'pangloss/vim-javascript'
   use 'mattn/emmet-vim'
-  use 'posva/vim-vue'
   use 'HerringtonDarkholme/yats.vim'
   use "rafamadriz/friendly-snippets"
   use({
@@ -144,19 +143,10 @@ require('packer').startup(function()
   }
 
   use {
-    'phaazon/hop.nvim',
-    branch = 'v2',
-    config = function()
-      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-    end
-  }
-
-  use {
     "nvim-neorg/neorg",
     run = ":Neorg sync-parsers",
   }
   use 'stevearc/oil.nvim'
-  use({ 'rose-pine/neovim', as = 'rose-pine' })
   use "folke/flash.nvim"
 end)
 
@@ -405,10 +395,6 @@ require('neoscroll').setup({
     mappings = {'<C-u>', '<C-d>', 'zt', 'zz', 'zb'},
 })
 
--- HOP
-
-require'hop'.setup()
-
 -- NORG
 
 require('neorg').setup {
@@ -541,6 +527,7 @@ vim.keymap.set('n', '<Leader>q', ':q!<CR>')
 vim.keymap.set('n', '<C-q>', ':q!<CR>')
 vim.keymap.set('n', '<CR>', 'o')
 vim.keymap.set('n', ';', ':', {remap = false})
+vim.keymap.set('n', 'U', '<C-r>')
 vim.keymap.set('n', '<c-f>', '<c-u>', { remap = true })
 vim.keymap.set('n', '<Leader><Leader>', 'V')
 vim.keymap.set('v', '<Leader><Leader>', '<Esc>')
@@ -722,11 +709,17 @@ require("catppuccin.lib.highlighter").syntax({
   TelescopePreviewTitle = { bg = colors.surface0 },
 })
 
+require("catppuccin").setup({
+  integrations = {
+      flash = false,
+    }
+})
+
 vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin edge nightfox spaceduck papercolor nordic everforest everblush rose
+--  catppuccin edge nightfox spaceduck papercolor nordic everforest everblush
 vim.cmd [[
   colorscheme catppuccin
 ]]
