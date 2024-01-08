@@ -76,30 +76,25 @@ require('packer').startup(function()
 
   use 'nvim-lua/plenary.nvim'
   use 'kyazdani42/nvim-web-devicons'
-  use 'ryanoasis/vim-devicons'
 
   use 'NLKNguyen/papercolor-theme'
-  use 'sainnhe/edge'
   use {'catppuccin/nvim', as = 'catppuccin'} 
   use 'projekt0n/github-nvim-theme'
-  use 'pineapplegiant/spaceduck'
   use 'sainnhe/everforest'
   use 'EdenEast/nightfox.nvim'
-  use 'AlexvZyl/nordic.nvim'
   use { 'Everblush/nvim', as = 'everblush' }
 
   use 'plasticboy/vim-markdown'
   use 'mustache/vim-mustache-handlebars'
   use 'pangloss/vim-javascript'
-  use 'mattn/emmet-vim'
   use 'HerringtonDarkholme/yats.vim'
+  use 'mattn/emmet-vim'
   use "rafamadriz/friendly-snippets"
   use({
     'Wansmer/treesj',
     requires = { 'nvim-treesitter' },
   })
 
-  use 'tpope/vim-fugitive'
   use 'lewis6991/gitsigns.nvim'
 
   use 'neovim/nvim-lspconfig'
@@ -148,6 +143,10 @@ require('packer').startup(function()
   }
   use 'stevearc/oil.nvim'
   use "folke/flash.nvim"
+  -- use "NeogitOrg/neogit"
+  use "lukas-reineke/indent-blankline.nvim"
+  use "vuki656/package-info.nvim"
+  use "MunifTanjim/nui.nvim"
 end)
 
 -- PLUGINS
@@ -492,11 +491,46 @@ vim.keymap.set('n', 'S',
 -- GIT
 
 vim.g.vue_pre_processors = {}
-vim.api.nvim_create_autocmd('User', { pattern = 'GitGutterStage', command = 'call fugitive#ReloadStatus()' })
 
 -- MARKDOWN
 
 vim.g.vim_markdown_folding_disabled = 1
+
+-- local neogit = require('neogit')
+-- neogit.setup {}
+
+require("ibl").setup({
+  scope = {
+    enabled = false,  
+    show_start = false,
+  },
+  exclude = {
+    filetypes = { "norg", "text" }
+  }
+})
+
+require('package-info').setup()
+
+-- Show dependency versions
+vim.keymap.set({ "n" }, "<LEADER>ns", require("package-info").show, { silent = true, noremap = true })
+
+-- Hide dependency versions
+vim.keymap.set({ "n" }, "<LEADER>nc", require("package-info").hide, { silent = true, noremap = true })
+
+-- Toggle dependency versions
+vim.keymap.set({ "n" }, "<LEADER>nt", require("package-info").toggle, { silent = true, noremap = true })
+
+-- Update dependency on the line
+vim.keymap.set({ "n" }, "<LEADER>nu", require("package-info").update, { silent = true, noremap = true })
+
+-- Delete dependency on the line
+vim.keymap.set({ "n" }, "<LEADER>nd", require("package-info").delete, { silent = true, noremap = true })
+
+-- Install a new dependency
+vim.keymap.set({ "n" }, "<LEADER>ni", require("package-info").install, { silent = true, noremap = true })
+
+-- Install a different dependency version
+vim.keymap.set({ "n" }, "<LEADER>np", require("package-info").change_version, { silent = true, noremap = true })
 
 -- EMMET
 
@@ -636,7 +670,33 @@ vim.keymap.set('n', '<leader>t', ":tabnew<CR>")
 
 -- MAPPING GIT
 
-vim.keymap.set('', '<c-g>', ":vertical G<cr>")
+vim.keymap.set('', '<c-g>', ":Neogit<cr>")
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    -- vim.keymap.set('n', '<leader>f', function()
+    --   vim.lsp.buf.format { async = true }
+    -- end, opts)
+  end,
+})
 
 -- AUTOCOMMAND
 
@@ -719,7 +779,7 @@ vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin edge nightfox spaceduck papercolor nordic everforest everblush
+--  catppuccin nightfox papercolor everforest everblush
 vim.cmd [[
   colorscheme catppuccin
 ]]
