@@ -140,21 +140,19 @@ require('packer').startup(function()
   use {
     "nvim-neorg/neorg",
     run = ":Neorg sync-parsers",
+    tag = "v7.0.0"
   }
   use 'stevearc/oil.nvim'
   use "folke/flash.nvim"
-  -- use "NeogitOrg/neogit"
   use "lukas-reineke/indent-blankline.nvim"
   use "vuki656/package-info.nvim"
   use "MunifTanjim/nui.nvim"
+  use "f-person/git-blame.nvim"
 end)
 
 -- PLUGINS
 
 -- LSP CONFIG
-
--- require'lspconfig'.vuels.setup{ cmd = { "vls.cmd" } }
--- require'lspconfig'.tsserver.setup{}
 
 require'lspconfig'.volar.setup{
   init_options = {
@@ -164,6 +162,22 @@ require'lspconfig'.volar.setup{
   },
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
 }
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require('lspconfig').emmet_ls.setup({
+    capabilities = capabilities,
+    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+    init_options = {
+      html = {
+        options = {
+          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+          ["bem.enabled"] = true,
+        },
+      },
+    }
+})
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
@@ -496,8 +510,13 @@ vim.g.vue_pre_processors = {}
 
 vim.g.vim_markdown_folding_disabled = 1
 
--- local neogit = require('neogit')
--- neogit.setup {}
+-- GIT BLAME
+
+require('gitblame').setup {
+    enabled = false,
+}
+
+-- INDENT BLANKLINE
 
 require("ibl").setup({
   scope = {
@@ -509,27 +528,16 @@ require("ibl").setup({
   }
 })
 
+-- PACKAGE INFO
+
 require('package-info').setup()
 
--- Show dependency versions
 vim.keymap.set({ "n" }, "<LEADER>ns", require("package-info").show, { silent = true, noremap = true })
-
--- Hide dependency versions
 vim.keymap.set({ "n" }, "<LEADER>nc", require("package-info").hide, { silent = true, noremap = true })
-
--- Toggle dependency versions
 vim.keymap.set({ "n" }, "<LEADER>nt", require("package-info").toggle, { silent = true, noremap = true })
-
--- Update dependency on the line
 vim.keymap.set({ "n" }, "<LEADER>nu", require("package-info").update, { silent = true, noremap = true })
-
--- Delete dependency on the line
 vim.keymap.set({ "n" }, "<LEADER>nd", require("package-info").delete, { silent = true, noremap = true })
-
--- Install a new dependency
 vim.keymap.set({ "n" }, "<LEADER>ni", require("package-info").install, { silent = true, noremap = true })
-
--- Install a different dependency version
 vim.keymap.set({ "n" }, "<LEADER>np", require("package-info").change_version, { silent = true, noremap = true })
 
 -- EMMET
@@ -547,10 +555,6 @@ vim.g.floaterm_keymap_next = ""
 vim.g.floaterm_keymap_toggle = "<F12>"
 vim.g.floaterm_width = 0.95
 vim.g.floaterm_height = 0.95
-
--- INDENT BLANKLINE
-
-vim.g.indent_blankline_filetype = {'vue', 'javascript', 'typescript', 'html'}
 
 -- MAPPING
 
@@ -579,9 +583,6 @@ vim.keymap.set('v', '<M-S-c>', '<Leader>_b', {remap = true})
 
 vim.keymap.set('n', '<C-L>', ':nohlsearch<cr>', {remap = false})
 
--- vim.keymap.set('n', '+', '<C-a>', {remap = false})
--- vim.keymap.set('n', '-', '<C-x>', {remap = false})
-
 vim.keymap.set('n', 'n', 'nzz', {remap = false})
 vim.keymap.set('n', 'N', 'Nzz', {remap = false})
 
@@ -593,9 +594,6 @@ vim.keymap.set('n', '<C-k>', ':m-2<CR>', {remap = false})
 vim.keymap.set('n', '<C-j>', ':m+<CR>', {remap = false})
 vim.keymap.set('v', '<C-k>', ':m-2<CR>gv=gv', {remap = false})
 vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv", {remap = false})
-
--- vim.keymap.set('n', 't', 'vatV', {remap = false})
--- vim.keymap.set('n', '<C-t>', 'vit', {remap = false})
 
 vim.keymap.set('n', '<c-n>', ':Neoformat<CR>')
 
@@ -648,7 +646,6 @@ vim.keymap.set('v', '<A-right>', "<esc>:set splitright<CR>:vnew<CR>", {remap = f
 vim.keymap.set('v', '<A-left>', "<esc>:set nosplitright<CR>:vnew<CR>", {remap = false})
 vim.keymap.set('v', '<A-up>', "<esc>:set nosplitbelow<CR>:new<CR>", {remap = false})
 vim.keymap.set('v', '<A-down>', "<esc>:set splitbelow<CR>:new<CR>", {remap = false})
--- vim.keymap.set('n', ',,', ":ZoomToggle<CR>", {remap = false})
 vim.keymap.set('n', '<leader>z', ":ZoomToggle<CR>", {remap = false})
 vim.keymap.set('n', '<leader>=', "<C-w>=", {remap = false})
 vim.keymap.set('n', '<Tab>', "<C-w><C-w>")
@@ -667,10 +664,6 @@ vim.keymap.set('n', '<M-CR>', "&foldlevel == 0 ? 'zRzMzo' :'zMzo'", {remap = fal
 -- MAPPING TABS
 
 vim.keymap.set('n', '<leader>t', ":tabnew<CR>")
-
--- MAPPING GIT
-
-vim.keymap.set('', '<c-g>', ":Neogit<cr>")
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
