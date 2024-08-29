@@ -115,7 +115,6 @@ require('packer').startup(function()
   use "kevinhwang91/nvim-hlslens"
   use 'anuvyklack/pretty-fold.nvim'
   use 'folke/todo-comments.nvim'
-  use 'norcalli/nvim-colorizer.lua'
   use 'godlygeek/tabular'
   use 'nacro90/numb.nvim'
   use 'windwp/nvim-autopairs'
@@ -148,6 +147,9 @@ require('packer').startup(function()
   use "vuki656/package-info.nvim"
   use "MunifTanjim/nui.nvim"
   use "f-person/git-blame.nvim"
+  use "brenoprata10/nvim-highlight-colors"
+
+  use "savq/melange-nvim"
 end)
 
 -- PLUGINS
@@ -196,10 +198,6 @@ end
 -- LSP SIGNATURE
 
 require 'lsp_signature'.setup()
-
--- COLORIZER
-
-require'colorizer'.setup()
 
 -- NUMB
 
@@ -358,10 +356,36 @@ require('nvim-treesitter.configs').setup{
 -- BETTER ESCAPE
 
 require("better_escape").setup {
-    mapping = {"jk", "jj"}, -- a table with mappings to use
-    timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-    clear_empty_lines = false, -- clear line after escaping if there is only whitespace
-    keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
+    timeout = vim.o.timeoutlen,
+    default_mappings = false,
+    mappings = {
+        i = {
+            j = {
+                -- These can all also be functions
+                j = "<Esc>",
+            },
+        },
+        c = {
+            j = {
+                j = "<Esc>",
+            },
+        },
+        t = {
+            j = {
+                j = "<Esc>",
+            },
+        },
+        v = {
+            j = {
+                k = "<Esc>",
+            },
+        },
+        s = {
+            j = {
+                k = "<Esc>",
+            },
+        },
+    },
 }
 
 -- BUFFERLINE
@@ -539,6 +563,13 @@ vim.keymap.set({ "n" }, "<LEADER>nu", require("package-info").update, { silent =
 vim.keymap.set({ "n" }, "<LEADER>nd", require("package-info").delete, { silent = true, noremap = true })
 vim.keymap.set({ "n" }, "<LEADER>ni", require("package-info").install, { silent = true, noremap = true })
 vim.keymap.set({ "n" }, "<LEADER>np", require("package-info").change_version, { silent = true, noremap = true })
+
+-- HIGLIGHT COLORS
+
+require('nvim-highlight-colors').setup({
+  -- render = 'virtual',
+  -- enable_tailwind = true
+})
 
 -- EMMET
 
@@ -726,6 +757,9 @@ vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.js', command = 'setloca
 vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.ts', command = 'setlocal foldnestmax=1' })
 vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.vim', command = 'setlocal foldmethod=marker' })
 
+vim.api.nvim_create_autocmd('BufRead', { pattern = '*.njk', command = 'set filetype=html' })
+vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.njk', command = 'set filetype=html' })
+
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nobuflisted' })
 
 vim.api.nvim_create_autocmd('VimEnter', { pattern = '*', command = 'cd c:\\Users\\ender\\Desktop\\projects' })
@@ -772,7 +806,7 @@ vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin nightfox papercolor everforest everblush
+--  catppuccin nightfox papercolor everforest everblush melange
 vim.cmd [[
   colorscheme catppuccin
 ]]
