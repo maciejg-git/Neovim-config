@@ -120,7 +120,6 @@ require('packer').startup(function()
   use 'windwp/nvim-autopairs'
   use 'max397574/better-escape.nvim'
   use 'kylechui/nvim-surround'
-  use 'sbdchd/neoformat'
   use 'numToStr/Comment.nvim'
 
   use 'hrsh7th/nvim-cmp'
@@ -150,6 +149,8 @@ require('packer').startup(function()
   use "brenoprata10/nvim-highlight-colors"
 
   use "savq/melange-nvim"
+  use "stevearc/conform.nvim"
+  use "ferdinandrau/lavish.nvim"
 end)
 
 -- PLUGINS
@@ -564,6 +565,16 @@ vim.keymap.set({ "n" }, "<LEADER>nd", require("package-info").delete, { silent =
 vim.keymap.set({ "n" }, "<LEADER>ni", require("package-info").install, { silent = true, noremap = true })
 vim.keymap.set({ "n" }, "<LEADER>np", require("package-info").change_version, { silent = true, noremap = true })
 
+-- CONFORM
+
+require("conform").setup({
+  formatters_by_ft = {
+    javascript = { "prettier", stop_after_first = true },
+    html = { "prettier", stop_after_first = true },
+    liquid = { "prettier", stop_after_first = true },
+  },
+})
+
 -- HIGLIGHT COLORS
 
 require('nvim-highlight-colors').setup({
@@ -626,7 +637,7 @@ vim.keymap.set('n', '<C-j>', ':m+<CR>', {remap = false})
 vim.keymap.set('v', '<C-k>', ':m-2<CR>gv=gv', {remap = false})
 vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv", {remap = false})
 
-vim.keymap.set('n', '<c-n>', ':Neoformat<CR>')
+vim.keymap.set('n', '<c-n>', require("conform").format)
 
 vim.keymap.set('i', '<leader>c', "console.log(", { remap = true })
 vim.keymap.set('i', '<leader>d', "console.log('debug'", { remap = true })
@@ -806,7 +817,7 @@ vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin nightfox papercolor everforest everblush melange
+--  catppuccin nightfox everforest everblush melange lavish
 vim.cmd [[
   colorscheme catppuccin
 ]]
