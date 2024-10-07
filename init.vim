@@ -151,6 +151,7 @@ require('packer').startup(function()
   use "savq/melange-nvim"
   use "stevearc/conform.nvim"
   use "ferdinandrau/lavish.nvim"
+  use "ilof2/posterpole.nvim"
 end)
 
 -- PLUGINS
@@ -817,7 +818,7 @@ vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin nightfox everforest everblush melange lavish
+--  catppuccin nightfox everforest everblush melange lavish posterpole
 vim.cmd [[
   colorscheme catppuccin
 ]]
