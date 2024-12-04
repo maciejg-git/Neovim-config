@@ -122,13 +122,13 @@ require('packer').startup(function()
   use 'kylechui/nvim-surround'
   use 'numToStr/Comment.nvim'
 
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-vsnip'
-  use 'hrsh7th/vim-vsnip'
-  use 'hrsh7th/vim-vsnip-integ'
+  -- use 'hrsh7th/nvim-cmp'
+  -- use 'hrsh7th/cmp-buffer'
+  -- use 'hrsh7th/cmp-nvim-lsp'
+  -- use 'hrsh7th/cmp-path'
+  -- use 'hrsh7th/cmp-vsnip'
+  -- use 'hrsh7th/vim-vsnip'
+  -- use 'hrsh7th/vim-vsnip-integ'
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -152,6 +152,7 @@ require('packer').startup(function()
   use "stevearc/conform.nvim"
   use "ferdinandrau/lavish.nvim"
   use "ilof2/posterpole.nvim"
+  use { "saghen/blink.cmp", tag = "v0.*" }
 end)
 
 -- PLUGINS
@@ -172,7 +173,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require('lspconfig').emmet_ls.setup({
     capabilities = capabilities,
-    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "liquid" },
+    filetypes = { "css", "eruby", "html", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "liquid" },
     init_options = {
       html = {
         options = {
@@ -223,42 +224,42 @@ require('gitsigns').setup({
 
 -- CMP
 
-local cmp = require('cmp')
-  cmp.setup {
-    snippet = {
-      expand = function(args)
-        vim.fn['vsnip#anonymous'](args.body)
-      end
-    },
-    formatting = {
-      format = function(entry, vim_item)
-        vim_item.menu = ({
-          buffer = "  [Buffer]",
-          nvim_lsp = "  [LSP]",
-          luasnip = "  [LuaSnip]",
-        })[entry.source.name]
-        return vim_item
-      end,
-    },
-    mapping = {
-      ['<C-p>'] = cmp.mapping.select_prev_item(),
-      ['<C-n>'] = cmp.mapping.select_next_item(),
-      ['<CR>'] = cmp.mapping.confirm(),
-      ['<TAB>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
-    },
-    sources = {
-      { name = 'buffer' },
-      { name = 'nvim_lsp' },
-      { name = 'path' },
-      { name = 'vsnip' },
-    },
-  }
-
-cmp.setup.filetype('norg', {
-  sources = cmp.config.sources({
-    { name = 'buffer' },
-  })
-})
+-- local cmp = require('cmp')
+--   cmp.setup {
+--     snippet = {
+--       expand = function(args)
+--         vim.fn['vsnip#anonymous'](args.body)
+--       end
+--     },
+--     formatting = {
+--       format = function(entry, vim_item)
+--         vim_item.menu = ({
+--           buffer = "  [Buffer]",
+--           nvim_lsp = "  [LSP]",
+--           luasnip = "  [LuaSnip]",
+--         })[entry.source.name]
+--         return vim_item
+--       end,
+--     },
+--     mapping = {
+--       ['<C-p>'] = cmp.mapping.select_prev_item(),
+--       ['<C-n>'] = cmp.mapping.select_next_item(),
+--       ['<CR>'] = cmp.mapping.confirm(),
+--       ['<TAB>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
+--     },
+--     sources = {
+--       { name = 'buffer' },
+--       { name = 'nvim_lsp' },
+--       { name = 'path' },
+--       { name = 'vsnip' },
+--     },
+--   }
+--
+-- cmp.setup.filetype('norg', {
+--   sources = cmp.config.sources({
+--     { name = 'buffer' },
+--   })
+-- })
 
 -- AUTOPAIRS
 
@@ -570,9 +571,9 @@ vim.keymap.set({ "n" }, "<LEADER>np", require("package-info").change_version, { 
 
 require("conform").setup({
   formatters_by_ft = {
-    javascript = { "prettier", stop_after_first = true },
-    html = { "prettier", stop_after_first = true },
-    liquid = { "prettier", stop_after_first = true },
+    javascript = { "prettier", stop_after_first = true, timeout_ms = 10000 },
+    html = { "prettier", stop_after_first = true, timeout_ms = 10000 },
+    liquid = { "prettier", stop_after_first = true, timeout_ms = 10000 },
   },
 })
 
@@ -581,6 +582,94 @@ require("conform").setup({
 require('nvim-highlight-colors').setup({
   -- render = 'virtual',
   -- enable_tailwind = true
+})
+
+require("blink.cmp").setup({
+  keymap = {
+    ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+    ['<C-e>'] = { 'hide', 'fallback' },
+
+    ['<CR>'] = { 'accept', 'fallback' },
+
+    ['<Tab>'] = {
+      function(cmp)
+        if cmp.snippet_active() then return cmp.accept()
+        else return cmp.select_next() end
+      end,
+      'snippet_forward',
+      'fallback'
+    },
+    ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+
+    ['<Up>'] = { 'select_prev', 'fallback' },
+    ['<Down>'] = { 'select_next', 'fallback' },
+    ['<C-p>'] = { 'select_prev', 'fallback' },
+    ['<C-n>'] = { 'select_next', 'fallback' },
+
+    ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+    ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+  },
+  completion = {
+    list = {
+      selection = 'auto_insert',
+    }
+  },
+  sources = {
+    -- list of enabled providers
+    completion = { 
+      enabled_providers = {'lsp', 'path', 'snippets', 'buffer' },
+    },
+
+    providers = {
+      lsp = {
+        name = 'LSP',
+        module = 'blink.cmp.sources.lsp',
+
+        --- *All* of the providers have the following options available
+        --- NOTE: All of these options may be functions to get dynamic behavior
+        --- See the type definitions for more information
+        enabled = true, -- whether or not to enable the provider
+        transform_items = nil, -- function to transform the items before they're returned
+        should_show_items = true, -- whether or not to show the items
+        max_items = nil, -- maximum number of items to return
+        min_keyword_length = 0, -- minimum number of characters to trigger the provider
+        fallback_for = {}, -- if any of these providers return 0 items, it will fallback to this provider
+        score_offset = 0, -- boost/penalize the score of the items
+        override = nil, -- override the source's functions
+      },
+      path = {
+        name = 'Path',
+        module = 'blink.cmp.sources.path',
+        score_offset = 3,
+        opts = {
+          trailing_slash = false,
+          label_trailing_slash = true,
+          get_cwd = function(context) return vim.fn.expand(('#%d:p:h'):format(context.bufnr)) end,
+          show_hidden_files_by_default = false,
+        }
+      },
+      snippets = {
+        name = 'Snippets',
+        module = 'blink.cmp.sources.snippets',
+        score_offset = -3,
+        opts = {
+          friendly_snippets = true,
+          search_paths = { vim.fn.stdpath('config') .. '/snippets' },
+          global_snippets = { 'all' },
+          extended_filetypes = {},
+          ignored_filetypes = { "norg" },
+        }
+
+        --- Example usage for disabling the snippet provider after pressing trigger characters (i.e. ".")
+        -- enabled = function(ctx) return ctx ~= nil and ctx.trigger.kind == vim.lsp.protocol.CompletionTriggerKind.TriggerCharacter end,
+      },
+      buffer = {
+        name = 'Buffer',
+        module = 'blink.cmp.sources.buffer',
+        fallback_for = { 'lsp' },
+      },
+    },
+  },
 })
 
 -- EMMET
