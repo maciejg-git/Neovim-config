@@ -15,7 +15,6 @@ vim.cmd [[
 -- OPTIONS
 
 vim.opt.undofile = true
--- vim.opt.foldtext = 'MyFoldText()'
 vim.opt.ruler = true
 vim.opt.showcmd = true
 vim.opt.smartindent = true
@@ -84,6 +83,8 @@ require('packer').startup(function()
   use 'sainnhe/everforest'
   use 'EdenEast/nightfox.nvim'
   use { 'Everblush/nvim', as = 'everblush' }
+  use "savq/melange-nvim"
+  use "ilof2/posterpole.nvim"
 
   use 'plasticboy/vim-markdown'
   use 'mustache/vim-mustache-handlebars'
@@ -121,6 +122,7 @@ require('packer').startup(function()
   use 'max397574/better-escape.nvim'
   use 'kylechui/nvim-surround'
   use 'numToStr/Comment.nvim'
+  use "stevearc/conform.nvim"
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -139,10 +141,6 @@ require('packer').startup(function()
   use "MunifTanjim/nui.nvim"
   use "f-person/git-blame.nvim"
   use "brenoprata10/nvim-highlight-colors"
-
-  use "savq/melange-nvim"
-  use "stevearc/conform.nvim"
-  use "ilof2/posterpole.nvim"
   use {"saghen/blink.cmp", tag = "v1.0.0"}
 end)
 
@@ -190,7 +188,6 @@ for type, icon in pairs(signs) do
 end
 
 vim.diagnostic.config({
-  -- Use the default configuration
   virtual_lines = true
 
   -- Alternatively, customize specific options
@@ -241,7 +238,6 @@ require('nvim-autopairs').add_rules {
 
 -- LUALINE
 
--- ayu_dark codedark horizon onedark onelight papercolor_dark papercolor_light
 require('lualine').setup{options = {section_separators='', component_separators='', theme='auto'}}
 
 -- TODO-COMMENTS
@@ -327,7 +323,6 @@ require("better_escape").setup {
     mappings = {
         i = {
             j = {
-                -- These can all also be functions
                 j = "<Esc>",
             },
         },
@@ -488,10 +483,6 @@ vim.keymap.set('n', 'S',
   end
 )
 
--- GIT
-
-vim.g.vue_pre_processors = {}
-
 -- MARKDOWN
 
 vim.g.vim_markdown_folding_disabled = 1
@@ -542,6 +533,8 @@ require('nvim-highlight-colors').setup({
   -- render = 'virtual',
   -- enable_tailwind = true
 })
+
+-- BLINK
 
 require("blink.cmp").setup({
   keymap = {
@@ -744,31 +737,11 @@ vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi Folded
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi SignColumn guibg=none' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi! link TelescopeSelection Visual' })
 
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gotham256', command = 'hi StatusLine gui=bold' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'PaperColor', command = 'hi VertSplit guifg=#303030 guibg=none' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'OceanicNext', command = 'hi! link VertSplit Normal' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'janah', command = 'hi! link Pmenu CursorLine' })
-
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'hybrid', command = 'highlight TelescopeMatching guifg=#b5bd68 gui=bold' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'PaperColor', command = 'highlight TelescopeMatching guifg=#b5bd68 gui=bold' })
-
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi link htmlCommentPart Comment' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi link htmlComment Comment' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxGreenSign guibg=none gui=bold' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxAquaSign guibg=none gui=bold' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxRedSign guibg=none gui=bold' })
-
--- vim.api.nvim_create_autocmd('BufEnter', { pattern = '*', command = 'syntax sync fromstart' })
-
-vim.api.nvim_create_autocmd('BufRead', { pattern = '*.vue', command = 'setlocal foldnestmax=4' })
-vim.api.nvim_create_autocmd('BufRead', { pattern = '*.js', command = 'setlocal foldnestmax=1' })
-vim.api.nvim_create_autocmd('BufRead', { pattern = '*.ts', command = 'setlocal foldnestmax=1' })
-vim.api.nvim_create_autocmd('BufRead', { pattern = '*.vim', command = 'setlocal foldmethod=marker' })
-
-vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.vue', command = 'setlocal foldnestmax=4' })
-vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.js', command = 'setlocal foldnestmax=1' })
-vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.ts', command = 'setlocal foldnestmax=1' })
-vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.vim', command = 'setlocal foldmethod=marker' })
 
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.njk', command = 'set filetype=html' })
 vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.njk', command = 'set filetype=html' })
@@ -776,9 +749,6 @@ vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.njk', command = 'set fi
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nobuflisted' })
 
 vim.api.nvim_create_autocmd('VimEnter', { pattern = '*', command = 'cd c:\\Users\\ender\\Desktop\\projects' })
-
-vim.api.nvim_create_autocmd('BufWinEnter', { pattern = '*/.git/index', command = 'nnoremap <esc> :q<cr>' })
-vim.api.nvim_create_autocmd('BufWinLeave', { pattern = '*/.git/index', command = 'unmap <esc>' })
 
 local AutoSaveFolds = vim.api.nvim_create_augroup('AutoSaveFolds', {clear = true})
 vim.api.nvim_create_autocmd('BufWinLeave', { pattern = '?*', group = AutoSaveFolds, command = 'silent! mkview!' })
@@ -793,21 +763,6 @@ vim.api.nvim_create_autocmd('InsertEnter', { pattern = '*', group = CursorLine, 
 vim.api.nvim_create_autocmd('WinLeave', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
 
 -- COLORSCHEME
-
-local colors = require("catppuccin.palettes").get_palette()
-require("catppuccin.lib.highlighter").syntax({
-  TelescopePromptNormal = { bg = colors.surface0 },
-  TelescopePromptBorder = { fg = colors.surface0, bg = colors.surface0 },
-  TelescopePromptTitle = { bg = colors.surface0 },
-
-  TelescopeResultsNormal = { bg = colors.surface0 },
-  TelescopeResultsBorder = { fg = colors.surface0, bg = colors.surface0 },
-  TelescopeResultsTitle = { bg = colors.surface0 },
-
-  TelescopePreviewNormal = { bg = colors.surface0 },
-  TelescopePreviewBorder = { fg = colors.surface0, bg = colors.surface0 },
-  TelescopePreviewTitle = { bg = colors.surface0 },
-})
 
 require("catppuccin").setup({
   integrations = {
@@ -827,11 +782,6 @@ vim.cmd [[
 EOF
 
 " FUNCTIONS
-
-function MyFoldText()
-	let line = getline(v:foldstart)
-	return '+ ' . v:folddashes . ' ' . line
-endfunction
 
 let g:font_size = 11
 
