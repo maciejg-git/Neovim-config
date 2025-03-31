@@ -84,7 +84,6 @@ require('packer').startup(function()
   use 'EdenEast/nightfox.nvim'
   use { 'Everblush/nvim', as = 'everblush' }
   use "savq/melange-nvim"
-  use "ilof2/posterpole.nvim"
 
   use 'plasticboy/vim-markdown'
   use 'mustache/vim-mustache-handlebars'
@@ -774,7 +773,7 @@ vim.opt.background = 'dark'
 
 vim.g.catppuccin_flavour = "macchiato"
 
---  catppuccin nightfox everforest everblush melange lavish posterpole
+--  catppuccin nightfox everforest everblush melange
 vim.cmd [[
   colorscheme catppuccin
 ]]
