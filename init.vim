@@ -79,13 +79,12 @@ require('packer').startup(function()
 
   use 'NLKNguyen/papercolor-theme'
   use {'catppuccin/nvim', as = 'catppuccin'} 
-  use 'projekt0n/github-nvim-theme'
   use 'sainnhe/everforest'
   use 'EdenEast/nightfox.nvim'
   use { 'Everblush/nvim', as = 'everblush' }
   use "savq/melange-nvim"
 
-  use 'plasticboy/vim-markdown'
+  use 'preservim/vim-markdown'
   use 'mustache/vim-mustache-handlebars'
   use 'pangloss/vim-javascript'
   use 'HerringtonDarkholme/yats.vim'
@@ -103,7 +102,7 @@ require('packer').startup(function()
 
   use 'nvim-telescope/telescope.nvim'
   use 'folke/trouble.nvim'
-  use 'hoob3rt/lualine.nvim'
+  use 'nvim-lualine/lualine.nvim'
   use 'akinsho/toggleterm.nvim'
   use 'karb94/neoscroll.nvim'
   use "petertriho/nvim-scrollbar" 
