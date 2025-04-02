@@ -178,12 +178,16 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   update_in_insert = false,
 })
 
-local signs = { Error = "▶", Warn = "▶", Hint = "▶", Info = "▶" }
-
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '▶',
+            [vim.diagnostic.severity.WARN] = '▶',
+            [vim.diagnostic.severity.HINT] = '▶',
+            [vim.diagnostic.severity.INFO] = '▶',
+        },
+    },
+})
 
 vim.diagnostic.config({
   virtual_lines = true
@@ -247,7 +251,7 @@ require("todo-comments").setup {}
 require("telescope").setup {
   defaults = {
     -- path_display = {"shorten"},
-    file_ignore_patterns = {"node_modules", "dist"},
+    file_ignore_patterns = {"node_modules", "dist", "_site"},
     mappings = {
       i = {
         ["<esc>"] = require('telescope.actions').close,
@@ -664,7 +668,6 @@ vim.keymap.set('n', '<F4>', ":PackerUpdate<CR>")
 vim.keymap.set('n', '<F7>', ":tabnew<CR>")
 vim.keymap.set('n', '<F8>', ":call system('explorer ' . expand('%:p:h'))<cr>")
 vim.keymap.set('n', '<F9>', ":set number!<CR>")
-vim.keymap.set('n', '<F11>', ":ToggleBackground<CR>")
 
 -- MAPPING FONT
 
@@ -734,12 +737,6 @@ vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi VertSp
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi Folded guibg=none gui=bold' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi SignColumn guibg=none' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi! link TelescopeSelection Visual' })
-
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi link htmlCommentPart Comment' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi link htmlComment Comment' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxGreenSign guibg=none gui=bold' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxAquaSign guibg=none gui=bold' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = 'gruvbox', command = 'hi GruvboxRedSign guibg=none gui=bold' })
 
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.njk', command = 'set filetype=html' })
 vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.njk', command = 'set filetype=html' })
@@ -829,30 +826,3 @@ function! NextOpenedFold(dir)
         call winrestview(view)
     endif
 endfunction
-
-function! s:ToggleBackground()
-	if ! exists('g:colors_name')
-		echomsg 'No colorscheme set'
-		return
-	endif
-	let l:scheme = g:colors_name
-
-	if l:scheme =~# 'dark' || l:scheme =~# 'light'
-		" Rotate between different theme backgrounds
-		execute 'colorscheme' (l:scheme =~# 'dark'
-					\ ? substitute(l:scheme, 'dark', 'light', '')
-					\ : substitute(l:scheme, 'light', 'dark', ''))
-	else
-		execute 'set background='.(&background ==# 'dark' ? 'light' : 'dark')
-		if ! exists('g:colors_name')
-			execute 'colorscheme' l:scheme
-			echomsg 'The colorscheme `'.l:scheme
-				\ .'` doesn''t have background variants!'
-		else
-			echo 'Set colorscheme to '.&background.' mode'
-		endif
-	endif
-endfunction
-command! ToggleBackground call s:ToggleBackground()
-
-
