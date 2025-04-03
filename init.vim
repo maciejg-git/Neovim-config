@@ -171,13 +171,6 @@ require('lspconfig').emmet_ls.setup({
     }
 })
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = true,
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-})
-
 vim.diagnostic.config({
     signs = {
         text = {
@@ -187,16 +180,13 @@ vim.diagnostic.config({
             [vim.diagnostic.severity.INFO] = '▶',
         },
     },
-})
+    virtual_lines = true
 
-vim.diagnostic.config({
-  virtual_lines = true
-
-  -- Alternatively, customize specific options
-  -- virtual_lines = {
-  --  -- Only show virtual line diagnostics for the current cursor line
-  --  current_line = true,
-  -- },
+    -- Alternatively, customize specific options
+    -- virtual_lines = {
+    --  -- Only show virtual line diagnostics for the current cursor line
+    --  current_line = true,
+    -- },
 })
 
 -- LSP SIGNATURE
@@ -268,8 +258,6 @@ require("telescope").setup {
       mappings = {
         i = {
           ["<c-d>"] = require("telescope.actions").delete_buffer,
-          -- Right hand side can also be the name of the action as a string
-          ["<c-d>"] = "delete_buffer",
         },
         n = {
           ["<c-d>"] = require("telescope.actions").delete_buffer,
@@ -582,9 +570,6 @@ require("blink.cmp").setup({
 -- EMMET
 
 vim.g.user_emmet_expandabbr_key = "<C-e>"
-vim.g.user_emmet_update_tag = "<M-e>"
-vim.g.user_emmet_removetag_key = "<M-d>"
-vim.g.user_emmet_splitjointag_key = "<M-t>"
 
 -- FLOATERM
 
