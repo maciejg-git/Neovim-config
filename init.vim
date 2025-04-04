@@ -85,7 +85,6 @@ require('packer').startup(function()
   use "savq/melange-nvim"
 
   use 'preservim/vim-markdown'
-  use 'mustache/vim-mustache-handlebars'
   use 'pangloss/vim-javascript'
   use 'HerringtonDarkholme/yats.vim'
   use 'mattn/emmet-vim'
@@ -210,7 +209,14 @@ require('gitsigns').setup({
     delete = { text = '_' },
     topdelete = { text = '‾' },
     changedelete = { text = '~' },
-    },
+  },
+  signs_staged = {
+    add          = { text = '+s' },
+    change       = { text = '~s' },
+    delete       = { text = '_s' },
+    topdelete    = { text = '‾s' },
+    changedelete = { text = '~s' },
+  },
 })
 
 -- AUTOPAIRS
