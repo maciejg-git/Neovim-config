@@ -473,12 +473,6 @@ vim.keymap.set('n', 'S',
 
 vim.g.vim_markdown_folding_disabled = 1
 
--- GIT BLAME
-
-require('gitblame').setup {
-    enabled = false,
-}
-
 -- INDENT BLANKLINE
 
 require("ibl").setup({
