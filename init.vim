@@ -83,6 +83,11 @@ require('packer').startup(function()
   use { 'Everblush/nvim', as = 'everblush' }
   use "savq/melange-nvim"
 
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
+
   use 'godlygeek/tabular'
   use 'preservim/vim-markdown'
 
@@ -121,20 +126,17 @@ require('packer').startup(function()
   use "stevearc/conform.nvim"
 
   use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
-
-  use {
     "nvim-neorg/neorg",
     run = ":Neorg sync-parsers",
     tag = "v7.0.0"
   }
+
+  use "MunifTanjim/nui.nvim"
+  use "vuki656/package-info.nvim"
+
   use 'stevearc/oil.nvim'
   use "folke/flash.nvim"
   use "lukas-reineke/indent-blankline.nvim"
-  use "vuki656/package-info.nvim"
-  use "MunifTanjim/nui.nvim"
   use "brenoprata10/nvim-highlight-colors"
   use {"saghen/blink.cmp", tag = "v1.0.0"}
 end)
