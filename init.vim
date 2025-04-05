@@ -74,7 +74,6 @@ vim.opt.guifont='Hack Nerd Font Mono:h12'
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
-  use 'nvim-lua/plenary.nvim'
   use 'kyazdani42/nvim-web-devicons'
 
   use 'NLKNguyen/papercolor-theme'
@@ -84,7 +83,9 @@ require('packer').startup(function()
   use { 'Everblush/nvim', as = 'everblush' }
   use "savq/melange-nvim"
 
+  use 'godlygeek/tabular'
   use 'preservim/vim-markdown'
+
   use 'pangloss/vim-javascript'
   use 'HerringtonDarkholme/yats.vim'
   use 'mattn/emmet-vim'
@@ -97,23 +98,21 @@ require('packer').startup(function()
   use 'lewis6991/gitsigns.nvim'
 
   use 'neovim/nvim-lspconfig'
-  use 'ray-x/lsp_signature.nvim'
 
+  use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
+
   use 'folke/trouble.nvim'
   use 'nvim-lualine/lualine.nvim'
-  use 'akinsho/toggleterm.nvim'
   use 'karb94/neoscroll.nvim'
   use "petertriho/nvim-scrollbar" 
   use {'akinsho/bufferline.nvim', tag = '*' }
   use 'rcarriga/nvim-notify'
   use 'mbbill/undotree'
   use "folke/which-key.nvim"
-  use 'voldikss/vim-floaterm'
 
   use "kevinhwang91/nvim-hlslens"
   use 'folke/todo-comments.nvim'
-  use 'godlygeek/tabular'
   use 'nacro90/numb.nvim'
   use 'windwp/nvim-autopairs'
   use 'max397574/better-escape.nvim'
@@ -136,7 +135,6 @@ require('packer').startup(function()
   use "lukas-reineke/indent-blankline.nvim"
   use "vuki656/package-info.nvim"
   use "MunifTanjim/nui.nvim"
-  use "f-person/git-blame.nvim"
   use "brenoprata10/nvim-highlight-colors"
   use {"saghen/blink.cmp", tag = "v1.0.0"}
 end)
@@ -187,10 +185,6 @@ vim.diagnostic.config({
     --  current_line = true,
     -- },
 })
-
--- LSP SIGNATURE
-
-require 'lsp_signature'.setup()
 
 -- NUMB
 
@@ -288,10 +282,6 @@ vim.keymap.set('', '<M-3>', ":lua require('telescope.builtin').lsp_document_symb
 vim.keymap.set('', '<M-4>', ":lua require('telescope.builtin').lsp_references({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
 vim.keymap.set('', '<leader><cr>', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
 vim.keymap.set('', '<leader>p', ":TodoTelescope<cr>", {remap = true})
-
--- TOGGLE TERM
-
-require("toggleterm").setup{}
 
 -- TREE SITTER
 
@@ -523,6 +513,8 @@ require("conform").setup({
   },
 })
 
+vim.keymap.set('n', '<c-n>', require("conform").format)
+
 -- HIGLIGHT COLORS
 
 require('nvim-highlight-colors').setup({
@@ -577,21 +569,11 @@ require("blink.cmp").setup({
 
 vim.g.user_emmet_expandabbr_key = "<C-e>"
 
--- FLOATERM
-
-vim.g.floaterm_keymap_new = ""
-vim.g.floaterm_keymap_prev = ""
-vim.g.floaterm_keymap_next = ""
-vim.g.floaterm_keymap_toggle = "<F12>"
-vim.g.floaterm_width = 0.95
-vim.g.floaterm_height = 0.95
-
 -- MAPPING
 
 vim.keymap.set('n', '<leader>r', '*``cgn', {remap = false})
 vim.keymap.set('v', '<leader>r', [[ "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn" ]], {remap = false, expr = true})
 
-vim.keymap.set('n', '<Leader>q', ':q!<CR>')
 vim.keymap.set('n', '<C-q>', ':q!<CR>')
 vim.keymap.set('n', '<CR>', 'o')
 vim.keymap.set('n', ';', ':', {remap = false})
@@ -624,8 +606,6 @@ vim.keymap.set('n', '<C-k>', ':m-2<CR>', {remap = false})
 vim.keymap.set('n', '<C-j>', ':m+<CR>', {remap = false})
 vim.keymap.set('v', '<C-k>', ':m-2<CR>gv=gv', {remap = false})
 vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv", {remap = false})
-
-vim.keymap.set('n', '<c-n>', require("conform").format)
 
 vim.keymap.set('i', '<leader>c', "console.log(", { remap = true })
 vim.keymap.set('i', '<leader>d', "console.log('debug'", { remap = true })
