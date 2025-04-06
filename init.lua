@@ -183,6 +183,7 @@ vim.keymap.set('x', '<C-A>', "<C-C>ggVG", {remap = false})
 
 -- MAPPING F
 
+vim.keymap.set('n', '<F2>', ":Lazy<CR>")
 vim.keymap.set('n', '<F7>', ":tabnew<CR>")
 vim.keymap.set('n', '<F8>', ":call system('explorer ' . expand('%:p:h'))<cr>")
 vim.keymap.set('n', '<F9>', ":set number!<CR>")
@@ -279,7 +280,12 @@ require("lazy").setup({
       name = "catppuccin",
       priority = 1000,
       config = function()
-        -- load the colorscheme here
+        require("catppuccin").setup({
+          flavour = "macchiato",
+          integrations = {
+            flash = false,
+          }
+        })
         vim.cmd([[colorscheme catppuccin]])
       end,
     },
@@ -684,5 +690,5 @@ require("lazy").setup({
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = false },
 })
