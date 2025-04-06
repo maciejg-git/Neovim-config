@@ -648,6 +648,13 @@ require("lazy").setup({
         picker = {
           layout = {
             preset = "telescope",
+          },
+          win = {
+            input = {
+              keys = {
+                ["<Esc>"] = { "close", mode = { "n", "i" } },
+              }
+            }
           }
         }
       },
