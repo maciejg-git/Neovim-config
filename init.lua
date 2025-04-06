@@ -707,7 +707,7 @@ require("lazy").setup({
         }
       },
       keys = {
-        { "<space>", function() Snacks.picker.buffers({ layout = { preset = "select" } }) end, desc = "Buffers" },
+        { "<space>", function() Snacks.picker.buffers({ layout = { preset = "select" }, current = false }) end, desc = "Buffers" },
         { "<leader>l", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>;", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<C-p>", function() Snacks.picker.files() end, desc = "Find Files" },
