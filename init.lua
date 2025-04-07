@@ -310,12 +310,6 @@ require("lazy").setup({
       'godlygeek/tabular',
     },
     {
-      'preservim/vim-markdown',
-      init = function()
-        vim.g.vim_markdown_folding_disabled = 1
-      end,
-    },
-    {
       'pangloss/vim-javascript',
     },
     {
@@ -668,6 +662,14 @@ require("lazy").setup({
         { "<leader>u", function() Snacks.picker.undo() end, desc = "Undo History" },
         { "<leader>c", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
       }
+    },
+    {
+      'MeanderingProgrammer/render-markdown.nvim',
+      opts = {},
+    },
+    {
+      'stevearc/overseer.nvim',
+      opts = {},
     }
   },
   -- Configure any other settings here. See the documentation for more details.
