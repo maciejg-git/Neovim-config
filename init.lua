@@ -82,22 +82,6 @@ vim.opt.breakindent = true
 vim.opt.breakindentopt={shift = 2}
 vim.opt.guifont='Hack Nerd Font Mono:h12'
 
-vim.keymap.set('', '<leader>;', ":lua require('telescope.builtin').command_history()<cr>", {remap = true})
-vim.keymap.set('', '<leader>c', ":lua require('telescope.builtin').colorscheme()<cr>", {remap = true})
-vim.keymap.set('', '<leader>m', ":lua require('telescope.builtin').keymaps()<cr>", {remap = true})
-vim.keymap.set('', '<leader>h', ":lua require('telescope.builtin').highlights()<cr>", {remap = true})
-vim.keymap.set('', '<leader>f', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", {remap = true})
-vim.keymap.set('', '<leader>g', ":lua require('telescope.builtin').git_commits()<cr>", {remap = true})
-vim.keymap.set('', '<leader>l', ":lua require('telescope.builtin').live_grep()<cr>", {remap = true})
-vim.keymap.set('', '<space>', ":lua require('telescope.builtin').buffers()<cr>", {remap = true})
-vim.keymap.set('', '<C-p>', ":lua require('telescope.builtin').find_files({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
-vim.keymap.set('', '<M-1>', ":lua require('telescope.builtin').diagnostics({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
-vim.keymap.set('', '<M-2>', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", {remap = true})
-vim.keymap.set('', '<M-3>', ":lua require('telescope.builtin').lsp_document_symbols({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
-vim.keymap.set('', '<M-4>', ":lua require('telescope.builtin').lsp_references({layout_strategy='vertical',layout_config={width=0.6}})<cr>", {remap = true})
-vim.keymap.set('', '<leader><cr>', ":lua require('telescope.builtin').resume()<cr>", {remap = true})
-vim.keymap.set('', '<leader>p', ":TodoTelescope<cr>", {remap = true})
-
 vim.keymap.set("n", "-", require("oil").open_float, { desc = "Open parent directory" })
 
 vim.keymap.set('n', 's', 
@@ -247,7 +231,6 @@ vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi FoldCo
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi VertSplit gui=none guibg=none' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi Folded guibg=none gui=bold' })
 vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi SignColumn guibg=none' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi! link TelescopeSelection Visual' })
 
 vim.api.nvim_create_autocmd('BufRead', { pattern = '*.njk', command = 'set filetype=html' })
 vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.njk', command = 'set filetype=html' })
@@ -421,37 +404,6 @@ require("lazy").setup({
     },
     {
       'nvim-lua/plenary.nvim',
-    },
-    {
-      'nvim-telescope/telescope.nvim',
-      opts = {
-        defaults = {
-          -- path_display = {"shorten"},
-          file_ignore_patterns = {"node_modules", "dist", "_site"},
-          mappings = {
-            i = {
-              ["<esc>"] = require('telescope.actions').close,
-            },
-          },
-        },
-        pickers = {
-          buffers = {
-            sort_lastused = true,
-            ignore_current_buffer = true,
-            previewer = false,
-            layout_strategy='vertical',
-            layout_config={ width=0.6 },
-            mappings = {
-              i = {
-                ["<c-d>"] = require("telescope.actions").delete_buffer,
-              },
-              n = {
-                ["<c-d>"] = require("telescope.actions").delete_buffer,
-              }
-            }
-          },
-        },
-      }
     },
     {
       'folke/trouble.nvim',
