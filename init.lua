@@ -84,17 +84,6 @@ vim.opt.guifont='Hack Nerd Font Mono:h12'
 
 vim.keymap.set("n", "-", require("oil").open_float, { desc = "Open parent directory" })
 
-vim.keymap.set('n', 's', 
-  function()
-    require("flash").jump()
-  end
-)
-vim.keymap.set('n', 'S', 
-  function()
-    require("flash").treesitter()
-  end
-)
-
 vim.keymap.set({ "n" }, "<LEADER>ns", require("package-info").show, { silent = true, noremap = true })
 vim.keymap.set({ "n" }, "<LEADER>nc", require("package-info").hide, { silent = true, noremap = true })
 vim.keymap.set({ "n" }, "<LEADER>nt", require("package-info").toggle, { silent = true, noremap = true })
@@ -561,12 +550,9 @@ require("lazy").setup({
     },
     {
       "folke/flash.nvim",
-      opts = {
-        modes = {
-          char = {
-            enabled = false
-          }
-        }
+      keys = {
+        { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+        { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
       }
     },
     {
