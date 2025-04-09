@@ -630,6 +630,9 @@ require("lazy").setup({
     {
       'stevearc/overseer.nvim',
       opts = {},
+    },
+    {
+      "nvim-tree/nvim-web-devicons",
     }
   },
   -- Configure any other settings here. See the documentation for more details.
