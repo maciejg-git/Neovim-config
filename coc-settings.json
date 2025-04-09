@@ -1,9 +1,0 @@
-{
-  "diagnostic.checkCurrentLine": false,
-  "diagnostic.messageDelay": 0,
-  "diagnostic.errorSign": "▶",
-  "diagnostic.infoSign": "▶",
-  "diagnostic.hintSign": "▶",
-  "coc.preferences.extensionUpdateCheck": "never",
-  "vetur.ignoreProjectWarning": true 
-}
