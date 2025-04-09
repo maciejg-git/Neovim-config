@@ -100,7 +100,6 @@ vim.keymap.set('v', '<leader>r', [[ "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "
 vim.keymap.set('n', '<C-q>', ':q!<CR>')
 vim.keymap.set('n', '<CR>', 'o')
 vim.keymap.set('n', ';', ':', {remap = false})
-vim.keymap.set('n', 'U', '<C-r>')
 vim.keymap.set('n', '<c-f>', '<c-u>', { remap = true })
 vim.keymap.set('n', '<Leader><Leader>', 'V')
 vim.keymap.set('v', '<Leader><Leader>', '<Esc>')
@@ -109,7 +108,6 @@ vim.keymap.set('x', '>', '>gv|', {remap = false})
 vim.keymap.set({'n', 'i', 'v'}, '<PageUp>', '<left>')
 vim.keymap.set({'n', 'i', 'v'}, '<PageDown>', '<right>')
 vim.keymap.set('n', '<Backspace>', 'ciw')
-vim.keymap.set('n', 'o', 'ciw')
 
 vim.keymap.set('n', '<M-c>', 'gcc', {remap = true})
 vim.keymap.set('v', '<M-c>', 'gc', {remap = true})
@@ -142,8 +140,6 @@ vim.keymap.set('n', '<leader>j', ":TSJJoin<cr>", { remap = true })
 vim.keymap.set('n', '<leader>s', ":TSJSplit<cr>", { remap = true })
 vim.keymap.set('n', '<M-j>', ":TSJJoin<cr>", { remap = true })
 vim.keymap.set('n', '<M-s>', ":TSJSplit<cr>", { remap = true })
-
-vim.keymap.set('i', '<leader>tt', "<template><c-e>", { remap = true })
 
 -- MAPPING WINDOWS
 
@@ -185,7 +181,6 @@ vim.keymap.set('n', '<leader>d', ':bp\\|bd#<cr>')
 vim.keymap.set('n', '<2-LeftMouse>', "foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : 'zo'", {remap = false, expr = true})
 vim.keymap.set('n', '<C-CR>', "&foldlevel == 0 ? 'zR' :'zM'", {remap = false, expr = true})
 vim.keymap.set('n', '<M-CR>', "&foldlevel == 0 ? 'zRzMzo' :'zMzo'", {remap = false, expr = true})
--- vim.keymap.set('n', 'f', "za")
 
 -- MAPPING TABS
 
@@ -296,9 +291,6 @@ require("lazy").setup({
           },
         }
       end,
-    },
-    {
-      'godlygeek/tabular',
     },
     {
       'pangloss/vim-javascript',
@@ -486,31 +478,11 @@ require("lazy").setup({
         timeout = vim.o.timeoutlen,
         default_mappings = false,
         mappings = {
-            i = {
-                j = {
-                    j = "<Esc>",
-                },
-            },
-            c = {
-                j = {
-                    j = "<Esc>",
-                },
-            },
-            t = {
-                j = {
-                    j = "<Esc>",
-                },
-            },
-            v = {
-                j = {
-                    k = "<Esc>",
-                },
-            },
-            s = {
-                j = {
-                    k = "<Esc>",
-                },
-            },
+            i = { j = { j = "<Esc>" } },
+            c = { j = { j = "<Esc>" } },
+            t = { j = { j = "<Esc>" } },
+            v = { j = { k = "<Esc>" } },
+            s = { j = { k = "<Esc>" } },
         },
       }
     },
@@ -575,7 +547,7 @@ require("lazy").setup({
     },
     {
       "saghen/blink.cmp",
-      version = "v1.0.0",
+      version = "v1.1.1",
       opts = {
         keymap = {
           preset = "none",
