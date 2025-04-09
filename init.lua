@@ -265,10 +265,6 @@ require("lazy").setup({
       'EdenEast/nightfox.nvim',
     },
     {
-      'Everblush/nvim',
-      name = "everblush"
-    },
-    {
       "savq/melange-nvim"
     },
     {
