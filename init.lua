@@ -21,10 +21,6 @@ vim.cmd [[
   syntax on
 
   filetype plugin indent on
-
-  cnoreabbrev qw wq
-  cnoreabbrev Wq wq
-  cnoreabbrev WQ wq
 ]]
 
 vim.opt.undofile = true
@@ -129,12 +125,9 @@ vim.keymap.set('v', '<C-k>', ':m-2<CR>gv=gv', {remap = false})
 vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv", {remap = false})
 
 vim.keymap.set('i', '<leader>c', "console.log(", { remap = true })
-vim.keymap.set('i', '<leader>d', "console.log('debug'", { remap = true })
 
-vim.keymap.set('i', '<leader>j', "JSON.stringify(", { remap = true })
 vim.keymap.set('i', '<leader>fa', "() => {<cr>", { remap = true })
 vim.keymap.set('i', '<leader>ff', "function() {", { remap = true })
-vim.keymap.set('i', '<leader>i', "if(", { remap = true })
 
 vim.keymap.set('n', '<leader>j', ":TSJJoin<cr>", { remap = true })
 vim.keymap.set('n', '<leader>s', ":TSJSplit<cr>", { remap = true })
@@ -172,10 +165,6 @@ vim.keymap.set('v', '<A-down>', "<esc>:set splitbelow<CR>:new<CR>", {remap = fal
 vim.keymap.set('n', '<leader>=', "<C-w>=", {remap = false})
 vim.keymap.set('n', '<Tab>', "<C-w><C-w>")
 
--- MAPPING BUFFERS
-
-vim.keymap.set('n', '<leader>d', ':bp\\|bd#<cr>')
-
 -- MAPPING FOLDS
 
 vim.keymap.set('n', '<2-LeftMouse>', "foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : 'zo'", {remap = false, expr = true})
@@ -212,15 +201,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi LineNr guibg=NONE' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi FoldColumn guibg=NONE' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi VertSplit gui=none guibg=none' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi Folded guibg=none gui=bold' })
-vim.api.nvim_create_autocmd('ColorScheme', { pattern = '*', command = 'hi SignColumn guibg=none' })
-
-vim.api.nvim_create_autocmd('BufRead', { pattern = '*.njk', command = 'set filetype=html' })
-vim.api.nvim_create_autocmd('BufNewFile', { pattern = '*.njk', command = 'set filetype=html' })
-
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nobuflisted' })
 
 vim.api.nvim_create_autocmd('VimEnter', { pattern = '*', command = 'cd c:\\Users\\ender\\Desktop\\projects' })
@@ -237,10 +217,14 @@ vim.api.nvim_create_autocmd('WinEnter', { pattern = '*', group = CursorLine, com
 vim.api.nvim_create_autocmd('InsertEnter', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
 vim.api.nvim_create_autocmd('WinLeave', { pattern = '*', group = CursorLine, command = 'set nocursorline' })
 
--- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- add your plugins here
+    {
+      'nvim-lua/plenary.nvim',
+    },
+    {
+      "nvim-tree/nvim-web-devicons",
+    },
     {
       'NLKNguyen/papercolor-theme',
     },
@@ -293,12 +277,6 @@ require("lazy").setup({
     },
     {
       'HerringtonDarkholme/yats.vim',
-    },
-    {
-      'mattn/emmet-vim',
-      init = function()
-        vim.g.user_emmet_expandabbr_key = "<C-e>"
-      end,
     },
     {
       "rafamadriz/friendly-snippets",
@@ -374,9 +352,6 @@ require("lazy").setup({
             -- },
         })
       end,
-    },
-    {
-      'nvim-lua/plenary.nvim',
     },
     {
       'folke/trouble.nvim',
@@ -611,12 +586,13 @@ require("lazy").setup({
         { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
         { "<leader>f", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
         { "<M-1>", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
-        { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+        { "<F1>", function() Snacks.picker.help() end, desc = "Help Pages" },
         { "<leader>h", function() Snacks.picker.highlights() end, desc = "Highlights" },
         { "<leader>m", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
         { "<leader><cr>", function() Snacks.picker.resume() end, desc = "Resume" },
         { "<leader>u", function() Snacks.picker.undo() end, desc = "Undo History" },
         { "<leader>c", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+        { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
       }
     },
     {
@@ -627,9 +603,6 @@ require("lazy").setup({
       'stevearc/overseer.nvim',
       opts = {},
     },
-    {
-      "nvim-tree/nvim-web-devicons",
-    }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
