@@ -557,6 +557,9 @@ require("lazy").setup({
             selection = {
               preselect = false,
             }
+          },
+          documentation = {
+            auto_show = true,
           }
         },
       }
@@ -577,6 +580,12 @@ require("lazy").setup({
               }
             }
           }
+        },
+        zen = {
+          enabled = true,
+          toggles = {
+            dim = false,
+          }
         }
       },
       keys = {
@@ -595,6 +604,7 @@ require("lazy").setup({
         { "<leader>u", function() Snacks.picker.undo() end, desc = "Undo History" },
         { "<leader>c", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
+        { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
       }
     },
     {
