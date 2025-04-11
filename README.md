@@ -4,7 +4,6 @@
 
 - ['nvim-treesitter/nvim-treesitter'](https://github.com/nvim-treesitter/nvim-treesitter) - Nvim Treesitter configurations and abstraction layer
 - ['neovim/nvim-lspconfig'](https://github.com/neovim/nvim-lspconfig) - quickstart configs for Nvim LSP
-
 - ["folke/lazy.nvim"](https://github.com/folke/lazy.nvim) - a modern plugin manager for Neovim
 - ["rafamadriz/friendly-snippets"](https://github.com/rafamadriz/friendly-snippets) - set of snippets for different languages
 - ['lewis6991/gitsigns.nvim'](https://github.com/lewis6991/gitsigns.nvim) - git integration for buffers
@@ -24,7 +23,6 @@
 - ["petertriho/nvim-scrollbar"](https://github.com/petertriho/nvim-scrollbar) - extensible Neovim Scrollbar
 - ["brenoprata10/nvim-highlight-colors"](https://github.com/brenoprata10/nvim-highlight-colors) - highlight colors for neovim
 - ['folke/trouble.nvim'](https://github.com/folke/trouble.nvim) - a pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing
-
 - ['karb94/neoscroll.nvim'](https://github.com/karb94/neoscroll.nvim) - smooth scrolling neovim plugin written in lua
 - ['Wansmer/treesj'](https://github.com/Wansmer/treesj) - neovim plugin for splitting/joining blocks of code
 - ['folke/todo-comments.nvim'](https://github.com/folke/todo-comments.nvim) - highlight, list and search todo comments in your projects
