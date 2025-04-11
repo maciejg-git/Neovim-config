@@ -1,16 +1,18 @@
 # Neovim-config
 
 [Neovim](https://neovim.io/)
+
 [Neovim Github](https://github.com/neovim/neovim)
 
 ## Plugins
 
 - ['nvim-treesitter/nvim-treesitter'](https://github.com/nvim-treesitter/nvim-treesitter) - Nvim Treesitter configurations and abstraction layer
 - ['neovim/nvim-lspconfig'](https://github.com/neovim/nvim-lspconfig) - quickstart configs for Nvim LSP
+- ["nvim-tree/nvim-web-devicons"](https://github.com/nvim-tree/nvim-web-devicons) - provides Font icons (glyphs) for use by neovim plugins
 - ["folke/lazy.nvim"](https://github.com/folke/lazy.nvim) - a modern plugin manager for Neovim
 - ["rafamadriz/friendly-snippets"](https://github.com/rafamadriz/friendly-snippets) - set of snippets for different languages
 - ['lewis6991/gitsigns.nvim'](https://github.com/lewis6991/gitsigns.nvim) - git integration for buffers
-- ['nvim-lualine/lualine.nvim'](https://github.com/nvim-lualine/lualine.nvim) - status line
+- ['nvim-lualine/lualine.nvim'](https://github.com/nvim-lualine/lualine.nvim) - a blazing fast and easy to configure neovim statusline plugin written in pure lua
 - ['akinsho/bufferline.nvim'](https://github.com/akinsho/bufferline.nvim) - a snazzy bufferline for Neovim
 - ["folke/which-key.nvim"](https://github.com/folke/which-key.nvim) - helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type
 - ['windwp/nvim-autopairs'](https://github.com/windwp/nvim-autopairs) - autopairs for neovim written in lua
@@ -21,7 +23,7 @@
 - ["lukas-reineke/indent-blankline.nvim"](https://github.com/lukas-reineke/indent-blankline.nvim) - indent guides for Neovim
 - ["saghen/blink.cmp"](https://github.com/saghen/blink.cmp) - performant, batteries-included completion plugin for Neovimn
 - ["folke/snacks.nvim"](https://github.com/folke/snacks.nvim) - a collection of QoL plugins for Neovim
-- ['MeanderingProgrammer/render-markdown.nvim'](https://github.com/MeanderingProgrammer/render-markdown.nvim)
+- ['MeanderingProgrammer/render-markdown.nvim'](https://github.com/MeanderingProgrammer/render-markdown.nvim) - plugin to improve viewing Markdown files in Neovim
 - ['stevearc/overseer.nvim'](https://github.com/stevearc/overseer.nvim) - a task runner and job management plugin for Neovim
 - ["petertriho/nvim-scrollbar"](https://github.com/petertriho/nvim-scrollbar) - extensible Neovim Scrollbar
 - ["brenoprata10/nvim-highlight-colors"](https://github.com/brenoprata10/nvim-highlight-colors) - highlight colors for neovim
