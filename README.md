@@ -1,5 +1,8 @@
 # Neovim-config
 
+[Neovim](https://neovim.io/)
+[Neovim Github](https://github.com/neovim/neovim)
+
 ## Plugins
 
 - ['nvim-treesitter/nvim-treesitter'](https://github.com/nvim-treesitter/nvim-treesitter) - Nvim Treesitter configurations and abstraction layer
