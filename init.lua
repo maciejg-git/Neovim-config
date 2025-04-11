@@ -269,6 +269,7 @@ require("lazy").setup({
               node_decremental = "<C-,>",
             },
           },
+          ensure_installed = { "javascript", "html", "json", "lua", "markdown", "css", "liquid", "vue" },
         }
       end,
     },
