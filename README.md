@@ -4,6 +4,8 @@
 
 [Neovim Github](https://github.com/neovim/neovim)
 
+Neovim IDE focused on web dev (Vue).
+
 ## Plugins
 
 - ['nvim-treesitter/nvim-treesitter'](https://github.com/nvim-treesitter/nvim-treesitter) - Nvim Treesitter configurations and abstraction layer
