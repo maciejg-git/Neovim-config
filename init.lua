@@ -605,6 +605,7 @@ require("lazy").setup({
         { "<leader>c", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+        { "<F11>", function() Snacks.lazygit() end, desc = "Lazygit" },
       }
     },
     {
