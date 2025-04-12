@@ -226,9 +226,6 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons",
     },
     {
-      'NLKNguyen/papercolor-theme',
-    },
-    {
       'catppuccin/nvim',
       name = "catppuccin",
       priority = 1000,
@@ -606,6 +603,7 @@ require("lazy").setup({
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<F11>", function() Snacks.lazygit() end, desc = "Lazygit" },
+        { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
       }
     },
     {
