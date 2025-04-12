@@ -35,6 +35,10 @@ Neovim IDE focused on web dev (Vue).
 - ['folke/todo-comments.nvim'](https://github.com/folke/todo-comments.nvim) - highlight, list and search todo comments in your projects
 - ['nacro90/numb.nvim'](https://github.com/nacro90/numb.nvim) - peek lines just when you intend
 - ["vuki656/package-info.nvim"](https://github.com/vuki656/package-info.nvim) - all the npm/yarn/pnpm commands I don't want to type
+- ['rcarriga/nvim-notify'](https://github.com/rcarriga/nvim-notify) - a fancy, configurable, notification manager for NeoVim
+- ["kevinhwang91/nvim-hlslens"](https://github.com/kevinhwang91/nvim-hlslens) - nvim-hlslens helps you better glance at matched information, seamlessly jump between matched instances
+- ['max397574/better-escape.nvim'](https://github.com/max397574/better-escape.nvim) - map keys without delay when typing
+- ['kylechui/nvim-surround'](https://github.com/kylechui/nvim-surround) - add/change/delete surrounding delimiter pairs with ease.
 
 ### Colorschemes
 
