@@ -352,6 +352,7 @@ require("lazy").setup({
     },
     {
       'folke/trouble.nvim',
+      opts = {},
     },
     {
       'nvim-lualine/lualine.nvim',
@@ -413,15 +414,19 @@ require("lazy").setup({
     },
     {
       "folke/which-key.nvim",
+      opts = {},
     },
     {
       "kevinhwang91/nvim-hlslens",
+      opts = {},
     },
     {
       'folke/todo-comments.nvim',
+      opts = {},
     },
     {
       'nacro90/numb.nvim',
+      opts = {},
     },
     {
       'windwp/nvim-autopairs',
@@ -455,10 +460,12 @@ require("lazy").setup({
       }
     },
     {
-      'kylechui/nvim-surround', 
+      'kylechui/nvim-surround',
+      opts = {},
     },
     {
       'numToStr/Comment.nvim',
+      opts = {},
     },
     {
       "stevearc/conform.nvim",
@@ -475,6 +482,7 @@ require("lazy").setup({
     },
     {
       "vuki656/package-info.nvim",
+      opts = {},
     },
     {
       'stevearc/oil.nvim',
@@ -514,6 +522,7 @@ require("lazy").setup({
     },
     {
       "brenoprata10/nvim-highlight-colors",
+      opts = {},
     },
     {
       "saghen/blink.cmp",
