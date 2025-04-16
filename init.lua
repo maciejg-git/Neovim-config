@@ -131,8 +131,6 @@ vim.keymap.set('i', '<leader>ff', "function() {", { remap = true })
 
 vim.keymap.set('n', '<leader>j', ":TSJJoin<cr>", { remap = true })
 vim.keymap.set('n', '<leader>s', ":TSJSplit<cr>", { remap = true })
-vim.keymap.set('n', '<M-j>', ":TSJJoin<cr>", { remap = true })
-vim.keymap.set('n', '<M-s>', ":TSJSplit<cr>", { remap = true })
 
 -- MAPPING WINDOWS
 
@@ -616,6 +614,8 @@ require("lazy").setup({
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<F11>", function() Snacks.lazygit() end, desc = "Lazygit" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
+        { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+        { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
       }
     },
     {
