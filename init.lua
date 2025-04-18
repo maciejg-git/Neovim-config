@@ -77,6 +77,8 @@ vim.opt.completeopt={'menuone', 'noselect'}
 vim.opt.breakindent = true
 vim.opt.breakindentopt={shift = 2}
 vim.opt.guifont='Hack Nerd Font Mono:h12'
+vim.opt.wildignore:append("**/share/nvim/runtime/colors/*.vim")
+vim.opt.wildignore:append("**/share/nvim/runtime/colors/*.lua")
 
 vim.keymap.set("n", "-", require("oil").open_float, { desc = "Open parent directory" })
 
