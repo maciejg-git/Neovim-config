@@ -576,24 +576,30 @@ require("lazy").setup({
         }
       },
       keys = {
-        { "<space>", function() Snacks.picker.buffers({
-          layout = {
-            preset = "vscode",
-            preview = false,
-            layout = {
-              backdrop = false,
-              width = 0.4,
-              min_width = 80,
-              height = 0.4,
-              border = "none",
-              box = "vertical",
-              { win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
-              { win = "list", border = "hpad" },
-              { win = "preview", title = "{preview}", border = "rounded" },
-            },
-          },
-          current = false
-        }) end, desc = "Buffers" },
+        { 
+          "<space>", 
+          function() 
+            Snacks.picker.buffers({
+              layout = {
+                preset = "vscode",
+                preview = false,
+                layout = {
+                  backdrop = false,
+                  width = 0.4,
+                  min_width = 80,
+                  height = 0.4,
+                  border = "none",
+                  box = "vertical",
+                  { win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+                  { win = "list", border = "hpad" },
+                  { win = "preview", title = "{preview}", border = "rounded" },
+                },
+              },
+              current = false
+            }) 
+          end, 
+          desc = "Buffers" 
+        },
         { "<leader>l", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>;", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<C-p>", function() Snacks.picker.files() end, desc = "Find Files" },
