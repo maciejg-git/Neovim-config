@@ -4,7 +4,7 @@
 
 [Neovim Github](https://github.com/neovim/neovim)
 
-Neovim IDE focused on web dev (Vue).
+Neovim IDE focused on web dev.
 
 ## Plugins
 
@@ -25,6 +25,10 @@ Neovim IDE focused on web dev (Vue).
 - ["lukas-reineke/indent-blankline.nvim"](https://github.com/lukas-reineke/indent-blankline.nvim) - indent guides for Neovim
 - ["saghen/blink.cmp"](https://github.com/saghen/blink.cmp) - performant, batteries-included completion plugin for Neovimn
 - ["folke/snacks.nvim"](https://github.com/folke/snacks.nvim) - a collection of QoL plugins for Neovim
+    - picker
+    - scratch
+    - lazygit integration
+    - zen mode
 - ['MeanderingProgrammer/render-markdown.nvim'](https://github.com/MeanderingProgrammer/render-markdown.nvim) - plugin to improve viewing Markdown files in Neovim
 - ['stevearc/overseer.nvim'](https://github.com/stevearc/overseer.nvim) - a task runner and job management plugin for Neovim
 - ["petertriho/nvim-scrollbar"](https://github.com/petertriho/nvim-scrollbar) - extensible Neovim Scrollbar
