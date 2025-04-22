@@ -363,7 +363,7 @@ require("lazy").setup({
           theme='auto'
         },
         sections = {
-          lualine_b = {'branch', 'diff', 'diagnostics', 'overseer'},
+          lualine_b = { {'b:gitsigns_head', icon = ''}, 'diff', 'diagnostics', 'overseer' },
         },
         extensions = {
           'overseer'
