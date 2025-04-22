@@ -363,7 +363,7 @@ require("lazy").setup({
           theme='auto'
         },
         sections = {
-          lualine_x = {'overseer', 'encoding', 'fileformat', 'filetype'},
+          lualine_b = {'branch', 'diff', 'diagnostics', 'overseer'},
         }
       }
     },
