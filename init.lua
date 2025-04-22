@@ -506,7 +506,7 @@ require("lazy").setup({
           show_start = false,
         },
         exclude = {
-          filetypes = { "text" }
+          filetypes = { "text", "markdown" }
         }
       },
       main = "ibl",
