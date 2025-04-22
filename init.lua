@@ -357,7 +357,14 @@ require("lazy").setup({
     {
       'nvim-lualine/lualine.nvim',
       opts = {
-        options = {section_separators='', component_separators='', theme='auto'}
+        options = {
+          section_separators='',
+          component_separators='',
+          theme='auto'
+        },
+        sections = {
+          lualine_x = {'overseer', 'encoding', 'fileformat', 'filetype'},
+        }
       }
     },
     {
