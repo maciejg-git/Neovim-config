@@ -359,11 +359,14 @@ require("lazy").setup({
       opts = {
         options = {
           section_separators='',
-          component_separators='',
+          component_separators={ left = '│', right = '' },
           theme='auto'
         },
         sections = {
           lualine_b = {'branch', 'diff', 'diagnostics', 'overseer'},
+        },
+        extensions = {
+          'overseer'
         }
       }
     },
