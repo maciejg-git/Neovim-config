@@ -26,7 +26,6 @@ Neovim IDE focused on web dev.
 - ["saghen/blink.cmp"](https://github.com/saghen/blink.cmp) - performant, batteries-included completion plugin for Neovimn
 - ["folke/snacks.nvim"](https://github.com/folke/snacks.nvim) - a collection of QoL plugins for Neovim
     - picker
-    - scratch
     - lazygit integration
     - zen mode
     - scroll
