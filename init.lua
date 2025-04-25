@@ -134,8 +134,6 @@ vim.keymap.set('i', '<leader>ff', "function() {", { remap = true })
 vim.keymap.set('n', '<leader>j', ":TSJJoin<cr>", { remap = true })
 vim.keymap.set('n', '<leader>s', ":TSJSplit<cr>", { remap = true })
 
--- MAPPING WINDOWS
-
 vim.keymap.set('n', '<C-A>', "ggVG", {remap = false})
 vim.keymap.set('i', '<C-A>', "<C-O>gg<C-O>VG", {remap = false})
 vim.keymap.set('c', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
@@ -143,16 +141,12 @@ vim.keymap.set('o', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
 vim.keymap.set('s', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
 vim.keymap.set('x', '<C-A>', "<C-C>ggVG", {remap = false})
 
--- MAPPING F
-
 vim.keymap.set('n', '<F2>', ":Lazy<CR>")
 vim.keymap.set('n', '<F3>', ":OverseerToggle<CR>")
 vim.keymap.set('n', '<F4>', ":OverseerRun<CR>")
 vim.keymap.set('n', '<F7>', ":tabnew<CR>")
 vim.keymap.set('n', '<F8>', ":call system('explorer ' . expand('%:p:h'))<cr>")
 vim.keymap.set('n', '<F9>', ":set number!<CR>")
-
--- MAPPING WINDOWS
 
 vim.keymap.set('n', '<A-right>', ":set splitright<CR>:vnew<CR>")
 vim.keymap.set('n', '<A-left>', ":set nosplitright<CR>:vnew<CR>")
@@ -165,13 +159,9 @@ vim.keymap.set('v', '<A-down>', "<esc>:set splitbelow<CR>:new<CR>", {remap = fal
 vim.keymap.set('n', '<leader>=', "<C-w>=", {remap = false})
 vim.keymap.set('n', '<Tab>', "<C-w><C-w>")
 
--- MAPPING FOLDS
-
 vim.keymap.set('n', '<2-LeftMouse>', "foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : 'zo'", {remap = false, expr = true})
 vim.keymap.set('n', '<C-CR>', "&foldlevel == 0 ? 'zR' :'zM'", {remap = false, expr = true})
 vim.keymap.set('n', '<M-CR>', "&foldlevel == 0 ? 'zRzMzo' :'zMzo'", {remap = false, expr = true})
-
--- MAPPING TABS
 
 vim.keymap.set('n', '<leader>t', ":tabnew<CR>")
 
@@ -202,7 +192,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nobuflisted' })
-
 vim.api.nvim_create_autocmd('VimEnter', { pattern = '*', command = 'cd c:\\Users\\ender\\Desktop\\projects' })
 
 local AutoSaveFolds = vim.api.nvim_create_augroup('AutoSaveFolds', {clear = true})
@@ -368,12 +357,6 @@ require("lazy").setup({
         extensions = {
           'overseer'
         }
-      }
-    },
-    {
-      'karb94/neoscroll.nvim',
-      opts = {
-        mappings = {'<C-u>', '<C-d>', 'zt', 'zz', 'zb'},
       }
     },
     {
@@ -583,6 +566,9 @@ require("lazy").setup({
           toggles = {
             dim = false,
           }
+        },
+        scroll = {
+          enabled = true
         }
       },
       keys = {
@@ -607,8 +593,6 @@ require("lazy").setup({
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<F11>", function() Snacks.lazygit() end, desc = "Lazygit" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
-        { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-        { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
       }
     },
     {
@@ -620,9 +604,6 @@ require("lazy").setup({
       opts = {},
     },
   },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
   checker = { enabled = false },
 })
