@@ -28,12 +28,12 @@ Neovim IDE focused on web dev.
     - picker
     - lazygit integration
     - zen mode
-    - scroll
 - ['MeanderingProgrammer/render-markdown.nvim'](https://github.com/MeanderingProgrammer/render-markdown.nvim) - plugin to improve viewing Markdown files in Neovim
 - ['stevearc/overseer.nvim'](https://github.com/stevearc/overseer.nvim) - a task runner and job management plugin for Neovim
 - ["petertriho/nvim-scrollbar"](https://github.com/petertriho/nvim-scrollbar) - extensible Neovim Scrollbar
 - ["brenoprata10/nvim-highlight-colors"](https://github.com/brenoprata10/nvim-highlight-colors) - highlight colors for neovim
 - ['folke/trouble.nvim'](https://github.com/folke/trouble.nvim) - a pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing
+- ['karb94/neoscroll.nvim'](https://github.com/karb94/neoscroll.nvim) - smooth scrolling neovim plugin written in lua
 - ['Wansmer/treesj'](https://github.com/Wansmer/treesj) - neovim plugin for splitting/joining blocks of code
 - ['folke/todo-comments.nvim'](https://github.com/folke/todo-comments.nvim) - highlight, list and search todo comments in your projects
 - ['nacro90/numb.nvim'](https://github.com/nacro90/numb.nvim) - peek lines just when you intend

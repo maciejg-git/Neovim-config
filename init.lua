@@ -360,6 +360,12 @@ require("lazy").setup({
       }
     },
     {
+      'karb94/neoscroll.nvim',
+      opts = {
+        mappings = {'<C-u>', '<C-d>', 'zt', 'zz', 'zb'},
+      }
+    },
+    {
       "petertriho/nvim-scrollbar",
       config = function()
         require("scrollbar").setup()
@@ -566,9 +572,6 @@ require("lazy").setup({
           toggles = {
             dim = false,
           }
-        },
-        scroll = {
-          enabled = true
         }
       },
       keys = {
