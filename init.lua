@@ -578,6 +578,7 @@ require("lazy").setup({
         { "<space>", function() Snacks.picker.buffers({ layout = { preset = "select" }, current = false }) end, desc = "Buffers" },
         { "<leader>l", function() Snacks.picker.grep() end, desc = "Grep" },
         { "<leader>;", function() Snacks.picker.command_history() end, desc = "Command History" },
+        { "<leader>:", function() Snacks.picker.commands() end, desc = "Commands" },
         { "<C-p>", function() Snacks.picker.files() end, desc = "Find Files" },
         { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
         { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
