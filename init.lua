@@ -453,6 +453,7 @@ require("lazy").setup({
     },
     {
       "vuki656/package-info.nvim",
+      ft = "json",
       opts = {},
       keys = {
         { "<LEADER>ns", mode = { "n" }, function() require("package-info").show() end },
@@ -466,6 +467,7 @@ require("lazy").setup({
     },
     {
       'stevearc/oil.nvim',
+      event = "VeryLazy",
       opts = {
         float = {
           padding = 4,
