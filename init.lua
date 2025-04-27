@@ -80,18 +80,6 @@ vim.opt.guifont='Hack Nerd Font Mono:h12'
 vim.opt.wildignore:append("**/share/nvim/runtime/colors/*.vim")
 vim.opt.wildignore:append("**/share/nvim/runtime/colors/*.lua")
 
-vim.keymap.set("n", "-", require("oil").open_float, { desc = "Open parent directory" })
-
-vim.keymap.set({ "n" }, "<LEADER>ns", require("package-info").show, { silent = true, noremap = true })
-vim.keymap.set({ "n" }, "<LEADER>nc", require("package-info").hide, { silent = true, noremap = true })
-vim.keymap.set({ "n" }, "<LEADER>nt", require("package-info").toggle, { silent = true, noremap = true })
-vim.keymap.set({ "n" }, "<LEADER>nu", require("package-info").update, { silent = true, noremap = true })
-vim.keymap.set({ "n" }, "<LEADER>nd", require("package-info").delete, { silent = true, noremap = true })
-vim.keymap.set({ "n" }, "<LEADER>ni", require("package-info").install, { silent = true, noremap = true })
-vim.keymap.set({ "n" }, "<LEADER>np", require("package-info").change_version, { silent = true, noremap = true })
-
-vim.keymap.set('n', '<c-n>', require("conform").format)
-
 vim.keymap.set('n', '<leader>r', '*``cgn', {remap = false})
 vim.keymap.set('v', '<leader>r', [[ "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn" ]], {remap = false, expr = true})
 
@@ -455,6 +443,9 @@ require("lazy").setup({
           html = { "prettier", stop_after_first = true, timeout_ms = 10000 },
           liquid = { "prettier", stop_after_first = true, timeout_ms = 10000 },
         },
+      },
+      keys = {
+        { '<c-n>', mode = { "n" }, function() require("conform").format() end }
       }
     },
     {
@@ -463,6 +454,15 @@ require("lazy").setup({
     {
       "vuki656/package-info.nvim",
       opts = {},
+      keys = {
+        { "<LEADER>ns", mode = { "n" }, function() require("package-info").show() end },
+        { "<LEADER>nc", mode = { "n" }, function() require("package-info").hide() end },
+        { "<LEADER>nt", mode = { "n" }, function() require("package-info").toggle() end },
+        { "<LEADER>nu", mode = { "n" }, function() require("package-info").update() end },
+        { "<LEADER>nd", mode = { "n" }, function() require("package-info").delete() end },
+        { "<LEADER>ni", mode = { "n" }, function() require("package-info").install() end },
+        { "<LEADER>np", mode = { "n" }, function() require("package-info").change_version() end },
+      }
     },
     {
       'stevearc/oil.nvim',
@@ -476,6 +476,9 @@ require("lazy").setup({
             winblend = 0,
           },
         },
+      },
+      keys = {
+        { "-", mode = { "n" }, function() require("oil").open_float() end, desc = "Open parent directory" },
       }
     },
     {
