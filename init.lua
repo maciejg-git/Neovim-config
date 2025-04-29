@@ -568,6 +568,7 @@ require("lazy").setup({
             input = {
               keys = {
                 ["<Esc>"] = { "close", mode = { "n", "i" } },
+                ["<C-c>"] = "cancel",
               }
             }
           }
@@ -577,6 +578,14 @@ require("lazy").setup({
           toggles = {
             dim = false,
           }
+        },
+        scratch = {
+          ft = "markdown",
+          filekey = {
+            cwd = true,
+            branch = false,
+            count = true,
+          },
         }
       },
       keys = {
@@ -602,6 +611,8 @@ require("lazy").setup({
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<F11>", function() Snacks.lazygit() end, desc = "Lazygit" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
+        { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+        { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
       }
     },
     {

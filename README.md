@@ -28,6 +28,7 @@ Neovim IDE focused on web dev.
     - picker
     - lazygit integration
     - zen mode
+    - scratch
 - ['MeanderingProgrammer/render-markdown.nvim'](https://github.com/MeanderingProgrammer/render-markdown.nvim) - plugin to improve viewing Markdown files in Neovim
 - ['stevearc/overseer.nvim'](https://github.com/stevearc/overseer.nvim) - a task runner and job management plugin for Neovim
 - ["petertriho/nvim-scrollbar"](https://github.com/petertriho/nvim-scrollbar) - extensible Neovim Scrollbar
