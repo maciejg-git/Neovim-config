@@ -262,24 +262,38 @@ require("lazy").setup({
         use_default_keymaps = false,
       }
     },
-    {
-      'lewis6991/gitsigns.nvim',
+    -- {
+    --   'lewis6991/gitsigns.nvim',
+    --   opts = {
+    --     signs = {
+    --       add = { text = '+' },
+    --       change = { text = '~' },
+    --       delete = { text = '_' },
+    --       topdelete = { text = '‾' },
+    --       changedelete = { text = '~' },
+    --     },
+    --     signs_staged = {
+    --       add          = { text = '+s' },
+    --       change       = { text = '~s' },
+    --       delete       = { text = '_s' },
+    --       topdelete    = { text = '‾s' },
+    --       changedelete = { text = '~s' },
+    --     },
+    --   }
+    -- },
+    { 
+      'echasnovski/mini.diff', 
       opts = {
-        signs = {
-          add = { text = '+' },
-          change = { text = '~' },
-          delete = { text = '_' },
-          topdelete = { text = '‾' },
-          changedelete = { text = '~' },
-        },
-        signs_staged = {
-          add          = { text = '+s' },
-          change       = { text = '~s' },
-          delete       = { text = '_s' },
-          topdelete    = { text = '‾s' },
-          changedelete = { text = '~s' },
-        },
-      }
+        view = {
+            style = vim.go.number and 'number' or 'sign',
+            signs = {
+              add = '+',
+              change = '~',
+              delete = '-',
+            },
+          },
+      },
+      version = false 
     },
     {
       'neovim/nvim-lspconfig',
@@ -340,7 +354,8 @@ require("lazy").setup({
           theme='auto'
         },
         sections = {
-          lualine_b = { {'b:gitsigns_head', icon = ''}, 'diff', 'diagnostics', 'overseer' },
+          -- lualine_b = { {'b:gitsigns_head', icon = ''}, 'diff', 'diagnostics', 'overseer' },
+          lualine_b = { 'branch', 'diff', 'diagnostics', 'overseer' },
         },
         extensions = {
           'overseer'
