@@ -492,6 +492,7 @@ require("lazy").setup({
           win_options = {
             winblend = 0,
           },
+          preview_split = "right",
         },
       },
       keys = {
@@ -623,6 +624,7 @@ require("lazy").setup({
         { "<leader>u", function() Snacks.picker.undo() end, desc = "Undo History" },
         { "<leader>c", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
+        { "<leader>T", function() Snacks.picker.todo_comments() end, desc = "Todo" },
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<F11>", function() Snacks.lazygit() end, desc = "Lazygit" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
