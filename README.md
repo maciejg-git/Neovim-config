@@ -13,7 +13,7 @@ Neovim IDE focused on web dev.
 - ["nvim-tree/nvim-web-devicons"](https://github.com/nvim-tree/nvim-web-devicons) - provides Font icons (glyphs) for use by neovim plugins
 - ["folke/lazy.nvim"](https://github.com/folke/lazy.nvim) - a modern plugin manager for Neovim
 - ["rafamadriz/friendly-snippets"](https://github.com/rafamadriz/friendly-snippets) - set of snippets for different languages
-- ['lewis6991/gitsigns.nvim'](https://github.com/lewis6991/gitsigns.nvim) - git integration for buffers
+- ['echasnovski/mini.diff'] - work with diff hunks
 - ['nvim-lualine/lualine.nvim'](https://github.com/nvim-lualine/lualine.nvim) - a blazing fast and easy to configure neovim statusline plugin written in pure lua
 - ['akinsho/bufferline.nvim'](https://github.com/akinsho/bufferline.nvim) - a snazzy bufferline for Neovim
 - ["folke/which-key.nvim"](https://github.com/folke/which-key.nvim) - helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type
@@ -43,6 +43,7 @@ Neovim IDE focused on web dev.
 - ["kevinhwang91/nvim-hlslens"](https://github.com/kevinhwang91/nvim-hlslens) - nvim-hlslens helps you better glance at matched information, seamlessly jump between matched instances
 - ['max397574/better-escape.nvim'](https://github.com/max397574/better-escape.nvim) - map keys without delay when typing
 - ['kylechui/nvim-surround'](https://github.com/kylechui/nvim-surround) - add/change/delete surrounding delimiter pairs with ease.
+- ['FabijanZulj/blame.nvim'](https://github.com/FabijanZulj/blame.nvim) - blame.nvim is a fugitive.vim style git blame visualizer for Neovim.
 
 ### Colorschemes
 
