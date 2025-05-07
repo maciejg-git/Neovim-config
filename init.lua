@@ -628,6 +628,10 @@ require("lazy").setup({
         require('blame').setup()
       end,
     },
+    {
+      "mason-org/mason.nvim",
+      opts = {},
+    }
   },
   install = { colorscheme = { "habamax" } },
   checker = { enabled = false },

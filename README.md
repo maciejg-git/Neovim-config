@@ -44,6 +44,7 @@ Neovim IDE focused on web dev.
 - ['max397574/better-escape.nvim'](https://github.com/max397574/better-escape.nvim) - map keys without delay when typing
 - ['kylechui/nvim-surround'](https://github.com/kylechui/nvim-surround) - add/change/delete surrounding delimiter pairs with ease.
 - ['FabijanZulj/blame.nvim'](https://github.com/FabijanZulj/blame.nvim) - blame.nvim is a fugitive.vim style git blame visualizer for Neovim.
+- ["mason-org/mason.nvim"](https://github.com/mason-org/mason.nvim) - Portable package manager for Neovim that runs everywhere Neovim runs. Easily install and manage LSP servers, DAP servers, linters, and formatters.
 
 ### Colorschemes
 
