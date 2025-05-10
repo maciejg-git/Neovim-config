@@ -131,10 +131,9 @@ vim.keymap.set('x', '<C-A>', "<C-C>ggVG", {remap = false})
 
 vim.keymap.set('n', '<F2>', ":Lazy<CR>")
 vim.keymap.set('n', '<F3>', ":Mason<CR>")
-vim.keymap.set('n', '<F5>', ":OverseerToggle<CR>")
-vim.keymap.set('n', '<F6>', ":OverseerRun<CR>")
-vim.keymap.set('n', '<F7>', ":OverseerLoadBundle<CR>")
-vim.keymap.set('n', '<F9>', ":set number!<CR>")
+vim.keymap.set('n', '<F9>', ":OverseerToggle<CR>")
+vim.keymap.set('n', '<F10>', ":OverseerRun<CR>")
+vim.keymap.set('n', '<F11>', ":OverseerLoadBundle<CR>")
 
 vim.keymap.set('n', '<A-right>', ":set splitright<CR>:vnew<CR>")
 vim.keymap.set('n', '<A-left>', ":set nosplitright<CR>:vnew<CR>")
@@ -607,7 +606,6 @@ require("lazy").setup({
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
         { "<leader>T", function() Snacks.picker.todo_comments() end, desc = "Todo" },
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-        { "<F11>", function() Snacks.lazygit() end, desc = "Lazygit" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
         { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
         { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
