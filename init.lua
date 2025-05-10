@@ -130,10 +130,10 @@ vim.keymap.set('s', '<C-A>', "<C-C>ggV<C-O>G", {remap = false})
 vim.keymap.set('x', '<C-A>', "<C-C>ggVG", {remap = false})
 
 vim.keymap.set('n', '<F2>', ":Lazy<CR>")
-vim.keymap.set('n', '<F3>', ":OverseerToggle<CR>")
-vim.keymap.set('n', '<F4>', ":OverseerRun<CR>")
-vim.keymap.set('n', '<F7>', ":tabnew<CR>")
-vim.keymap.set('n', '<F8>', ":call system('explorer ' . expand('%:p:h'))<cr>")
+vim.keymap.set('n', '<F3>', ":Mason<CR>")
+vim.keymap.set('n', '<F5>', ":OverseerToggle<CR>")
+vim.keymap.set('n', '<F6>', ":OverseerRun<CR>")
+vim.keymap.set('n', '<F7>', ":OverseerLoadBundle<CR>")
 vim.keymap.set('n', '<F9>', ":set number!<CR>")
 
 vim.keymap.set('n', '<A-right>', ":set splitright<CR>:vnew<CR>")
@@ -619,7 +619,11 @@ require("lazy").setup({
     },
     {
       'stevearc/overseer.nvim',
-      opts = {},
+      opts = {
+        task_list = {
+          min_height = 16,
+        }
+      },
     },
     {
       "FabijanZulj/blame.nvim",
