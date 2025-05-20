@@ -311,7 +311,8 @@ require("lazy").setup({
                     [vim.diagnostic.severity.INFO] = '▶',
                 },
             },
-            virtual_lines = true
+            -- virtual_lines = true
+            virtual_text = true
 
             -- Alternatively, customize specific options
             -- virtual_lines = {
