@@ -352,20 +352,7 @@ require("lazy").setup({
     {
       "petertriho/nvim-scrollbar",
       config = function()
-        require("scrollbar").setup({
-          excluded_filetypes = {
-            "blink-cmp-menu",
-            "dropbar_menu",
-            "dropbar_menu_fzf",
-            "DressingInput",
-            "cmp_docs",
-            "cmp_menu",
-            "noice",
-            "prompt",
-            "TelescopePrompt",
-            "snacks_picker_list",
-          },
-        })
+        require("scrollbar").setup()
         require("scrollbar.handlers.search").setup({
             override_lens = function() end,
         })
@@ -619,7 +606,6 @@ require("lazy").setup({
         { "<leader>c", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
         { "<leader>T", function() Snacks.picker.todo_comments() end, desc = "Todo" },
-        { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
         { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
@@ -654,7 +640,7 @@ require("lazy").setup({
       version = false,
       opts = {},
       keys = {
-        { "<leader>F", function() MiniFiles.open() end, desc = "Mini Files" },
+        { "<leader>e", function() MiniFiles.open() end, desc = "Mini Files" },
       }
     },
   },
