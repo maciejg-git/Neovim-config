@@ -638,7 +638,27 @@ require("lazy").setup({
     { 
       'echasnovski/mini.files', 
       version = false,
-      opts = {},
+      opts = {
+        mappings = {
+          close       = 'q',
+          go_in       = '<right>',
+          go_in_plus  = 'L',
+          go_out      = '<left>',
+          go_out_plus = 'H',
+          mark_goto   = "'",
+          mark_set    = 'm',
+          reset       = '',
+          reveal_cwd  = '@',
+          show_help   = 'g?',
+          synchronize = '=',
+          trim_left   = '<',
+          trim_right  = '>',
+        },
+        windows = {
+          width_focus = 50,
+          width_nofocus = 20,
+        },
+      },
       keys = {
         { "<leader>e", function() MiniFiles.open() end, desc = "Mini Files" },
       }
