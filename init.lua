@@ -643,6 +643,15 @@ require("lazy").setup({
         { "<leader>e", function() MiniFiles.open() end, desc = "Mini Files" },
       }
     },
+    {
+      "abreujp/scholar.nvim",
+      priority = 1000,
+      config = function()
+        require("scholar").setup()
+
+        vim.o.background = "light"
+      end,
+    }
   },
   install = { colorscheme = { "habamax" } },
   checker = { enabled = false },
