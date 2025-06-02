@@ -648,8 +648,6 @@ require("lazy").setup({
       priority = 1000,
       config = function()
         require("scholar").setup()
-
-        vim.o.background = "light"
       end,
     }
   },
