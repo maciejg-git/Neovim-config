@@ -508,7 +508,7 @@ require("lazy").setup({
     },
     {
       "saghen/blink.cmp",
-      version = "v1.1.1",
+      version = "v1.3.1",
       opts = {
         keymap = {
           preset = "none",
