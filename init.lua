@@ -178,37 +178,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.lsp.config('vue_ls', {
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-  init_options = {
-    vue = {
-      hybridMode = false,
-    },
-  },
-})
-vim.lsp.enable('vue_ls')
-vim.lsp.enable('emmet_ls')
-vim.lsp.enable('eslint')
-
-vim.diagnostic.config({
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = '▶',
-            [vim.diagnostic.severity.WARN] = '▶',
-            [vim.diagnostic.severity.HINT] = '▶',
-            [vim.diagnostic.severity.INFO] = '▶',
-        },
-    },
-    -- virtual_lines = true
-    virtual_text = true
-
-    -- Alternatively, customize specific options
-    -- virtual_lines = {
-    --  -- Only show virtual line diagnostics for the current cursor line
-    --  current_line = true,
-    -- },
-})
-
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nobuflisted' })
 vim.api.nvim_create_autocmd('VimEnter', { pattern = '*', command = 'cd c:\\Users\\ender\\Desktop\\projects' })
 
@@ -308,6 +277,50 @@ require("lazy").setup({
     },
     {
       'neovim/nvim-lspconfig',
+      config = function()
+        require'lspconfig'.volar.setup{
+          init_options = {
+            typescript = {
+              tsdk = 'C:/Users/ender/AppData/Roaming/npm/node_modules/typescript/lib'
+            }
+          },
+          filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'}
+        }
+
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+        require('lspconfig').emmet_ls.setup({
+            capabilities = capabilities,
+            filetypes = { "css", "eruby", "html", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "liquid" },
+            init_options = {
+              html = {
+                options = {
+                  ["bem.enabled"] = true,
+                },
+              },
+            }
+        })
+
+        vim.diagnostic.config({
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = '▶',
+                    [vim.diagnostic.severity.WARN] = '▶',
+                    [vim.diagnostic.severity.HINT] = '▶',
+                    [vim.diagnostic.severity.INFO] = '▶',
+                },
+            },
+            -- virtual_lines = true
+            virtual_text = true
+
+            -- Alternatively, customize specific options
+            -- virtual_lines = {
+            --  -- Only show virtual line diagnostics for the current cursor line
+            --  current_line = true,
+            -- },
+        })
+      end,
     },
     {
       'folke/trouble.nvim',
