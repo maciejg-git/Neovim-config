@@ -304,6 +304,10 @@ require("lazy").setup({
             },
           },
       },
+      keys = {
+        { "<leader>d", mode = { "n" }, function() MiniDiff.toggle_overlay() end, desc = "Toggle diff" },
+      },
+      lazy = false,
       version = false 
     },
     {
@@ -409,10 +413,6 @@ require("lazy").setup({
             s = { j = { k = "<Esc>" } },
         },
       }
-    },
-    {
-      'kylechui/nvim-surround',
-      opts = {},
     },
     {
       'numToStr/Comment.nvim',
