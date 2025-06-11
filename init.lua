@@ -630,7 +630,26 @@ require("lazy").setup({
       config = function()
         require("scholar").setup()
       end,
-    }
+    },
+    {
+      'echasnovski/mini.surround',
+      version = false,
+      opts = {
+        mappings = {
+          add = 'ta',
+          delete = 'td',
+          find = 'tf',
+          find_left = 'tF',
+          highlight = 'th',
+          replace = 'tr',
+          update_n_lines = 'tn',
+
+          suffix_last = 'l',
+          suffix_next = 'n',
+        },
+        respect_selection_type = true,
+      }
+    },
   },
   install = { colorscheme = { "habamax" } },
   checker = { enabled = false },
