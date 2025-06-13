@@ -650,6 +650,26 @@ require("lazy").setup({
         respect_selection_type = true,
       }
     },
+    {
+      "monaqa/dial.nvim",
+      config = function()
+        local augend = require("dial.augend")
+        require("dial.config").augends:register_group{
+          default = {
+            augend.integer.alias.decimal_int,
+            augend.integer.alias.hex,
+            augend.constant.alias.bool,
+            augend.constant.alias.alpha,
+            augend.constant.alias.Alpha,
+            augend.hexcolor.new{
+              case = "upper",
+            },
+          },
+        }
+        vim.keymap.set("n", "<M-a>", require("dial.map").inc_normal(), { noremap = true })
+        vim.keymap.set("n", "<M-x>", require("dial.map").dec_normal(), { noremap = true })
+      end
+    }
   },
   install = { colorscheme = { "habamax" } },
   checker = { enabled = false },
