@@ -212,7 +212,7 @@ require("lazy").setup({
       priority = 1000,
       config = function()
         require("catppuccin").setup({
-          flavour = "macchiato",
+          flavour = "latte",
           integrations = {
             flash = false,
           }
@@ -222,12 +222,22 @@ require("lazy").setup({
     },
     {
       'sainnhe/everforest',
+      priority = 1000,
     },
     {
       'EdenEast/nightfox.nvim',
+      priority = 1000,
     },
     {
-      "savq/melange-nvim"
+      "savq/melange-nvim",
+      priority = 1000,
+    },
+    {
+      "abreujp/scholar.nvim",
+      priority = 1000,
+      config = function()
+        require("scholar").setup()
+      end,
     },
     {
       'nvim-treesitter/nvim-treesitter',
@@ -623,13 +633,6 @@ require("lazy").setup({
       keys = {
         { "<leader>e", function() MiniFiles.open() end, desc = "Mini Files" },
       }
-    },
-    {
-      "abreujp/scholar.nvim",
-      priority = 1000,
-      config = function()
-        require("scholar").setup()
-      end,
     },
     {
       'echasnovski/mini.surround',
