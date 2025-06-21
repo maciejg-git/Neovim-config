@@ -678,6 +678,33 @@ require("lazy").setup({
         vim.keymap.set("n", "<M-a>", require("dial.map").inc_normal(), { noremap = true })
         vim.keymap.set("n", "<M-x>", require("dial.map").dec_normal(), { noremap = true })
       end
+    },
+    {
+      "andrewferrier/debugprint.nvim",
+      opts = {
+        keymaps = {
+          normal = {
+            plain_below = "gpp",
+            plain_above = "gpP",
+            variable_below = "gpv",
+            variable_above = "gpV",
+            surround_plain = "gpsp",
+            surround_variable = "gpsv",
+            textobj_below = "gpo",
+            textobj_above = "gpO",
+            textobj_surround = "gpso",
+          },
+          insert = {
+            plain = "<C-G>p",
+            variable = "<C-G>v",
+          },
+          visual = {
+            variable_below = "gpv",
+            variable_above = "gpV",
+          },
+        },
+      },
+      lazy = false,
     }
   },
   install = { colorscheme = { "habamax" } },
