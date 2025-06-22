@@ -47,6 +47,7 @@ Neovim IDE focused on web dev.
 - ['echasnovski/mini.files'](https://github.com/echasnovski/mini.files) - Navigate and manipulate file system. Part of 'mini.nvim' library
 - ['echasnovski/mini.surround'](https://github.com/echasnovski/mini.surround) - Neovim Lua plugin with fast and feature-rich surround actions. Part of 'mini.nvim' library
 - ["monaqa/dial.nvim"](https://github.com/monaqa/dial.nvim) - enhanced increment/decrement plugin for Neovim
+- ['andrewferrier/debugprint.nvim'](https://github.com/andrewferrier/debugprint.nvim) - Debugging in NeoVim the print() way
 
 ### Colorschemes
 
