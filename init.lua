@@ -624,7 +624,7 @@ require("lazy").setup({
           go_out_plus = 'H',
           mark_goto   = "'",
           mark_set    = 'm',
-          reset       = '',
+          reset       = '<leader>h',
           reveal_cwd  = '@',
           show_help   = 'g?',
           synchronize = '=',
@@ -671,7 +671,7 @@ require("lazy").setup({
             augend.constant.alias.alpha,
             augend.constant.alias.Alpha,
             augend.hexcolor.new{
-              case = "upper",
+              case = "prefer_lower",
             },
           },
         }
