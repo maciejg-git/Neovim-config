@@ -67,8 +67,9 @@ vim.opt.viewoptions={'cursor', 'folds'}
 vim.opt.sessionoptions:remove('folds')
 vim.opt.sessionoptions:remove('help')
 vim.opt.hidden = true
-vim.opt.foldmethod="expr"
-vim.opt.foldexpr="v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldmethod="expr"
+-- vim.opt.foldexpr="v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldmethod="indent"
 vim.opt.foldcolumn='0'
 vim.opt.foldlevel=99
 vim.opt.foldtext=""
