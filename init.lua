@@ -69,7 +69,8 @@ vim.opt.sessionoptions:remove('help')
 vim.opt.hidden = true
 -- vim.opt.foldmethod="expr"
 -- vim.opt.foldexpr="v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldmethod="indent"
+-- vim.opt.foldmethod="indent"
+vim.opt.foldmethod="manual"
 vim.opt.foldcolumn='0'
 vim.opt.foldlevel=99
 vim.opt.foldtext=""
@@ -153,35 +154,44 @@ vim.keymap.set('n', '<M-CR>', "&foldlevel == 0 ? 'zRzMzo' :'zMzo'", {remap = fal
 
 vim.keymap.set('n', '<leader>t', ":tabnew<CR>")
 
-vim.lsp.config('vue_ls', {
+vim.lsp.config('vtsls', {
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-  init_options = {
-    vue = {
-      hybridMode = false,
+  settings = {
+    vtsls = {
+      tsserver = {
+        globalPlugins = {{
+          name = '@vue/typescript-plugin',
+          languages = { 'vue' },
+          configNamespace = 'typescript',
+          location = vim.fn.stdpath('data') .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+        }},
+      },
     },
   },
 })
+
+vim.lsp.enable('vtsls')
 vim.lsp.enable('vue_ls')
 vim.lsp.enable('emmet_ls')
 vim.lsp.enable('eslint')
 
 vim.diagnostic.config({
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = '▶',
-            [vim.diagnostic.severity.WARN] = '▶',
-            [vim.diagnostic.severity.HINT] = '▶',
-            [vim.diagnostic.severity.INFO] = '▶',
-        },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '▶',
+      [vim.diagnostic.severity.WARN] = '▶',
+      [vim.diagnostic.severity.HINT] = '▶',
+      [vim.diagnostic.severity.INFO] = '▶',
     },
-    -- virtual_lines = true
-    virtual_text = true
+  },
+  -- virtual_lines = true
+  virtual_text = true
 
-    -- Alternatively, customize specific options
-    -- virtual_lines = {
-    --  -- Only show virtual line diagnostics for the current cursor line
-    --  current_line = true,
-    -- },
+  -- Alternatively, customize specific options
+  -- virtual_lines = {
+  --  -- Only show virtual line diagnostics for the current cursor line
+  --  current_line = true,
+  -- },
 })
 
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nobuflisted' })
