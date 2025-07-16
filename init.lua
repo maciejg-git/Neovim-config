@@ -230,7 +230,7 @@ require("lazy").setup({
           highlight_overrides = {
             latte = function(latte)
               return {
-                IblScope = { fg = '#7a7c82' },
+                IblScope = { fg = '#8e9198' },
               }
             end,
           }
