@@ -226,6 +226,13 @@ require("lazy").setup({
           flavour = "latte",
           integrations = {
             flash = false,
+          },
+          highlight_overrides = {
+            latte = function(latte)
+              return {
+                IblScope = { fg = '#7a7c82' },
+              }
+            end,
           }
         })
         vim.cmd([[colorscheme catppuccin]])
@@ -477,7 +484,7 @@ require("lazy").setup({
       "lukas-reineke/indent-blankline.nvim",
       opts = {
         scope = {
-          enabled = false,  
+          enabled = true,
           show_start = false,
         },
         exclude = {
