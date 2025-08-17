@@ -633,9 +633,9 @@ require("lazy").setup({
         mappings = {
           close       = 'q',
           go_in       = '<right>',
-          go_in_plus  = 'L',
+          go_in_plus  = '<C-right>',
           go_out      = '<left>',
-          go_out_plus = 'H',
+          go_out_plus = '<C-left>',
           mark_goto   = "'",
           mark_set    = 'm',
           reset       = '<leader>h',
@@ -647,7 +647,7 @@ require("lazy").setup({
         },
         windows = {
           width_focus = 50,
-          width_nofocus = 20,
+          width_nofocus = 25,
         },
       },
       keys = {
@@ -672,6 +672,27 @@ require("lazy").setup({
         },
         respect_selection_type = true,
       }
+    },
+    { 
+      'echasnovski/mini.hipatterns',
+      version = false,
+      config = function()
+        local hipatterns = require('mini.hipatterns')
+        hipatterns.setup({
+          highlighters = {
+            fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+            hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
+            todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
+            note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
+          },
+        })
+      end
+    },
+    {
+      'echasnovski/mini-git',
+      opts = {},
+      version = false,
+      main = 'mini.git',
     },
     {
       "monaqa/dial.nvim",
@@ -709,8 +730,8 @@ require("lazy").setup({
             textobj_surround = "gpso",
           },
           insert = {
-            plain = "<C-G>p",
-            variable = "<C-G>v",
+            plain = "<leader>p",
+            variable = "<leader>v",
           },
           visual = {
             variable_below = "gpv",
@@ -719,21 +740,6 @@ require("lazy").setup({
         },
       },
       lazy = false,
-    },
-    { 
-      'echasnovski/mini.hipatterns',
-      version = false,
-      config = function()
-        local hipatterns = require('mini.hipatterns')
-        hipatterns.setup({
-          highlighters = {
-            fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-            hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
-            todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
-            note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
-          },
-        })
-      end
     },
   },
   install = { colorscheme = { "habamax" } },
