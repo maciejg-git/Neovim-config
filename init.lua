@@ -247,10 +247,6 @@ require("lazy").setup({
       priority = 1000,
     },
     {
-      "savq/melange-nvim",
-      priority = 1000,
-    },
-    {
       "abreujp/scholar.nvim",
       priority = 1000,
       config = function()
@@ -295,7 +291,7 @@ require("lazy").setup({
       }
     },
     { 
-      'echasnovski/mini.diff', 
+      'nvim-mini/mini.diff', 
       opts = {
         view = {
             style = vim.go.number and 'number' or 'sign',
@@ -627,7 +623,7 @@ require("lazy").setup({
       opts = {},
     },
     { 
-      'echasnovski/mini.files', 
+      'nvim-mini/mini.files', 
       version = false,
       opts = {
         mappings = {
@@ -655,7 +651,7 @@ require("lazy").setup({
       }
     },
     {
-      'echasnovski/mini.surround',
+      'nvim-mini/mini.surround',
       version = false,
       opts = {
         mappings = {
@@ -674,7 +670,7 @@ require("lazy").setup({
       }
     },
     { 
-      'echasnovski/mini.hipatterns',
+      'nvim-mini/mini.hipatterns',
       version = false,
       config = function()
         local hipatterns = require('mini.hipatterns')
@@ -689,7 +685,7 @@ require("lazy").setup({
       end
     },
     {
-      'echasnovski/mini-git',
+      'nvim-mini/mini-git',
       opts = {},
       version = false,
       main = 'mini.git',
