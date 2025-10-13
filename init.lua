@@ -563,14 +563,6 @@ require("lazy").setup({
             dim = false,
           }
         },
-        scratch = {
-          ft = "markdown",
-          filekey = {
-            cwd = true,
-            branch = false,
-            count = true,
-          },
-        }
       },
       keys = {
         { "<space>", function() Snacks.picker.buffers({ layout = { preset = "select" }, current = false }) end, desc = "Buffers" },
@@ -594,9 +586,8 @@ require("lazy").setup({
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
         { "<leader>T", function() Snacks.picker.todo_comments() end, desc = "Todo" },
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+        { "Z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
-        { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-        { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
       }
     },
     {
