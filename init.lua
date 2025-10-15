@@ -728,6 +728,11 @@ require("lazy").setup({
       },
       lazy = false,
     },
+    {
+      'nvim-mini/mini.cursorword',
+      opts = {},
+      version = false,
+    },
   },
   install = { colorscheme = { "habamax" } },
   checker = { enabled = false },
