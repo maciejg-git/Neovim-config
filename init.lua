@@ -135,7 +135,6 @@ vim.keymap.set('n', '<F2>', ":Lazy<CR>")
 vim.keymap.set('n', '<F3>', ":Mason<CR>")
 vim.keymap.set('n', '<F9>', ":OverseerToggle<CR>")
 vim.keymap.set('n', '<F10>', ":OverseerRun<CR>")
-vim.keymap.set('n', '<F11>', ":OverseerLoadBundle<CR>")
 
 vim.keymap.set('n', '<A-right>', ":set splitright<CR>:vnew<CR>")
 vim.keymap.set('n', '<A-left>', ":set nosplitright<CR>:vnew<CR>")
@@ -440,25 +439,6 @@ require("lazy").setup({
         { "<LEADER>nd", mode = { "n" }, function() require("package-info").delete() end },
         { "<LEADER>ni", mode = { "n" }, function() require("package-info").install() end },
         { "<LEADER>np", mode = { "n" }, function() require("package-info").change_version() end },
-      }
-    },
-    {
-      'stevearc/oil.nvim',
-      event = "VeryLazy",
-      opts = {
-        float = {
-          padding = 4,
-          max_width = 0,
-          max_height = 0,
-          border = "rounded",
-          win_options = {
-            winblend = 0,
-          },
-          preview_split = "right",
-        },
-      },
-      keys = {
-        { "-", mode = { "n" }, function() require("oil").open_float() end, desc = "Open parent directory" },
       }
     },
     {
