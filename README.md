@@ -20,7 +20,6 @@ Neovim IDE focused on web dev.
 - ['windwp/nvim-autopairs'](https://github.com/windwp/nvim-autopairs) - autopairs for neovim written in lua
 - ['numToStr/Comment.nvim'](https://github.com/numToStr/Comment.nvim) - smart and powerful comment plugin for neovim
 - ["stevearc/conform.nvim"](https://github.com/stevearc/conform.nvim) - lightweight yet powerful formatter plugin for Neovim
-- ['stevearc/oil.nvim'](https://github.com/stevearc/oil.nvim) - file management
 - ["folke/flash.nvim"](https://github.com/folke/flash.nvim) - navigate your code with search labels, enhanced character motions and Treesitter integration
 - ["lukas-reineke/indent-blankline.nvim"](https://github.com/lukas-reineke/indent-blankline.nvim) - indent guides for Neovim
 - ["saghen/blink.cmp"](https://github.com/saghen/blink.cmp) - performant, batteries-included completion plugin for Neovimn
@@ -28,7 +27,6 @@ Neovim IDE focused on web dev.
     - picker
     - lazygit integration
     - zen mode
-    - scratch
 - ['MeanderingProgrammer/render-markdown.nvim'](https://github.com/MeanderingProgrammer/render-markdown.nvim) - plugin to improve viewing Markdown files in Neovim
 - ['stevearc/overseer.nvim'](https://github.com/stevearc/overseer.nvim) - a task runner and job management plugin for Neovim
 - ["petertriho/nvim-scrollbar"](https://github.com/petertriho/nvim-scrollbar) - extensible Neovim Scrollbar
@@ -36,7 +34,6 @@ Neovim IDE focused on web dev.
 - ['folke/trouble.nvim'](https://github.com/folke/trouble.nvim) - a pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing
 - ['karb94/neoscroll.nvim'](https://github.com/karb94/neoscroll.nvim) - smooth scrolling neovim plugin written in lua
 - ['Wansmer/treesj'](https://github.com/Wansmer/treesj) - neovim plugin for splitting/joining blocks of code
-- ['folke/todo-comments.nvim'](https://github.com/folke/todo-comments.nvim) - highlight, list and search todo comments in your projects
 - ['nacro90/numb.nvim'](https://github.com/nacro90/numb.nvim) - peek lines just when you intend
 - ["vuki656/package-info.nvim"](https://github.com/vuki656/package-info.nvim) - all the npm/yarn/pnpm commands I don't want to type
 - ['rcarriga/nvim-notify'](https://github.com/rcarriga/nvim-notify) - a fancy, configurable, notification manager for NeoVim
@@ -48,11 +45,14 @@ Neovim IDE focused on web dev.
 - ['echasnovski/mini.surround'](https://github.com/echasnovski/mini.surround) - Neovim Lua plugin with fast and feature-rich surround actions. Part of 'mini.nvim' library
 - ["monaqa/dial.nvim"](https://github.com/monaqa/dial.nvim) - enhanced increment/decrement plugin for Neovim
 - ['andrewferrier/debugprint.nvim'](https://github.com/andrewferrier/debugprint.nvim) - Debugging in NeoVim the print() way
+- ['MeanderingProgrammer/treesitter-modules.nvim'](https://github.com/MeanderingProgrammer/treesitter-modules.nvim) - Original modules from nvim-treesitter master branch
+- ['nvim-mini/mini.hipatterns'](https://github.com/nvim-mini/mini.hipatterns) - Highlight patterns in text. Part of 'mini.nvim' library.
+- ['nvim-mini/mini-git'](https://github.com/nvim-mini/mini-git) - Git integration. Part of 'mini.nvim' library.
 
 ### Colorschemes
 
 - ['catppuccin/nvim'](https://github.com/catppuccin/nvim)
 - ['sainnhe/everforest'](https://github.com/sainnhe/everforest)
 - ['EdenEast/nightfox.nvim'](https://github.com/EdenEast/nightfox.nvim)
-- ["savq/melange-nvim"](https://github.com/savq/melange-nvim)
 - ["abreujp/scholar.nvim"](https://github.com/abreujp/scholar.nvim)
+- ['zenbones-theme/zenbones.nvim'](https://github.com/zenbones-theme/zenbones.nvim)

@@ -566,7 +566,6 @@ require("lazy").setup({
         { "<leader>u", function() Snacks.picker.undo() end, desc = "Undo History" },
         { "<leader>c", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
-        { "<leader>T", function() Snacks.picker.todo_comments() end, desc = "Todo" },
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "Z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
