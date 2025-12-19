@@ -193,6 +193,11 @@ vim.diagnostic.config({
   -- },
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'javascript', 'html', 'css', 'json', 'lua', 'markdown' },
+  callback = function() vim.treesitter.start() end,
+})
+
 vim.api.nvim_create_autocmd('TermOpen', { pattern = '*', command = 'setlocal nobuflisted' })
 vim.api.nvim_create_autocmd('VimEnter', { pattern = '*', command = 'cd c:\\Users\\ender\\Desktop\\projects' })
 
@@ -254,25 +259,22 @@ require("lazy").setup({
     },
     {
       'nvim-treesitter/nvim-treesitter',
-      build = ':TSUpdate',
-      config = function()
-        require 'nvim-treesitter.install'.compilers = { "clang" }
-
-        require('nvim-treesitter.configs').setup{
-          highlight = {
-            enable = true,
+      lazy = false,
+      build = ':TSUpdate'
+    },
+    {
+      'MeanderingProgrammer/treesitter-modules.nvim',
+      dependencies = { 'nvim-treesitter/nvim-treesitter' },
+      opts = {
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+              init_selection = ',',
+              node_incremental = ',',
+              node_decremental = '<C-,>',
           },
-          incremental_selection = {
-            enable = true,
-            keymaps = {
-              init_selection = ",",
-              node_incremental = ",",
-              node_decremental = "<C-,>",
-            },
-          },
-          ensure_installed = { "javascript", "html", "json", "lua", "markdown", "css", "liquid", "vue" },
-        }
-      end,
+        },
+      },
     },
     {
       'pangloss/vim-javascript',
@@ -708,6 +710,12 @@ require("lazy").setup({
       },
       lazy = false,
     },
+    {
+        "zenbones-theme/zenbones.nvim",
+        dependencies = "rktjmp/lush.nvim",
+        lazy = false,
+        priority = 1000,
+    }
   },
   install = { colorscheme = { "habamax" } },
   checker = { enabled = false },
