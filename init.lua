@@ -714,6 +714,12 @@ require("lazy").setup({
         dependencies = "rktjmp/lush.nvim",
         lazy = false,
         priority = 1000,
+    },
+    {
+      "serhez/teide.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {},
     }
   },
   install = { colorscheme = { "habamax" } },
