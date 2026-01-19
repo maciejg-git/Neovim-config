@@ -477,7 +477,7 @@ require("lazy").setup({
     },
     {
       "saghen/blink.cmp",
-      version = "v1.3.1",
+      version = "v1.8.0",
       opts = {
         keymap = {
           preset = "none",
@@ -720,6 +720,11 @@ require("lazy").setup({
       lazy = false,
       priority = 1000,
       opts = {},
+    },
+    {
+      "esmuellert/codediff.nvim",
+      dependencies = { "MunifTanjim/nui.nvim" },
+      cmd = "CodeDiff",
     }
   },
   install = { colorscheme = { "habamax" } },
