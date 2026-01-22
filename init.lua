@@ -222,6 +222,9 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons",
     },
     {
+      "MunifTanjim/nui.nvim",
+    },
+    {
       'catppuccin/nvim',
       name = "catppuccin",
       priority = 1000,
@@ -258,6 +261,18 @@ require("lazy").setup({
       end,
     },
     {
+        "zenbones-theme/zenbones.nvim",
+        dependencies = "rktjmp/lush.nvim",
+        lazy = false,
+        priority = 1000,
+    },
+    {
+      "serhez/teide.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {},
+    },
+    {
       'nvim-treesitter/nvim-treesitter',
       lazy = false,
       build = ':TSUpdate'
@@ -283,6 +298,10 @@ require("lazy").setup({
       'HerringtonDarkholme/yats.vim',
     },
     {
+      'MeanderingProgrammer/render-markdown.nvim',
+      opts = {},
+    },
+    {
       "rafamadriz/friendly-snippets",
     },
     {
@@ -290,24 +309,6 @@ require("lazy").setup({
       opts = {
         use_default_keymaps = false,
       }
-    },
-    { 
-      'nvim-mini/mini.diff', 
-      opts = {
-        view = {
-            style = vim.go.number and 'number' or 'sign',
-            signs = {
-              add = '+',
-              change = '~',
-              delete = '-',
-            },
-          },
-      },
-      keys = {
-        { "<leader>d", mode = { "n" }, function() MiniDiff.toggle_overlay() end, desc = "Toggle diff" },
-      },
-      lazy = false,
-      version = false 
     },
     {
       'neovim/nvim-lspconfig',
@@ -425,9 +426,6 @@ require("lazy").setup({
       keys = {
         { '<c-n>', mode = { "n" }, function() require("conform").format() end }
       }
-    },
-    {
-      "MunifTanjim/nui.nvim",
     },
     {
       "vuki656/package-info.nvim",
@@ -572,10 +570,6 @@ require("lazy").setup({
       }
     },
     {
-      'MeanderingProgrammer/render-markdown.nvim',
-      opts = {},
-    },
-    {
       'stevearc/overseer.nvim',
       opts = {
         task_list = {
@@ -593,6 +587,24 @@ require("lazy").setup({
     {
       "mason-org/mason.nvim",
       opts = {},
+    },
+    { 
+      'nvim-mini/mini.diff', 
+      opts = {
+        view = {
+            style = vim.go.number and 'number' or 'sign',
+            signs = {
+              add = '+',
+              change = '~',
+              delete = '-',
+            },
+          },
+      },
+      keys = {
+        { "<leader>d", mode = { "n" }, function() MiniDiff.toggle_overlay() end, desc = "Toggle diff" },
+      },
+      lazy = false,
+      version = false 
     },
     { 
       'nvim-mini/mini.files', 
@@ -708,18 +720,6 @@ require("lazy").setup({
         },
       },
       lazy = false,
-    },
-    {
-        "zenbones-theme/zenbones.nvim",
-        dependencies = "rktjmp/lush.nvim",
-        lazy = false,
-        priority = 1000,
-    },
-    {
-      "serhez/teide.nvim",
-      lazy = false,
-      priority = 1000,
-      opts = {},
     },
     {
       "esmuellert/codediff.nvim",
