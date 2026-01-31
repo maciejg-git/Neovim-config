@@ -82,15 +82,13 @@ vim.opt.guifont='Hack Nerd Font Mono:h12'
 vim.opt.wildignore:append("**/share/nvim/runtime/colors/*.vim")
 vim.opt.wildignore:append("**/share/nvim/runtime/colors/*.lua")
 
-vim.keymap.set('n', '<leader>r', '*``cgn', {remap = false})
-vim.keymap.set('v', '<leader>r', [[ "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn" ]], {remap = false, expr = true})
+vim.keymap.set('n', '<leader>r', '*``cgn', {remap = false, desc = "Replace"})
+vim.keymap.set('v', '<leader>r', [[ "y/\\v\<c-r>=escape(@\", '/')\<cr>\<cr>" . "``cgn" ]], {remap = false, expr = true, desc = "Replace"})
 
 vim.keymap.set('n', '<C-q>', ':q!<CR>')
 vim.keymap.set('n', '<CR>', 'o')
 vim.keymap.set('n', ';', ':', {remap = false})
 vim.keymap.set('n', '<c-f>', '<c-u>', { remap = true })
-vim.keymap.set('n', '<Leader><Leader>', 'V')
-vim.keymap.set('v', '<Leader><Leader>', '<Esc>')
 vim.keymap.set('x', '<', '<gv', {remap = false})
 vim.keymap.set('x', '>', '>gv|', {remap = false})
 vim.keymap.set({'n', 'i', 'v'}, '<PageUp>', '<left>')
@@ -121,8 +119,8 @@ vim.keymap.set('i', '<leader>c', "console.log(", { remap = true })
 vim.keymap.set('i', '<leader>fa', "() => {<cr>", { remap = true })
 vim.keymap.set('i', '<leader>ff', "function() {", { remap = true })
 
-vim.keymap.set('n', '<leader>j', ":TSJJoin<cr>", { remap = true })
-vim.keymap.set('n', '<leader>s', ":TSJSplit<cr>", { remap = true })
+vim.keymap.set('n', '<leader>j', ":TSJJoin<cr>", { remap = true, desc = "Join block" })
+vim.keymap.set('n', '<leader>s', ":TSJSplit<cr>", { remap = true, desc = "Split block" })
 
 vim.keymap.set('n', '<C-A>', "ggVG", {remap = false})
 vim.keymap.set('i', '<C-A>', "<C-O>gg<C-O>VG", {remap = false})
@@ -144,14 +142,14 @@ vim.keymap.set('v', '<A-right>', "<esc>:set splitright<CR>:vnew<CR>", {remap = f
 vim.keymap.set('v', '<A-left>', "<esc>:set nosplitright<CR>:vnew<CR>", {remap = false})
 vim.keymap.set('v', '<A-up>', "<esc>:set nosplitbelow<CR>:new<CR>", {remap = false})
 vim.keymap.set('v', '<A-down>', "<esc>:set splitbelow<CR>:new<CR>", {remap = false})
-vim.keymap.set('n', '<leader>=', "<C-w>=", {remap = false})
+vim.keymap.set('n', '<leader>=', "<C-w>=", {remap = false, desc = "Make windows equal"})
 vim.keymap.set('n', '<Tab>', "<C-w><C-w>")
 
 vim.keymap.set('n', '<2-LeftMouse>', "foldclosed(line('.')) == -1 ? '<2-LeftMouse>' : 'zo'", {remap = false, expr = true})
 vim.keymap.set('n', '<C-CR>', "&foldlevel == 0 ? 'zR' :'zM'", {remap = false, expr = true})
 vim.keymap.set('n', '<M-CR>', "&foldlevel == 0 ? 'zRzMzo' :'zMzo'", {remap = false, expr = true})
 
-vim.keymap.set('n', '<leader>t', ":tabnew<CR>")
+vim.keymap.set('n', '<leader>t', ":tabnew<CR>", {desc = "New tab"})
 
 vim.lsp.config('vtsls', {
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
@@ -565,7 +563,6 @@ require("lazy").setup({
         { "<leader>c", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-        { "Z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
       }
     },
@@ -601,7 +598,7 @@ require("lazy").setup({
           },
       },
       keys = {
-        { "<leader>d", mode = { "n" }, function() MiniDiff.toggle_overlay() end, desc = "Toggle diff" },
+        { "<leader>d", mode = { "n" }, function() MiniDiff.toggle_overlay() end, desc = "Toggle diff overlay" },
       },
       lazy = false,
       version = false 
