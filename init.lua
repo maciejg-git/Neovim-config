@@ -368,6 +368,13 @@ require("lazy").setup({
     {
       "folke/which-key.nvim",
       opts = {},
+      config = function()
+        local wk = require("which-key")
+        wk.add({
+          { "<leader>g", group = "Git picker"},
+          { "<leader>n", group = "Package info"}
+        })
+      end,
     },
     {
       "kevinhwang91/nvim-hlslens",
