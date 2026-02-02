@@ -97,8 +97,6 @@ vim.keymap.set('n', '<Backspace>', 'ciw')
 
 vim.keymap.set('n', '<M-c>', 'gcc', {remap = true})
 vim.keymap.set('v', '<M-c>', 'gc', {remap = true})
-vim.keymap.set('n', '<M-S-c>', '<Leader>_b', {remap = true})
-vim.keymap.set('v', '<M-S-c>', '<Leader>_b', {remap = true})
 
 vim.keymap.set('n', '<C-L>', ':nohlsearch<cr>', {remap = false})
 
@@ -115,9 +113,6 @@ vim.keymap.set('v', '<C-k>', ':m-2<CR>gv=gv', {remap = false})
 vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv", {remap = false})
 
 vim.keymap.set('i', '<leader>c', "console.log(", { remap = true })
-
-vim.keymap.set('i', '<leader>fa', "() => {<cr>", { remap = true })
-vim.keymap.set('i', '<leader>ff', "function() {", { remap = true })
 
 vim.keymap.set('n', '<leader>j', ":TSJJoin<cr>", { remap = true, desc = "Join block" })
 vim.keymap.set('n', '<leader>s', ":TSJSplit<cr>", { remap = true, desc = "Split block" })
@@ -184,9 +179,7 @@ vim.diagnostic.config({
   -- virtual_lines = true
   virtual_text = true
 
-  -- Alternatively, customize specific options
   -- virtual_lines = {
-  --  -- Only show virtual line diagnostics for the current cursor line
   --  current_line = true,
   -- },
 })
@@ -561,7 +554,6 @@ require("lazy").setup({
         { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
         { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
         { "<leader>f", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
-        { "<M-1>", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
         { "<F1>", function() Snacks.picker.help() end, desc = "Help Pages" },
         { "<leader>h", function() Snacks.picker.highlights() end, desc = "Highlights" },
         { "<leader>m", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
@@ -571,6 +563,7 @@ require("lazy").setup({
         { "<leader>i", function() Snacks.picker.icons() end, desc = "Icons" },
         { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
         { "<leader>G", function() Snacks.lazygit() end, desc = "Lazygit" },
+        { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
       }
     },
     {
@@ -697,33 +690,6 @@ require("lazy").setup({
         vim.keymap.set("n", "<M-a>", require("dial.map").inc_normal(), { noremap = true })
         vim.keymap.set("n", "<M-x>", require("dial.map").dec_normal(), { noremap = true })
       end
-    },
-    {
-      "andrewferrier/debugprint.nvim",
-      opts = {
-        keymaps = {
-          normal = {
-            plain_below = "gpp",
-            plain_above = "gpP",
-            variable_below = "gpv",
-            variable_above = "gpV",
-            surround_plain = "gpsp",
-            surround_variable = "gpsv",
-            textobj_below = "gpo",
-            textobj_above = "gpO",
-            textobj_surround = "gpso",
-          },
-          insert = {
-            plain = "<leader>p",
-            variable = "<leader>v",
-          },
-          visual = {
-            variable_below = "gpv",
-            variable_above = "gpV",
-          },
-        },
-      },
-      lazy = false,
     },
     {
       "esmuellert/codediff.nvim",
