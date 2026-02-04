@@ -258,12 +258,6 @@ require("lazy").setup({
         priority = 1000,
     },
     {
-      "serhez/teide.nvim",
-      lazy = false,
-      priority = 1000,
-      opts = {},
-    },
-    {
       'nvim-treesitter/nvim-treesitter',
       lazy = false,
       build = ':TSUpdate'
