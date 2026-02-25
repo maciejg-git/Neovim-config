@@ -689,6 +689,11 @@ require("lazy").setup({
       "esmuellert/codediff.nvim",
       dependencies = { "MunifTanjim/nui.nvim" },
       cmd = "CodeDiff",
+    },
+    {
+      "ruicsh/tailwindcss-dial.nvim",
+      dependencies = { "monaqa/dial.nvim" },
+      opts = {},
     }
   },
   install = { colorscheme = { "habamax" } },
