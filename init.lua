@@ -694,7 +694,30 @@ require("lazy").setup({
       "ruicsh/tailwindcss-dial.nvim",
       dependencies = { "monaqa/dial.nvim" },
       opts = {},
-    }
+    },
+    {
+      "olimorris/codecompanion.nvim",
+      opts = {
+        interactions = {
+          chat = {
+            adapter = {
+              name = "gemini",
+              model = "gemini-3-flash-preview",
+            }
+          },
+          inline = {
+            adapter = {
+              name = "gemini",
+              model = "gemini-3-flash-preview",
+            }
+          }
+        }
+      },
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      },
+    },
   },
   install = { colorscheme = { "habamax" } },
   checker = { enabled = false },
