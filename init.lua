@@ -33,8 +33,6 @@ vim.opt.wrapmargin=0
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.scrolloff=1
-vim.opt.lines=40 
-vim.opt.columns=164
 vim.opt.autoindent = true
 vim.opt.copyindent = true
 vim.opt.backup = false
@@ -233,7 +231,7 @@ require("lazy").setup({
             end,
           }
         })
-        vim.cmd([[colorscheme catppuccin]])
+        vim.cmd([[colorscheme catppuccin-latte]])
       end,
     },
     {
@@ -467,7 +465,7 @@ require("lazy").setup({
     },
     {
       "saghen/blink.cmp",
-      version = "v1.8.0",
+      version = "v1.10.2",
       opts = {
         keymap = {
           preset = "none",
