@@ -359,6 +359,18 @@ require("lazy").setup({
           { "<leader>g", group = "Git picker"},
           { "<leader>n", group = "Package info"}
         })
+        require("which-key").setup({
+          win = {
+            width = { min = 30, max = 60 },
+            height = { min = 4, max = 0.75 },
+            col = -1,
+            row = -1,
+            padding = { 1, 2 },
+          },
+          layout = {
+            width = { min = 30 },
+          }
+        })
       end,
     },
     {
