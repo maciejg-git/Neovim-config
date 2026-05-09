@@ -183,7 +183,7 @@ vim.diagnostic.config({
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'javascript', 'html', 'css', 'json', 'lua', 'markdown' },
+  pattern = { 'javascript', 'html', 'css', 'json', 'lua', 'markdown', 'javascriptreact' },
   callback = function() vim.treesitter.start() end,
 })
 
@@ -417,6 +417,7 @@ require("lazy").setup({
       opts = {
         formatters_by_ft = {
           javascript = { "prettier", stop_after_first = true, timeout_ms = 10000 },
+          javascriptreact = { "prettier", stop_after_first = true, timeout_ms = 10000 },
           html = { "prettier", stop_after_first = true, timeout_ms = 10000 },
           liquid = { "prettier", stop_after_first = true, timeout_ms = 10000 },
         },
@@ -484,10 +485,9 @@ require("lazy").setup({
 
           ['<Tab>'] = {
             function(cmp)
-              if cmp.snippet_active() then return cmp.accept()
+              if cmp.snippet_active() then return cmp.snippet_forward()
               else return cmp.select_next() end
             end,
-            'snippet_forward',
             'fallback'
           },
           ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
