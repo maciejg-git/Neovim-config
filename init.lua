@@ -379,20 +379,7 @@ require("lazy").setup({
     },
     {
       'windwp/nvim-autopairs',
-      config = function()
-        require('nvim-autopairs').setup{
-          fast_wrap = {},
-        }
-
-        local Rule = require('nvim-autopairs.rule')
-        local ts_conds = require 'nvim-autopairs.ts-conds'
-
-        require('nvim-autopairs').add_rules {
-          Rule('{{', '  }', 'vue')
-            :set_end_pair_length(2)
-            :with_pair(ts_conds.is_ts_node 'text'),
-        }
-      end,
+      opts = {},
     },
     {
       'max397574/better-escape.nvim',
@@ -505,6 +492,7 @@ require("lazy").setup({
         completion = {
           trigger = {
             show_in_snippet = false,
+            show_on_blocked_trigger_characters = { ' ', '\n', '\t', '}' }
           },
           list = {
             selection = {
