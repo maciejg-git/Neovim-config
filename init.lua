@@ -239,13 +239,6 @@ require("lazy").setup({
       priority = 1000,
     },
     {
-      "abreujp/scholar.nvim",
-      priority = 1000,
-      config = function()
-        require("scholar").setup()
-      end,
-    },
-    {
         "zenbones-theme/zenbones.nvim",
         dependencies = "rktjmp/lush.nvim",
         lazy = false,
@@ -382,20 +375,6 @@ require("lazy").setup({
       opts = {},
     },
     {
-      'max397574/better-escape.nvim',
-      opts = {
-        timeout = vim.o.timeoutlen,
-        default_mappings = false,
-        mappings = {
-            i = { j = { j = "<Esc>" } },
-            c = { j = { j = "<Esc>" } },
-            t = { j = { j = "<Esc>" } },
-            v = { j = { k = "<Esc>" } },
-            s = { j = { k = "<Esc>" } },
-        },
-      }
-    },
-    {
       'numToStr/Comment.nvim',
       opts = {},
     },
@@ -403,10 +382,10 @@ require("lazy").setup({
       "stevearc/conform.nvim",
       opts = {
         formatters_by_ft = {
-          javascript = { "prettier", stop_after_first = true, timeout_ms = 10000 },
-          javascriptreact = { "prettier", stop_after_first = true, timeout_ms = 10000 },
-          html = { "prettier", stop_after_first = true, timeout_ms = 10000 },
-          liquid = { "prettier", stop_after_first = true, timeout_ms = 10000 },
+          javascript = { "oxfmt", stop_after_first = true, timeout_ms = 10000 },
+          javascriptreact = { "oxfmt", stop_after_first = true, timeout_ms = 10000 },
+          html = { "oxfmt", stop_after_first = true, timeout_ms = 10000 },
+          liquid = { "oxfmt", stop_after_first = true, timeout_ms = 10000 },
         },
       },
       keys = {
@@ -536,6 +515,7 @@ require("lazy").setup({
         { "<leader>;", function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>:", function() Snacks.picker.commands() end, desc = "Commands" },
         { "<C-p>", function() Snacks.picker.files() end, desc = "Find Files" },
+        { "<leader>e", function() Snacks.explorer() end, desc = "Explorer" },
         { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
         { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
         { "<leader>gc", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
@@ -590,34 +570,6 @@ require("lazy").setup({
       },
       lazy = false,
       version = false 
-    },
-    { 
-      'nvim-mini/mini.files', 
-      version = false,
-      opts = {
-        mappings = {
-          close       = 'q',
-          go_in       = '<right>',
-          go_in_plus  = '<C-right>',
-          go_out      = '<left>',
-          go_out_plus = '<C-left>',
-          mark_goto   = "'",
-          mark_set    = 'm',
-          reset       = '<leader>h',
-          reveal_cwd  = '@',
-          show_help   = 'g?',
-          synchronize = '=',
-          trim_left   = '<',
-          trim_right  = '>',
-        },
-        windows = {
-          width_focus = 50,
-          width_nofocus = 25,
-        },
-      },
-      keys = {
-        { "<leader>e", function() MiniFiles.open() end, desc = "Mini Files" },
-      }
     },
     {
       'nvim-mini/mini.surround',
@@ -683,6 +635,9 @@ require("lazy").setup({
       "esmuellert/codediff.nvim",
       dependencies = { "MunifTanjim/nui.nvim" },
       cmd = "CodeDiff",
+      keys = {
+        { "<leader>gD", mode = { "n" }, "<cmd>CodeDiff<cr>", desc = "CodeDiff" },
+      },
     },
     {
       "ruicsh/tailwindcss-dial.nvim",
@@ -710,6 +665,9 @@ require("lazy").setup({
       dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
+      },
+      keys = {
+        { "<leader>a", mode = { "n" }, "<cmd>CodeCompanionChat Toggle<cr>", desc = "CodeCompanion" },
       },
     },
   },
